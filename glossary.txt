@@ -1,0 +1,72 @@
+ФОРМАТИРОВАНИЕ
+==========
+
+ViewHelpers:
+ * ViewHelpers в тексте должны форматироваться следующим образом:
+	... объект <code>cObject</code> ViewHelper
+	... здесь имеется ViewHelper <code>format.date</code>
+
+Фрагменты кода:
+ * Фрагменты кода идут с отступом в одну табуляцию.
+
+ГЛОССАРИЙ
+========
+
+Глоссарий содержит информацию о том, как должны переводиться некоторые немецкие или английские слова на русский. Пожалуйста, обновите глоссарий если Вам попались какие-либо специфичные слова и выражения.
+
+German = English = русский
+
+Ablaufmuster = модель расписания
+Action	= Action = действие
+	Eine Methode als Teil eines Controllers = ... = Метод, как часть диспетчера
+Aggregate = Aggregate = Совокупный
+	в контексте Предметно ориентированного проектирования (Domain-Driven Design)
+Allgegenwärtige Sprache	= Ubiquitous Language = Распространенный язык
+	Feststehender Begriff in Domain Driven Design
+Anmerkung = Annotation = Примечание
+Annotation = конфигурация связанных комментариев "Doc Comment", @scope
+Ausnahme = Exception = Исключение
+Controller = Controller = Диспетчер или контроллер
+Domänenmodell = Domain Model = Модель предметной области
+	Variante eines Models das dem Domain-Driven Design Prinzipien entspricht
+Domain-Driven Design (DDD) = Domain-Driven Design = Предметно ориентированное проектирование
+	Programmier-Paradigma zur Modellierung von Domänen mit Fokus auf die Geschäftslogik
+Entität = Entity
+	Individuelles Objekt nach DDD
+Entwurfsmuster = Design Pattern
+	Formale Beschreibung einer Lösung für ein gängiges Design-Problem
+Exception = Exception
+	Eine Ausnahmesituation, technisch umgesetzt durch PHPs Exception Handler
+Exception werfen = ... throw Exception ...
+Fehler = Error
+Fehlerbehandlung = Error Handling
+Fabrik = Factory
+	spezielles Design Pattern
+Interface = Interface
+	Im Sinne von PHP "interface"
+Schnittstelle = Interface
+Lazy Loading = Lazy Loading
+Modell = Model
+	Komponente aus dem MVC Pattern
+Namensraum = Namespace
+	Namentliche Abgrenzung von Klassen, Interfaces aber auch Parametern.
+Paket = Package
+	Ein FLOW3 Paket
+Persistenz = Persistence
+Prototyp = Prototype
+	(Design Pattern)
+Reflection = Reflection
+Repository = Repository
+	Teil des DDD, allgemeines Konstrukt zur Aufbewahrung von Entities
+Anfrage = Request
+	Anfrage an das Framework z.B. über einen Web Browser oder die Kommandozeile
+Request Handler
+Service = Service
+	im Sinne von Domain-Driven Design
+Singleton	(Design Pattern)
+Type Hint
+	Klassen- oder Interfacename vor einem Methoden- oder Funktionsargument. foo(TypeHint $bar)
+Value Object (VO)
+	ein Design Pattern, verwendet in DDD
+View
+View Helper
