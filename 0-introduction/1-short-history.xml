@@ -6,7 +6,7 @@
          xmlns:svg="http://www.w3.org/2000/svg"
          xmlns:ns="http://docbook.org/ns/docbook"
          xmlns:mathml="http://www.w3.org/1998/Math/MathML">
-  <title>A short history of Extbase and Fluid</title>
+  <title>Краткая история Extbase и Fluid</title>
 
   <para>After the implementation of TYPO3 v5 and FLOW3 as the basis framework
   started, the development of TYPO3 v4 and TYPO3 v5 was happening almost

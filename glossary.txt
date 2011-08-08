@@ -31,6 +31,8 @@ Domänenmodell = Domain Model = Модель предметной области
 	Variante eines Models das dem Domain-Driven Design Prinzipien entspricht
 Domain-Driven Design (DDD) = Domain-Driven Design = Предметно ориентированное проектирование
 	Programmier-Paradigma zur Modellierung von Domänen mit Fokus auf die Geschäftslogik
+engine = механизм
+
 Entität = Entity
 	Individuelles Objekt nach DDD
 Entwurfsmuster = Design Pattern
@@ -42,10 +44,12 @@ Fehler = Error
 Fehlerbehandlung = Error Handling
 Fabrik = Factory
 	spezielles Design Pattern
+framework = framework = технология
 Interface = Interface
 	Im Sinne von PHP "interface"
 Schnittstelle = Interface
 Lazy Loading = Lazy Loading
+makes sure = гарантировать
 Modell = Model
 	Komponente aus dem MVC Pattern
 Namensraum = Namespace
@@ -64,6 +68,7 @@ Request Handler
 Service = Service
 	im Sinne von Domain-Driven Design
 Singleton	(Design Pattern)
+template engine = механизм шаблонов
 Type Hint
 	Klassen- oder Interfacename vor einem Methoden- oder Funktionsargument. foo(TypeHint $bar)
 Value Object (VO)
