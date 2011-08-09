@@ -27,6 +27,7 @@ Anmerkung = Annotation = Примечание
 Annotation = конфигурация связанных комментариев "Doc Comment", @scope
 Ausnahme = Exception = Исключение
 Controller = Controller = Диспетчер или контроллер
+CMS = система управления информации на сайте
 Domänenmodell = Domain Model = Модель предметной области
 	Variante eines Models das dem Domain-Driven Design Prinzipien entspricht
 Domain-Driven Design (DDD) = Domain-Driven Design = Предметно ориентированное проектирование
@@ -44,20 +45,23 @@ Fehler = Error
 Fehlerbehandlung = Error Handling
 Fabrik = Factory
 	spezielles Design Pattern
-framework = framework = технология
+framework = framework = технология, платформа
+web application framework = платформа (технология) веб разработки
 Interface = Interface
 	Im Sinne von PHP "interface"
 Schnittstelle = Interface
 Lazy Loading = Lazy Loading
 makes sure = гарантировать
-Modell = Model
+Modell = Model = Модеь
+Model-View-Controller = Model-View-Controller = Модель-Представление-Диспетчер
 	Komponente aus dem MVC Pattern
 Namensraum = Namespace
 	Namentliche Abgrenzung von Klassen, Interfaces aber auch Parametern.
 Paket = Package
 	Ein FLOW3 Paket
-Persistenz = Persistence
-Prototyp = Prototype
+Persistenz = Persistence = хранение, сохранение (состояния)
+persistence layer = слой хранения, уровень сохранения данных
+Prototyp = Prototype = прототип
 	(Design Pattern)
 Reflection = Reflection
 Repository = Repository
@@ -69,6 +73,7 @@ Service = Service
 	im Sinne von Domain-Driven Design
 Singleton	(Design Pattern)
 template engine = механизм шаблонов
+Test-Driven Development = разработки через тестирование
 Type Hint
 	Klassen- oder Interfacename vor einem Methoden- oder Funktionsargument. foo(TypeHint $bar)
 Value Object (VO)

@@ -27,7 +27,7 @@
   простоту создания внешнего оформления и индивидуального дизайна для
   расширений.</para>
 
-  <para>Extbase гарантирует четкое разделение различных задач, что сильно
+  <para>Extbase гарантирует чёткое разделение различных задач, что сильно
   упрощает обслуживание, так как код имеет модульную структуру. Благодаря
   этому сокращается время разработки, расходуемое не только на начальную
   разработку, но и на мелкие доработки. Extbase существенно облегчает бремя
@@ -36,54 +36,56 @@
   и данных FlexForm. Это позволяет разработчикам сфокусироваться на решении
   задач для своих клиентов.</para>
 
-  <para>Because of the modern architeture and the usage of up-to-date software
-  development paradigms, using Extbase needs different knowledge than before:
-  Instead of "hacking together" an extension, programmers now must understand
-  some concepts like Domain-Driven Design, and plan and model the extension
-  more thoroughly before the implementation starts. In return, the source code
-  of the extension becomes a lot better readable, more flexible and more
-  extensible. Moreover, the used concepts are also applicable to other
-  programming languages and frameworks, as the development paradigms like
-  Domain-Driven Design or Model-View-Controller architecture can be used
-  universally.</para>
+  <para>Из-за современной архитектуры и использования современных парадигм
+  разработки приложений, использование Extbase требует других навыков, чем
+  были нужны прежде: вместо "совместного взлома" расширений, сейчас
+  программисты должны понимать некоторые концепции, вроде Domain-Driven Design
+  (DDD - предметно ориентированное проектирование), а также нужно тщательнее
+  планировать и разрабатывать модель перед началом непосредственно разработки.
+  В свою очередь сам исходный код расширения становится понятней, лучше
+  читается, становится гибким и его проще дорабатывать. Кроме того,
+  используемые концепции применимы и для других языков программирования и
+  технологий, так как парадигмы разработки Domain-Driven Design или
+  Model-View-Controller (MVC - Модель-Представление-Диспетчер)
+  универсальны.</para>
 
-  <para>Extensions which build on Extbase can be ported to TYPO3 v5 and FLOW3
-  in a manageable fashion, as the structure of the extension, the naming
-  conventions and the used APIs are almost the same. Hence, Extbase eases the
-  transition to FLOW3 and TYPO3 v5 -- if you use Extbase, you can later easily
-  switch to FLOW3 and TYPO3 v5.</para>
+  <para>Расширения, построенные на основе Extbase могут быть впоследствии
+  перенесены на TYPO3 версии 5 и FLOW3, так как структура расширения,
+  соглашения об именовании и используемые API весьма схожи. Таким образом,
+  Extbase упрощает переход на FLOW3 и TYPO3 версии 5 – используя Extbase,
+  позже можно запросто перейти на FLOW3 и TYPO3 версии 5.</para>
 
   <sidebar>
-    <title>TYPO3 v4 and TYPO3 v5</title>
+    <title>TYPO3 версии 4 и TYPO3 версии 5</title>
 
-    <para>In the TYPO3 community, some products are developed in parallel
-    right now. Here, they should be presented shortly. TYPO3 v4 is the
-    established branch of TYPO3, which powers hundreds of thousands of
-    installations world-wide. Right now, version 4.4 is the current version,
-    and version 4.5 is in development.</para>
+    <para>В сообществе TYPO3 некоторые продукты сейчас разрабатываются
+    параллельно. Здесь их нужно кратко охарактеризовать. TYPO3 версии 4
+    является стабильной ветвью TYPO3, работающей на сотнях и тысячах серверов
+    во всем мире. На данный момент версия 4.5 является стабильной версией с
+    долгосрочной поддержкой, а версия 4.6 находится в разработке.</para>
 
-    <para>Because the internal structures of TYPO3 v4 were growing
-    organically, and thus can be quite confusing, the TYPO3 team decided to
-    begin a new development branch parallel to TYPO3 v4: TYPO3 v5 should be
-    developed from scratch. While doing that, special attention has been on
-    clean code and an easy and powerful infrastructure.<remark>The last
-    sentence is strange -&gt; REWORK.</remark> It quickly emerged that we
-    first needed to write a web application framework, before the CMS itself
-    should be developed. This web application framework is FLOW3, and on that
-    basis, TYPO3 v5 is now developed.</para>
+    <para>Так как внутренняя структура TYPO3 версии 4 создавалась постепенно и
+    органично, она может показаться довольно странной и местами запутанной.
+    Команда разработчиков TYPO3 решила начать разработку новой ветви TYPO3
+    параллельно с 4 версией: TYPO3 версии 5 разрабатывается с нуля. При этом
+    особое внимание было уделено прозрачному исходному коду и простой, но
+    мощной инфраструктуре. Быстро выяснилось, что сначала необходимо создать
+    платформу для веб разработки, а лишь затем переходить к созданию самой CMS
+    (системы управления информации на сайте). Платформа веб разработки – это
+    FLOW3, а на ее основе сейчас и разрабатывается TYPO3 версии 5.</para>
   </sidebar>
 
-  <para>We hope that Extbase and Fluid are the introduction to a completely
-  new world of programming for you, such that you can now start learning the
-  new concepts of FLOW3. At the beginning, you will learn a lot of new
-  concepts, but over time, you will notice that Extbase and Fluid makes you a
-  lot more productive than before. With a bit of luck, you might get into the
-  "flow" which drove us while we developed Extbase and Fluid.</para>
+  <para>Мы надеемся, что Extbase и Fluid откроет для Вас совершенно новый мир
+  программирования, а прямо сейчас можно приступить к изучению новых концепций
+  FLOW3. Для начала будет дано множество новых понятий, но со временем вы
+  будете замечать, что работа с Extbase и Fluid гораздо продуктивнее, чем
+  старые стили программирования. Если повезёт, то вы попадёте в "поток",
+  подхвативший нас во время разработки Extbase и Fluid.</para>
 
-  <para>Not only you as developer can profit from Extbase: Also the FLOW3
-  development team can test many concepts for their real-world applicability,
-  and remove bugs and inconsistencies, which occur in Extbase and
-  Fluid.</para>
+  <para>Преимущества от Extbase получите не только вы, как разработчик,
+  команда разработчиков FLOW3 может протестировать множество идей в мире
+  реальных вещей, избавиться от ошибок и несоответствий, присутствующих в
+  Extbase и Fluid в настоящее время.</para>
 
   <xi:include href="1-short-history.xml" />
 

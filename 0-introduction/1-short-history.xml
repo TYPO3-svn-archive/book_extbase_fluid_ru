@@ -8,52 +8,51 @@
          xmlns:mathml="http://www.w3.org/1998/Math/MathML">
   <title>Краткая история Extbase и Fluid</title>
 
-  <para>After the implementation of TYPO3 v5 and FLOW3 as the basis framework
-  started, the development of TYPO3 v4 and TYPO3 v5 was happening almost
-  completely independent from each other. In October 2008, the core developers
-  of both branches met for the <emphasis>TYPO3 Transition Days</emphasis> in
-  Berlin. There, the developers wanted to work on a common vision and strategy
-  for the transition from the current TYPO3 version 4 to the coming version 5.
-  The core points of this strategy were communicated as a manifesto (see the
-  box "The Berlin Manifesto").</para>
+  <para>После реализации TYPO3 версии 5 и принятия FLOW3 в качестве платформы
+  его разработки, разработка версий 4 и 5 TYPO3 велась практически независимо
+  друг от друга. В октябре 2008 разработчики ядра обоих ветвей встретились на
+  <emphasis>TYPO3 Transition Days</emphasis> в Берлине. Здесь разработчики
+  решили поработать над общим видением и стратегией перехода от текущей 4
+  версии TYPO3 к будущей версии 5. Ключевые точки этой стратегии были озвучены
+  в виде манифеста (смотрите блок "Берлинский манифест").</para>
 
   <sidebar>
-    <title>The Berlin Manifesto</title>
+    <title>Берлинский манифест</title>
 
-    <para>We, the participants of the TYPO3 Transition Days 2008 state that
-    …</para>
+    <para>Мы, участники TYPO3 Transition Days 2008 констатируем, что …</para>
 
     <itemizedlist>
       <listitem>
-        <para>TYPO3 v4 continues to be actively developed</para>
+        <para>TYPO3 версии 4 продолжает активно разрабатываться.</para>
       </listitem>
 
       <listitem>
-        <para>v4 development will continue after the release of v5</para>
+        <para>Разработка версии 4 будет продолжаться и после выхода версии
+        5.</para>
       </listitem>
 
       <listitem>
-        <para>Future releases of v4 will see its features converge with those
-        in TYPO3 v5</para>
+        <para>Будущие выпуски версии 4 будут приобретать функционал, схожий с
+        аналогами из версии 5.</para>
       </listitem>
 
       <listitem>
-        <para>TYPO3 v5 will be the successor of TYPO3 v4</para>
+        <para>TYPO3 версии 5 будет преемником TYPO3 версии 4.</para>
       </listitem>
 
       <listitem>
-        <para>Migrtion of content from TYPO3 v4 to TYPO3 v5 will be easily
-        possible</para>
+        <para>Миграция содержимого из TYPO3 версии 4 на TYPO3 версии 5 будет
+        по возможности упрощено.</para>
       </listitem>
 
       <listitem>
-        <para>TYPO3 v5 will introduce many new concepts and ideas. Learning
-        never stops and we'll help with adequate resources to ensure a smooth
-        transition.</para>
+        <para>В TYPO3 версии 5 будет представлено множество новых концепций и
+        идей. Обучение не может остановиться, а мы поможем с ресурсами для
+        обеспечения плавного перехода.</para>
       </listitem>
     </itemizedlist>
 
-    <para>Signed by:</para>
+    <para>Подписано:</para>
 
     <para><emphasis>Patrick Broens, Karsten Dambekalns, Dmitry Dulepov,
     Andreas Förthner, Oliver Hader, Martin Herr, Christian Jul Jensen,
@@ -63,72 +62,71 @@
     Stucki, Bastian Waidelich</emphasis></para>
   </sidebar>
 
-  <para>With the background of this manifesto, the decision was made to
-  re-implement two parts of TYPO3 v4:</para>
+  <para>На фоне этого манифеста было решено повторно реализовать обе части
+  TYPO3 версии 4:</para>
 
   <itemizedlist>
     <listitem>
-      <para>A modern successor for the base class
-      <classname>tslib_piBase</classname>, on which by now the majority of the
-      3600 extensions for TYPO3 builds on. From there, Extbase emerged.</para>
+      <para>Современного преемника базового класса
+      <classname>tslib_piBase</classname>, на основе которого было построено
+      большинство из более чем 5000 расширений для TYPO3. Здесь появляется
+      Extbase.</para>
     </listitem>
 
     <listitem>
-      <para>A new template engine for outputting data, which connects
-      flexibility, ease of use and extensibility: Fluid.</para>
+      <para>Новый механизм шаблонов для вывода данных, объединяющий гибкость,
+      простоту использования и масштабируемость: Fluid.</para>
     </listitem>
   </itemizedlist>
 
-  <para>Discussions about the new template engine started already on the
-  Transition Days, where Bastian Waidelich and Sebastian Kurfürst discussed
-  how such a new template engine should work and behave. Shortly after, a
-  prototype was implemented. The development of Extbase began two months
-  later, when a few core members met in Karlsruhe. There, they agreed on
-  staying as close as possible to the concepts, the architecture and the APIs
-  of FLOW3.</para>
+  <para>Споры о новом механизме шаблонов начались уже во время Transition
+  Days, где Bastian Waidelich и Sebastian Kurfürst обсуждали, как должен себя
+  вести и работать такой новый механизм шаблонов. Чуть позже был создан
+  прототип. Разработка Extbase началась два месяца спустя, на встрече
+  нескольких разработчиков ядра в Карлсруэ. Здесь они договорились
+  придерживаться как можно ближе концепций, архитектуры и API FLOW3.</para>
 
-  <para>After that followed an intensive development phase, where Jochen Rau
-  developed the biggest part of Extbase, while Sebastian Kurfürst did code
-  reviews and gave feedback. Additionally, Fluid has reached the beta stage in
-  that time.</para>
+  <para>Затем последовала фаза интенсивной разработки, в течение которой
+  Jochen Rau разработал львиную долю Extbase, а Sebastian Kurfürst проверял
+  код и давал отзывы. Помимо того, Fluid достиг бета стадии.</para>
 
-  <para>The first public presentation of Extbase happened in March 2009 at the
-  <emphasis>T3BOARD09</emphasis> in Laax (CH). With stormy weather, 2228 m
-  over sea level, core developers and interested people could see the current
-  state of Extbase. In a stimulated discussion<remark>TODO: sounds
-  strange</remark>, the last open topics like naming conventions or the name
-  of the framework, were decided upon. Additionally, the decision was made to
-  include Fluid in version 4.3, instead in version 4.4 as planned
-  before.</para>
+  <para>Первое публичное представление Extbase произошло в марте 2009 на
+  <emphasis>T3BOARD09</emphasis> в Лааксе (Швейцария). В штормовую погоду, на
+  высоте 2228 метров над уровнем моря, разработчики ядра и другие
+  интересующиеся смогли увидеть текущее состояние Extbase. В оживлённой
+  дискуссии были внесены уточнения в оставшиеся вопросы, такие как соглашения
+  об именовании, название самой платформы. Кроме того, было решено включить
+  Fluid в версию 4.3, а не в 4.4, как планировалось ранее.</para>
 
-  <para>In the following days, the Fluid team developed a small program (named
-  <emphasis>Backporter</emphasis>) which could take the code of Fluid for
-  FLOW3, and transform it to code for TYPO3 v4. That's how the first working
-  version of Fluid vor TYPO3 v4 came into being at the end of the T3BOARD09.
-  Additionally, it was now pretty easy to keep Fluid for FLOW3 in sync with
-  Fluid for TYPO3 v4.</para>
+  <para>В последующие дни команда разработчиков Fluid создала небольшую
+  программку (под названием <emphasis>Backporter</emphasis>), которая могла бы
+  брать код Fluid для FLOW3 и преобразовывать его в код для 4 версии TYPO3.
+  Вот так, под занавес T3BOARD09 на свет была рождена первая рабочая версия
+  Fluid для 4 версии TYPO3. Кроме того, появилась простая возможность
+  переходить между Fluid для FLOW3 и Fluid для TYPO3 версии 4.</para>
 
-  <para>The first real presentation of Extbase and Fluid happened in April
-  2009 on the american <emphasis>TYPO3 Conference</emphasis> in Dallas, and a
-  month later on the <emphasis>TYPO3 Developer Days</emphasis> in Elmshorn
-  near Hamburg. After that, a lot of positive feedback and constructive
-  criticism emerged from the community.</para>
+  <para>Первая настоящая презентация Extbase и Fluid случилась в апреле 2009,
+  на американской <emphasis>Конференции по TYPO3</emphasis> в Далласе, а
+  месяцем позже – на <emphasis>TYPO3 Developer Days</emphasis> в Эльмсхорне,
+  недалеко от Гамбурга. После чего в сообществе появилось много положительных
+  отзывов и конструктивной критики.</para>
 
-  <para>During the next months, a lot of work was done to clean up the
-  details: The syntax of Fluid was improved, ViewHelpers were written, and the
-  persistence layer of Extbase was improved and refactored multiple times.
-  Functionalities for the security of the framework were implemented, the MVC
-  framework was cleaned up, and more functionalities were implemented which
-  were needed for practical usage.</para>
+  <para>В течение следующего месяца была проделана титаническая работа по
+  шлифовке деталей: был исправлен синтаксис Fluid, написаны ViewHelpers и
+  несколько раз исправлялся и дорабатывался слой сохранения данных в Extbase.
+  Был реализован функционал по обеспечению безопасности платформы разработки,
+  платформа MVC была подчищена и ее функционал был расширен в плане
+  практического использования.</para>
 
-  <para>At the <emphasis>T3CON09</emphasis> in autumn 2009, Extbase and Fluid
-  could be presented as a beta version. Afterwards, only errors were
-  corrected, but no new functionalities were implemented. With the release of
-  TYPO3 4.3.0 in November 2009, Extbase and Fluid were included in the TYPO3
-  core and are thus available in every TYPO3 installation.</para>
+  <para>На <emphasis>T3CON09</emphasis> осенью 2009, Extbase и Fluid могли
+  быть представлены в бета версиях. Впрочем, никаких новых функций не
+  появилось, а были исправлены лишь найденные ошибки. С выходом TYPO3 4.3.0 в
+  ноябре 2009 в ядро системы были включены Extbase и Fluid, после чего они
+  стали доступны в каждой установленной обновлённой версии TYPO3.</para>
 
-  <para>After a well-deserved break of the development team after the release,
-  work started again with smaller bugfixes and a roadmap for upcoming
-  functionalities. That's how many details of the framework were improved, and
-  the persistence layer was once again streamlined and cleaned up.</para>
+  <para>После выхода очередной версии TYPO3 последовал заслуженный отдых для
+  разработчиков, но затем работа снова закипела – были исправлены
+  незначительные ошибки и представлен план разработки будущего функционала.
+  Были исправлены многие детали платформы, снова был рационализирован и
+  подчищен слой сохранения данных.</para>
 </section>

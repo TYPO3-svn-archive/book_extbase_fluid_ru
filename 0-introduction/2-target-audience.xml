@@ -6,32 +6,33 @@
          xmlns:svg="http://www.w3.org/2000/svg"
          xmlns:ns="http://docbook.org/ns/docbook"
          xmlns:mathml="http://www.w3.org/1998/Math/MathML">
-  <title>Target Audience</title>
+  <title>Целевая аудитория</title>
 
-  <para>This book is for TYPO3 extension developers who have basic knowledge
-  in PHP programming and in working with and administering TYPO3. It gives a
-  compact introduction into the Extbase framework and the Fluid template
-  engine. We are striving for the following target audiences:</para>
+  <para>Эта книга предназначена для разработчиков расширений для TYPO3,
+  знакомых с программированием на PHP и администрированием TYPO3. Здесь даётся
+  краткое описание платформы Extbase и механизма шаблонов Fluid.
+  Подразумевается следующие целевые аудитории:</para>
 
   <itemizedlist>
     <listitem>
-      <para>Beginners, who want to use Extbase and Fluid right from start as a
-      basis for own extensions</para>
+      <para>Начинающие, желающие использовать Extbase и Fluid с самого начала
+      для создания своих расширений.</para>
     </listitem>
 
     <listitem>
-      <para>Experienced developers, who want to learn Extbase and Fluid before
-      a new project</para>
+      <para>Опытные разработчики, желающие познакомиться с возможностями
+      Extbase и Fluid для использования их потенциала в своих новых
+      проектах.</para>
     </listitem>
 
     <listitem>
-      <para>Developers, who want to port their existing extensions early to
-      FLOW3</para>
+      <para>Разработчики, желающие перенести ранее разработанные расширения на
+      FLOW3.</para>
     </listitem>
 
     <listitem>
-      <para>Deciders, who want to gain a technical overview over the new
-      framework.</para>
+      <para>Руководители проектов, желающие получить представление о
+      потенциале новых технологических решений.</para>
     </listitem>
   </itemizedlist>
 </section>
