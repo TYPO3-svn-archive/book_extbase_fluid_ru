@@ -6,42 +6,64 @@
          xmlns:svg="http://www.w3.org/2000/svg"
          xmlns:ns="http://docbook.org/ns/docbook"
          xmlns:mathml="http://www.w3.org/1998/Math/MathML">
-  <title>Configuring the Server</title>
+  <title>Настройка сервера</title>
 
-  <para>Since TYPO3 is written in the PHP scrpting language, you will need a
-  webserver like Apache with PHP (version 5.2 or 5.3) support, for your TYPO3
-  development. Additionally TYPO3 requires a MySQL database for data storage.
-  If you don't have a local development server yet, we recommend the XAMPP
-  package (<emphasis>http://www.apachefriends.org/xampp.html</emphasis>). It
-  will install Apache, PHP, MySQL and other useful tools on all established
-  operating systems (Linux, Windows, Mac OS X). Now you can install TYPO3 on
-  your test system.</para>
+  <para>Так как TYPO3 написан на языке сценариев PHP, то для работы TYPO3
+  понадобиться веб сервер наподобие Apache с поддержкой PHP (версии 5.2 или
+  5.3). Кроме того, для хранения данных TYPO3 необходима база данных MySQL.
+  Если у вас ещё нет локально работающего сервера, мы рекомендуем пакет XAMPP
+  (<emphasis>http://www.apachefriends.org/xampp.html</emphasis>). Он установит
+  Apache, PHP, MySQL и другие полезные инструменты на любые распространённые
+  операционные системы (Linux, Windows, Mac OS X). Теперь на тестовую систему
+  можно установить TYPO3.</para>
 
-  <para>For production systems you are advised to use a PHP Opcode Cache like
-  eAccelerator (<emphasis>http://eaccelerator.net</emphasis>), as it caches
-  the compiled PHP code often reducing script loading times by more than half.
-  By default eAccelerator will not cache PHP comments. However, as Extbase
-  uses these comments to retrieve important information, eAccelerator must not
-  omit them. To achieve this you need to configure eAccelerator with the
-  option <code>--with-eaccelerator-doc-comment-inclusion</code>. A complete
-  installation of eAccelerator will then work as follows: First download the
-  eAccelerator source code and navigate to the source directory using the
-  console. You have to adjust the eAccelerator source to your installed PHP
-  version by running the command <code>phpize</code>. After this you can
-  configure the eAccelerator source code not to remove the PHP comments by
-  running <code>./configure --with-eaccelerator-doc-comment-inclusion</code>.
-  Now compile eAccelerator with the command <code>make</code>. To finish the
-  installation run <code>make install</code> as the <emphasis>root</emphasis>
-  user.</para>
+  <para>Для производственных систем рекомендуем использовать библиотеки
+  кеширования микрокода PHP (Opcode Cache) вроде eAccelerator
+  (<emphasis>http://eaccelerator.net</emphasis>), они кешируют
+  скомпилированный код PHP, что существенно уменьшает время загрузки сценария,
+  зачастую более чем в половину. По умолчанию eAccelerator не кеширует
+  комментарии PHP из файла. Но Extbase использует эти комментарии для
+  получения важной информации, которую как раз может и не пропустить
+  eAccelerator. Чтобы избежать этого, нужно настроить eAccelerator с
+  параметром <code>--with-eaccelerator-doc-comment-inclusion</code>. Полный
+  процесс установки eAccelerator будет выглядеть следующим образом: скачиваем
+  исходный код eAccelerator, переходим в директорию, содержащую этот код,
+  используя консоль (или любым удобным способом). Предстоит скорректировать
+  исходный код eAccelerator в соответствие с установленной версией PHP,
+  запустив команду <code>phpize</code>. После чего можно настроить исходный
+  код eAccelerator так, чтобы при его выполнении не удалялись комментарии PHP,
+  это делается следующим образом: <code>./configure
+  --with-eaccelerator-doc-comment-inclusion</code>. Теперь скомпилируем
+  eAccelerator командой <code>make</code>. Для завершения установки нужно
+  запустить <code>make install</code> от пользователя
+  <emphasis>root</emphasis>.</para>
 
-  <para>It might be neccessary to adjust your PHP configuration to load
-  eAccelerator. Now you can check if your source code comments are preserved
-  by using a TYPO3 instance. Install the <emphasis>extbase</emphasis>
-  Extension in the TYPO3 backend by using the Extension Manager and then open
-  the <emphasis>Reports</emphasis> module. Select the <emphasis>Status
-  Report</emphasis> submodule and have a look at the
-  <emphasis>extbase</emphasis> section, which will tell you whether the PHP
-  comments are preserved or not.</para>
+  <para>Это может быть необходимо для корректировки установленной PHP для
+  загрузки eAccelerator. Теперь можно проверить, сохраняются ли комментарии из
+  исходного кода, используя установленную TYPO3. Для этого установите
+  расширение <emphasis>extbase</emphasis> во внутреннем интерфейсе TYPO3,
+  воспользовавшись модулем управления расширениями, а затем перейдите в модуль
+  <emphasis>Отчеты</emphasis>. Выберете режим <emphasis>Отчет о
+  состоянии</emphasis> и взгляните в раздел <emphasis>extbase</emphasis>, где
+  говорится, сохраняются ли комментарии PHP или нет.</para>
 
-  <para><remark>TODO: Add picture 1-1</remark></para>
+  <figure>
+    <title>В модуле <emphasis>Отчеты</emphasis> можно узнать, имеется ли у
+    <emphasis>Extbase</emphasis> доступ к комментариям в исходном коде
+    PHP</title>
+
+    <screenshot>
+      <info>
+        <title>В модуле <emphasis>Отчеты</emphasis> можно узнать, имеется ли у
+        <emphasis>Extbase</emphasis> доступ к комментариям в исходном коде
+        PHP</title>
+      </info>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="status_extbase.png"></imagedata>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
+  </figure>
 </section>

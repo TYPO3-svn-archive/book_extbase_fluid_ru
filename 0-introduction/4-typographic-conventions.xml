@@ -6,30 +6,31 @@
          xmlns:svg="http://www.w3.org/2000/svg"
          xmlns:ns="http://docbook.org/ns/docbook"
          xmlns:mathml="http://www.w3.org/1998/Math/MathML">
-  <title>Typographic conventions</title>
+  <title>Соглашения по форматированию</title>
 
-  <para>This book uses the following typographic conventions:</para>
+  <para>В этой книге приняты следующие соглашения по форматированию:</para>
 
-  <para><filename>File names and directories</filename></para>
+  <para><filename>Названия файлов и директорий</filename></para>
 
-  <para><emphasis>emphasiszed content</emphasis></para>
+  <para><emphasis>важное содержание</emphasis></para>
 
-  <para><classname>class names</classname>, <methodname>method
-  names</methodname>, <code>inline code</code></para>
+  <para><classname>названия классов, методов, встроенный
+  код</classname></para>
 
-  <para><code><replaceable>cursive non-proportional fonts</replaceable></code>
-  are used if the user should replace certain code parts.</para>
+  <para><code><replaceable>курсив в моноширинном шрифте</replaceable></code>
+  используется в местах, где пользователь должен заменить определённые части
+  кода.</para>
 
   <note>
-    <para>This stands for a general advice or hint.</para>
+    <para>общие советы или подсказки.</para>
   </note>
 
   <tip>
-    <para>This stands for a tip or a suggestion.</para>
+    <para>совет или предложение.</para>
   </tip>
 
   <warning>
-    <para>With this symbol, certain special behavior is explained, which could
-    lead to problems or impose a risk.</para>
+    <para>этим символом отмечены специфичные места, несущие потенциальный риск
+    или проблемы.</para>
   </warning>
 </section>

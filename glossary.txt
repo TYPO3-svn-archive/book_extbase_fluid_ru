@@ -13,7 +13,6 @@ ViewHelpers:
 ========
 
 Глоссарий содержит информацию о том, как должны переводиться некоторые немецкие или английские слова на русский. Пожалуйста, обновите глоссарий если Вам попались какие-либо специфичные слова и выражения.
-
 German = English = русский
 
 Ablaufmuster = модель расписания
@@ -26,6 +25,7 @@ Allgegenwärtige Sprache	= Ubiquitous Language = Распространенны�
 Anmerkung = Annotation = Примечание
 Annotation = конфигурация связанных комментариев "Doc Comment", @scope
 Ausnahme = Exception = Исключение
+backend = внутренний интерфейс
 Controller = Controller = Диспетчер или контроллер
 CMS = система управления информации на сайте
 Domänenmodell = Domain Model = Модель предметной области
@@ -47,6 +47,8 @@ Fabrik = Factory
 	spezielles Design Pattern
 framework = framework = технология, платформа
 web application framework = платформа (технология) веб разработки
+Frontend = внешний интерфейс
+IDE = среда разработки
 Interface = Interface
 	Im Sinne von PHP "interface"
 Schnittstelle = Interface
@@ -57,6 +59,7 @@ Model-View-Controller = Model-View-Controller = Модель-Представл�
 	Komponente aus dem MVC Pattern
 Namensraum = Namespace
 	Namentliche Abgrenzung von Klassen, Interfaces aber auch Parametern.
+Opcode Cache = библиотеки кеширования микрокода
 Paket = Package
 	Ein FLOW3 Paket
 Persistenz = Persistence = хранение, сохранение (состояния)
@@ -72,6 +75,7 @@ Request Handler
 Service = Service
 	im Sinne von Domain-Driven Design
 Singleton	(Design Pattern)
+System Extensions = системные расширения
 template engine = механизм шаблонов
 Test-Driven Development = разработки через тестирование
 Type Hint
@@ -80,3 +84,4 @@ Value Object (VO)
 	ein Design Pattern, verwendet in DDD
 View
 View Helper
+working environment = рабочая среда

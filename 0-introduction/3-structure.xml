@@ -11,9 +11,9 @@
   <para>Книга разбита на десять глав и три приложения. Главы затрагивают
   следующие вопросы:</para>
 
-  <para>Chapter 1, <emphasis>Установка</emphasis>, описывается процесс
-  установки Extbase и Fluid. Для усовершенствования процесса разработи
-  расширений, даются советы по настройке сред разработки и отладке.</para>
+  <para>Глава 1, <emphasis>Установка</emphasis>, описывается процесс установки
+  Extbase и Fluid. Для усовершенствования процесса разработки расширений,
+  даются советы по настройке сред разработки и отладке.</para>
 
   <para>Глава 2, <emphasis>Основные принципы</emphasis>, начинается с обзора
   концепций объектно ориентированного программирования, так как они особенно
@@ -21,60 +21,61 @@
   проектирование (Domain-Driven Design), парадигма программирования,
   оптимально поддерживаемая в Extbase. После этого даются сведения о шаблоне
   разработки Модель-Представление-Диспетчер (MVC: Model-View-Controller),
-  ясляющегося технической основой каждого расширения Extbase. И наконец
+  являющегося технической основой каждого расширения Extbase. И наконец
   объясняется принцип разработки через тестирование (TDD: Test-Driven
   Development).</para>
 
-  <para>Глава 3, <emphasis>Journey through the Blog Example</emphasis>, should
-  give you a feeling how the concepts from chapter 2 were implemented in
-  Extbase. Based on a given example extension we explain how a blog posting is
-  created and goes through the different system stages until it is
-  shown.</para>
+  <para>Глава 3, <emphasis>Путешествие по примеру сетевого журнала</emphasis>,
+  должно дать представление о том, как концепции, освещённые в главе 2, были
+  реализованы в Extbase. На примере расширения даются пояснения, как создаётся
+  сообщение в сетевом журнале, и как оно проходит различные этапы в системе,
+  пока не будет отображено.</para>
 
-  <para>В главе 4, <emphasis>Creating a first extension</emphasis>, we show
-  you a minimal extension. With this extension, data is managed through the
-  TYPO3 backend, and displayed in the Frontend.</para>
+  <para>В главе 4, <emphasis>Создание первого расширения</emphasis>,
+  показывает создание простейшего расширения. В нем данными можно управлять из
+  внутреннего интерфейса TYPO3, а сами они отображаются во внешнем
+  интерфейсе.</para>
 
-  <para>Глава 5, <emphasis>Modelling the Domain</emphasis>, shows
-  Domain-Driven Design with a practical example. It shows how a model can be
-  planned and implemented.</para>
+  <para>Глава 5, <emphasis>Проектирование объектной области</emphasis>,
+  показывает Domain-Driven Design (DDD) на практическом примере. Показана
+  возможность планирования модели и ее реализации.</para>
 
-  <para>If the domain model is finished, the necessary TYPO3 infrastructure
-  must be created: Database tables and backend editing forms. The relevant
-  information is explained in chapter 6, <emphasis>setting up the persistence
-  layer</emphasis>.</para>
+  <para>По завершении создания объектной области необходимо создать
+  необходимую инфраструктуру в TYPO3: таблицы в базе данных и формы
+  редактирования данных во внутреннем интерфейсе. Соответствующая информация
+  даётся в главе 6, <emphasis>настройка слоя хранения
+  данных</emphasis>.</para>
 
-  <para>After chapters 5 and 6 have explained the model layer in detail, we
-  now focus on the application flow of the extension in chapter 7,
-  <emphasis>controlling the flow with controllers</emphasis>. These are
-  implemented in the controller layer.</para>
+  <para>После глав 5 и 6 даётся детальное объяснение слоя модели, в главе 7,
+  <emphasis>управление потоком при помощи диспетчеров</emphasis>, фокус смещён
+  на потоке приложения расширения. Это реализовано на уровне диспетчера
+  (controller layer).</para>
 
-  <para>Now, only the output layer of the extension is missing, the so-called
-  <emphasis>view</emphasis>. In chapter 8, <emphasis>styling the output with
-  Fluid</emphasis>, Fluid is explained in detail and its functionalities are
-  shown with several examples. At the end of the chapter, the explained
-  functionalities are combined and demonstrated at the example
-  extension.</para>
+  <para>На данном этапе в расширении не хватает лишь уровня вывода, так
+  называемого <emphasis>view</emphasis>. В главе 8, <emphasis>стилизация
+  выводимого во Fluid</emphasis>, детально разбирается Fluid, его функционал
+  демонстрируется на нескольких примерах. В конце главы комбинируется весь
+  затронутый функционал на примере расширения.</para>
 
-  <para>Глава 9, <emphasis>internationalization, validation and
-  security</emphasis> deals with advanced topics and tasks. This includes the
-  multilingual capabilities of extensions, the validation of data and the
-  handling of security aspects.</para>
+  <para>Глава 9, <emphasis>Интернационализация, проверка и
+  безопасность</emphasis> затрагивает дополнительные материалы и задачи. Это
+  многоязычная поддержка в расширениях, проверка данных и аспекты
+  безопасности.</para>
 
-  <para>Глава 10, <emphasis>outlook</emphasis>, gives a glimpse into code
-  which is currently being developed. The focus lies on the kickstarter and
-  the use of Extbase in the TYPO3 Backend. Additionally, this chapter shows
-  you parts of FLOW3 and explains how Extbase Extensions can be ported to
-  TYPO3 v5.</para>
+  <para>Глава 10, <emphasis>Перспектива</emphasis>, пытается заглянуть в
+  разрабатываемый в текущий момент код. Фокус лежит на kickstarter и
+  использование Extbase во внутреннем интерфейсе TYPO3. Кроме того, здесь
+  демонстрируются части FLOW3 и даются пояснения, как расширения на базе
+  Extbase могут быть перенесены на TYPO3 версии 5.</para>
 
-  <para>Extbase mostly uses the conventions of FLOW3. In <emphasis>Appendix A,
-  Coding Guidelines</emphasis>, they are summarized.</para>
+  <para>Extbase по большей части использует соглашения, принятые во FLOW3. В
+  <emphasis>Приложении А, указания по программированию</emphasis>, они
+  подытожены.</para>
 
-  <para>Appendix B <emphasis>Reference of Extbase</emphasis> contains an
-  overview about important Extbase concepts and an alphabetical listing of the
-  API.</para>
+  <para>Приложение Б, <emphasis>Справочник по Extbase</emphasis> содержит
+  обзор важных концепций Extbase и алфавитный список API.</para>
 
-  <para>In Appendix C, <emphasis>Reference of Fluid</emphasis>, you can find a
-  reference of all standard Fluid ViewHelpers and the API which is needed to
-  create own ViewHelpers.</para>
+  <para>В приложении В, <emphasis>Справочник по Fluid</emphasis>, можно найти
+  справочник всех стандартных Fluid ViewHelpers и API, при помощи которой
+  можно создавать собственные ViewHelpers.</para>
 </section>

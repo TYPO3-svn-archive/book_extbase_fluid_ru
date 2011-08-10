@@ -6,44 +6,43 @@
          xmlns:svg="http://www.w3.org/2000/svg"
          xmlns:ns="http://docbook.org/ns/docbook"
          xmlns:mathml="http://www.w3.org/1998/Math/MathML">
-  <title>Thanks</title>
+  <title>Благодарности</title>
 
   <section>
-    <title>from Jochen and Sebastian</title>
+    <title>От Jochen и Sebastian</title>
 
-    <para>Above all, we want to thank our families and partners for the
-    understanding and the support, when we spent our afternoons and evenings
-    with the book instead of them. Also our customers had to be patient the
-    one or another time, when we developed Extbase or wrote the book, instead
-    of continuing a customer project.</para>
+    <para>Прежде всего хотелось бы поблагодарить наши семьи и партнёров за
+    понимание и поддержку, когда мы проводили свободное время с книгой, а не с
+    ними. Также благодарим наших заказчиков за их терпимость, так как часть
+    времени мы уделяли разработке Extbase или написанию книги, вместо работы с
+    их проектами.</para>
 
-    <para>TYPO3 would not exist without the dedication and vision of Kasper
-    Skårhøy and without the tireless work of all community members, especially
-    the TYPO3 core team. Here, we specifically want to thank the members who
-    discovered and implemented many future-proof technologies for TYPO3 v5.
-    Extbase would not be possible without this inspiration and
-    guideline.</para>
+    <para>TYPO3 не существовало бы без самоотверженности и видения Kasper
+    Skårhøy и неустанной работы всего сообщества, особенно команды
+    разработчиков ядра TYPO3. Отдельную благодарность хотелось бы дать людям,
+    открывшим и реализовавшим многие технологии будущего в для TYPO3 версии 5.
+    Extbase не существовало бы без их вдохновения и руководства.</para>
 
-    <para>Also when creating the book, we had generous support: A thank you
-    goes to Patrick Lobacher, as he has written the section about Object
-    Oriented Programming.</para>
+    <para>Щедрая поддержка была и при создании книги: благодаря Patrick
+    Lobacher, был написан раздел об объектно ориентированном
+    программировании.</para>
 
-    <para>Our special thanks goes to our editors, Alexandra Follenius and
-    Inken Kiupel, who gave us a lot of feedback and comments to our texts, and
-    thus had a great impact on the creating of this book. Also we want to
-    thank the many unknown helping hands at O'Reilly, who ultimately created
-    this book.</para>
+    <para>Отдельные благодарности нашим редакторам, Alexandra Follenius и
+    Inken Kiupel, давшим много отзывов и комментариев по нашим текстам, что
+    сильно повлияло на написание книги. Также хотелось бы поблагодарить
+    множество неизвестных людей, помогавших на O'Reilly, в конце концов
+    выпустивших саму книгу.</para>
 
-    <para>Additionally, you are right now reading the English Version of this
-    book, so we want to thank our translators for the dedication and work they
-    have put into this project over the last months!</para>
+    <para>Кроме того, прямо сейчас Вы читаете русскую версию этой книги, и нам
+    хотелось бы поблагодарить переводчиков за содействие и работу над
+    проектом!</para>
 
-    <para>Last but not least, we want to thank you: That you want to use
-    Extbase and Fluid!</para>
+    <para>И не в последнюю очередь хотелось бы поблагодарить Вас, за Ваше
+    желание использовать Extbase и Fluid!</para>
   </section>
 
   <section>
-    <title>from the translators</title>
+    <title>От переводчиков</title>
 
     <para></para>
   </section>
