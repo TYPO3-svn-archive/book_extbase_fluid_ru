@@ -6,7 +6,91 @@
          xmlns:svg="http://www.w3.org/2000/svg"
          xmlns:ns="http://docbook.org/ns/docbook"
          xmlns:mathml="http://www.w3.org/1998/Math/MathML">
-  <title>More helpful Extensions</title>
+  <title>Дополнительные полезные расширения</title>
 
-  <para>Blah Blah Blah Blah</para>
+  <para>Здесь представлены некоторые расширения, так или иначе полезные для
+  разработки своих расширений. Некоторые из них (например, первые чертыре, из
+  представленных ниже) также поддерживаются командой Extbase, другие
+  разрабатываются другими людьми.</para>
+
+  <section>
+    <title>blog_example</title>
+
+    <para>На примере расширения Blog построена эта книга. Это простой пример
+    многогранных возможностей Extbase и Fluid. Само расширение может быть
+    найдено при помощи ключа расширения blog_example в TER или по ссылке <link
+    xl:href="???">https://svn.typo3.org/TYPO3v4/CoreProjects/MVC/blog_example/trunk/</link>
+    в репозитории Subversion.</para>
+  </section>
+
+  <section>
+    <title>viewhelpertest</title>
+
+    <para>Это расширение демонстрирует все Fluid ViewHelper и их применение.
+    Оно используется разработчиками для тестирования и распространения Fluid.
+    Darüber hinaus ist sie auch hilfreich, um Praxisbeispiele zur Verwendung
+    von ViewHelpern zu sehen. Sie finden die Extension im
+    Subversion-Repository unter <link xl:href="???">https://svn.typo3.org/
+    TYPO3v4/CoreProjects/MVC/viewhelpertest/</link>.</para>
+  </section>
+
+  <section>
+    <title>extbase_kickstarter</title>
+
+    <para>Der Extbase Kickstarter ermöglicht einen Schnelleinstieg in die
+    Extbase-Extension-Programmierung, indem er viele wiederkehrende Aufgaben
+    automatisiert. Er war zum Zeitpunkt der Drucklegung des Buchs noch recht
+    instabil, die Entwickler arbeiten allerdings an der Verbesserung des
+    Kickstarters. Daher empfehlen wir Ihnen, ihn einmal anzuschauen.</para>
+
+    <para>Der Extbase Kickstarter ist in Subversion unter
+    https://svn.typo3.org/TYPO3v4/Extensions/ extbase_kickstarter/trunk/ bzw.
+    als stabile Version auch im TER unter dem Extension Key
+    extbase_kickstarter zu finden.</para>
+
+    <para><remark>проверить ссылки на кикстартер!</remark></para>
+  </section>
+
+  <section>
+    <title>doc_extbase</title>
+
+    <para>Die Extension <emphasis>doc_extbase</emphasis> enthält die
+    Dokumentation von Extbase. Außerdem enthält sie eine API-Referenz. Auch
+    diese Extension ist im TER bzw. in Subversion unter <link
+    xl:href="???">https://
+    svn.typo3.org/TYPO3v4/CoreProjects/MVC/doc_extbase/</link> zu
+    finden.</para>
+  </section>
+
+  <section>
+    <title>devlog</title>
+
+    <para>Die Extension <emphasis>devlog</emphasis> (im TER verfügbar) kann
+    zum Logging des Programmablaufs genutzt werden. Alle Log-Meldungen werden
+    übersichtlich in einem Backend-Modul dargestellt. Die Extension ist
+    besonders hilfreich, wenn in der Frontend-Ausgabe keine Debugmeldungen
+    ausgegeben werden sollen, wie beispielsweise auf Produktivsystemen.</para>
+
+    <para>Um Daten zu loggen, können Sie die Methode
+    <methodname>t3lib_div::devlog($message, $extension- Key, $severity,
+    $data)</methodname> nutzen. Dabei ist $message eine Nachicht, die geloggt
+    werden soll, <varname>$extensionKey</varname> ist der Extension Key der
+    aufrufenden Extension, <varname>$severity</varname> ist eine Zahl von -1
+    bis 3, die den Schweregrad des Fehlers angibt, und
+    <varname>$data</varname> ist ein optionales Array, das zusätzliche zu
+    loggende Daten enthalten kann.</para>
+
+    <para>Weitere Informationen finden Sie in der Online-Dokumentation der
+    Extension <emphasis>devlog</emphasis> im TER.</para>
+  </section>
+
+  <section>
+    <title>PHPUnit</title>
+
+    <para>Diese Erweiterung ermöglicht das Ausführen von automatisierten
+    Unit-Tests im TYPO3- Backend. Sie finden diese Erweiterung im TER unter
+    dem Extension Key <emphasis>phpunit</emphasis>. Auf die Verwendung dieser
+    Extension wird noch ausführlich im Abschnitt «Test-Driven Development» in
+    Kapitel 2, <emphasis>Grundlagen</emphasis>, eingegangen.</para>
+  </section>
 </section>

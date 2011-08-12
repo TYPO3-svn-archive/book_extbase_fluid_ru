@@ -6,31 +6,39 @@
          xmlns:svg="http://www.w3.org/2000/svg"
          xmlns:ns="http://docbook.org/ns/docbook"
          xmlns:mathml="http://www.w3.org/1998/Math/MathML">
-  <title>Extbase and Fluid Autocompletion</title>
+  <title>Автоматическое дополнение кода в Extbase и Fluid</title>
 
-  <para>When developing your own Extensions you'll often work with classes of
-  Extbase and Fluid. That's why it helps to set up the autocompletion feature.
-  It will enable suggestions for complete class names as soon as you press
-  Ctrl + Space (see fig. 1-2). To activate this functionality you have to
-  configure the project you're currently developing, making it depend on
-  Extbase and Fluid. After that the IDE will activate autocompletion for
-  Extbase and Fluid classes.</para>
+  <para>Разрабатывая собственные расширения, зачастую нужны классы из Extbase
+  и Fluid. Вот почему важно настроить функционал автоматического дополнения
+  кода. Появятся подсказки для завершения названий классов по нажатию Ctrl +
+  Пробел (рисунок 1-2). Для включения этих функций необходимо настроить
+  разрабатываемый проект, сделав его зависимым от Extbase и Fluid. После этого
+  IDE включит автозавершения для классов Extbase и Fluid.</para>
 
-  <para><remark>TODO: Insert figure 1-2 with caption: The autocompletion
-  feature will show you possible class names and their code
-  documentation.</remark></para>
+  <screenshot>
+    <info>
+      <title>Функция автозавршения отображает существующие названия классов и
+      содержащуюся в коде документацию.</title>
+    </info>
 
-  <para>In NetBeans right-click your Extension project and choose
-  <emphasis>Properties</emphasis> in the opened context menu to edit the
-  project properties. Select the category <emphasis>PHP Include
-  Path</emphasis> and use <emphasis>Add Folder...</emphasis> to add the
-  directories of Extbase and Fluid.</para>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="1_2.png"></imagedata>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
 
-  <para>In Eclipse this works pretty similar. Right-click the project in which
-  you want to enable the autocompletion feature and select
-  <emphasis>Properties</emphasis>. Now choose the category <emphasis>PHP
-  include Path</emphasis>. Now click on <emphasis>Projects</emphasis>, because
-  you want to create a reference to another Eclipse project. Click on the
-  <emphasis>Add...</emphasis> button and choose the Extbase and Fluid Projects
-  that you've created before.</para>
+  <para>В NetBeans щёлкните правой кнопкой мыши по проекту расширения и
+  выберете в контекстном меню <emphasis>Свойства</emphasis>. Перейдите к
+  категории <emphasis>Путь к PHP include</emphasis> и используйте
+  <emphasis>Добавить папку...</emphasis> для добавления директорий Extbase и
+  Fluid.</para>
+
+  <para>В Eclipse все настраивается схожим образом. Щелчок правой кнопкой мыши
+  по проекту, для которого нужно включить автозавершение, и выберете
+  <emphasis>Свойства</emphasis> в контекстном меню. Выбираете категорию
+  <emphasis>Путь к PHP include</emphasis>. Здесь щёлкаете по
+  <emphasis>Проекты</emphasis>, так как нужно создать ссылку на другой проект
+  Eclipse. Щёлкаете по кнопке <emphasis>Добавить...</emphasis> и выбираете
+  созданные до этого проекты Extbase и Fluid.</para>
 </section>
