@@ -9,7 +9,7 @@
   <title>Дополнительные полезные расширения</title>
 
   <para>Здесь представлены некоторые расширения, так или иначе полезные для
-  разработки своих расширений. Некоторые из них (например, первые чертыре, из
+  разработки своих расширений. Некоторые из них (например, первые четыре, из
   представленных ниже) также поддерживаются командой Extbase, другие
   разрабатываются другими людьми.</para>
 
@@ -28,69 +28,60 @@
 
     <para>Это расширение демонстрирует все Fluid ViewHelper и их применение.
     Оно используется разработчиками для тестирования и распространения Fluid.
-    Darüber hinaus ist sie auch hilfreich, um Praxisbeispiele zur Verwendung
-    von ViewHelpern zu sehen. Sie finden die Extension im
-    Subversion-Repository unter <link xl:href="???">https://svn.typo3.org/
+    Полезно оно и для просмотра практического применения ViewHelper.
+    Расширение можно найти в репозитории Subversion <link
+    xl:href="???">https://svn.typo3.org/
     TYPO3v4/CoreProjects/MVC/viewhelpertest/</link>.</para>
   </section>
 
   <section>
-    <title>extbase_kickstarter</title>
+    <title>extension_builder</title>
 
-    <para>Der Extbase Kickstarter ermöglicht einen Schnelleinstieg in die
-    Extbase-Extension-Programmierung, indem er viele wiederkehrende Aufgaben
-    automatisiert. Er war zum Zeitpunkt der Drucklegung des Buchs noch recht
-    instabil, die Entwickler arbeiten allerdings an der Verbesserung des
-    Kickstarters. Daher empfehlen wir Ihnen, ihn einmal anzuschauen.</para>
+    <para>Расширение, помогающее в создании своего расширения. Хотя расширение
+    все ещё находится в стадии разработки, мы все же призываем взглянуть на
+    него.</para>
 
-    <para>Der Extbase Kickstarter ist in Subversion unter
-    https://svn.typo3.org/TYPO3v4/Extensions/ extbase_kickstarter/trunk/ bzw.
-    als stabile Version auch im TER unter dem Extension Key
-    extbase_kickstarter zu finden.</para>
-
-    <para><remark>проверить ссылки на кикстартер!</remark></para>
+    <para>Проектировщик расширений можно найти на сайте разработки <link
+    xl:href="???">http://forge.typo3.org/projects/show/extension-extension_builder</link>.</para>
   </section>
 
   <section>
     <title>doc_extbase</title>
 
-    <para>Die Extension <emphasis>doc_extbase</emphasis> enthält die
-    Dokumentation von Extbase. Außerdem enthält sie eine API-Referenz. Auch
-    diese Extension ist im TER bzw. in Subversion unter <link
-    xl:href="???">https://
-    svn.typo3.org/TYPO3v4/CoreProjects/MVC/doc_extbase/</link> zu
-    finden.</para>
+    <para>Расширение <emphasis>doc_extbase</emphasis> – это документация по
+    Extbase. Кроме того, в нем имеется справочник API. Расширение отсутствует
+    в TER, но можно получить версию из репозитория Git по адресу <link
+    xl:href="???">http://git.typo3.org/TYPO3v4/CoreProjects/MVC/doc_extbase.git</link>.</para>
   </section>
 
   <section>
     <title>devlog</title>
 
-    <para>Die Extension <emphasis>devlog</emphasis> (im TER verfügbar) kann
-    zum Logging des Programmablaufs genutzt werden. Alle Log-Meldungen werden
-    übersichtlich in einem Backend-Modul dargestellt. Die Extension ist
-    besonders hilfreich, wenn in der Frontend-Ausgabe keine Debugmeldungen
-    ausgegeben werden sollen, wie beispielsweise auf Produktivsystemen.</para>
+    <para>Расширение <emphasis>devlog</emphasis> (имеется в TER) может
+    использоваться для регистрации выполнения программ. Все сообщения журнала
+    доступны из внутреннего интерфейса. Расширение особенно полезно, если
+    отладочные сообщения не должны отображаться во внешнем интерфейсе,
+    например, на уже работающем сайте.</para>
 
-    <para>Um Daten zu loggen, können Sie die Methode
-    <methodname>t3lib_div::devlog($message, $extension- Key, $severity,
-    $data)</methodname> nutzen. Dabei ist $message eine Nachicht, die geloggt
-    werden soll, <varname>$extensionKey</varname> ist der Extension Key der
-    aufrufenden Extension, <varname>$severity</varname> ist eine Zahl von -1
-    bis 3, die den Schweregrad des Fehlers angibt, und
-    <varname>$data</varname> ist ein optionales Array, das zusätzliche zu
-    loggende Daten enthalten kann.</para>
+    <para>Для регистрации данных можно использовать метод
+    <methodname>t3lib_div::devlog($message, $extension-Key, $severity,
+    $data)</methodname>. Это $message сообщение, которое заносится в журнал
+    <varname>$extensionKey</varname> под ключом вызвавшего расширения,
+    <varname>$severity</varname> – число от 1 до 3, указывающее на серьёзность
+    ошибки, а <varname>$data</varname> – необязательный массив с
+    дополнительными данными.</para>
 
-    <para>Weitere Informationen finden Sie in der Online-Dokumentation der
-    Extension <emphasis>devlog</emphasis> im TER.</para>
+    <para>Дополнительную информация можно получить в документации по
+    расширению <emphasis>devlog</emphasis> в TER.</para>
   </section>
 
   <section>
     <title>PHPUnit</title>
 
-    <para>Diese Erweiterung ermöglicht das Ausführen von automatisierten
-    Unit-Tests im TYPO3- Backend. Sie finden diese Erweiterung im TER unter
-    dem Extension Key <emphasis>phpunit</emphasis>. Auf die Verwendung dieser
-    Extension wird noch ausführlich im Abschnitt «Test-Driven Development» in
-    Kapitel 2, <emphasis>Grundlagen</emphasis>, eingegangen.</para>
+    <para>Расширение позволяет автоматически запускать модульные тесты во
+    внутреннем интерфейсе TYPO3. Расширение доступно в TER под ключом
+    <emphasis>phpunit</emphasis>. Использование расширения подробно описано в
+    разделе «Разработка через тестирование» главы 2, <emphasis>Основные
+    принципы</emphasis>.</para>
   </section>
 </section>

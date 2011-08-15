@@ -6,71 +6,74 @@
          xmlns:svg="http://www.w3.org/2000/svg"
          xmlns:ns="http://docbook.org/ns/docbook"
          xmlns:mathml="http://www.w3.org/1998/Math/MathML">
-  <title>Basic Principles</title>
+  <title>Основные принципы</title>
 
-  <para>TYPO3 comes with an impressive variety of available extensions. As
-  usual with Open Source Projects, these extensions have been written by
-  various Programmers. Extensions are used in all sorts of projects: Some are
-  written for use in small clubs or even in private, others are developed in
-  big teams in the context of major projects. While a newbie, writing his
-  first extension, may hassle with some first-time problems concerning TYPO3,
-  many big projects are based on homemade Frameworks. So style and
-  architecture of today's extensions are quite inhomogeneous. Hence it is
-  often very difficult to extend or modify existing Extensions for own
-  projects: Before being able to do so, you have to intensively dig into the
-  way of thinking and programming of the respective author or team of
-  authors.</para>
+  <para>TYPO3 поставляется со впечатляющим количеством доступных расширений.
+  Как обычно для проектов с открытым исходным кодом, все эти расширения
+  написаны самыми разными программистами. Расширения используются в самых
+  разных проектах: некоторые написаны для использования в небольших клубах, и
+  даже в приватных целях, другие разрабатывались большими командами в
+  контексте больших проектов. Новички же при написании своего первого
+  расширения столкнутся со множеством проблем, связанных с TYPO3, многие
+  большие проекты созданы на основе самописных технологий. Поэтому стили и
+  архитектура представленных на данный момент расширений весьма неоднородны.
+  Ввиду этого очень сложно изменить или подстроить существующие расширения под
+  свои проекты: перед этим нужно погрузиться в образ мысли и стиль
+  программирования определённого автора.</para>
 
-  <para>It's one of the aims of Extbase to reduce this inconsistency in
-  extensions. Approved paradigms of programming lead to fast success for
-  newbies and protect Developers from having to deal with complex database
-  queries or potential security holes like SQL-Injections or XSS-Attacks.
-  Based on Extbase small Extensions as well as big projects can be realized in
-  a well-structured way.</para>
+  <para>Одной из целей Extbase является уменьшение подобной
+  непоследовательности в расширениях. Утверждённые парадигмы программирования
+  позволят быстро адаптироваться новичкам и защитят разработчиков от
+  необходимости создания сложных запросов к базе данных или потенциальных дыр
+  в безопасности, вроде SQL-инъекций или атак XSS. На основе Extbase как
+  небольшие расширения, так и большие проекты, будут реализовываться хорошо
+  структурированным способом.</para>
 
-  <para>Extbase is based on four interconnected and complementary paradigms,
-  which we like to present in this chapter. You'll find these during the whole
-  project cycle, from planning to realization and maintenance of your
-  extension:</para>
+  <para>В основе Extbase лежат четыре взаимосвязанные и дополняющие друг-друга
+  парадигмы, которые мы и представим в текущей главе. С ними придётся
+  сталкиваться постоянно, начиная от планирования и заканчивая реализацией
+  расширений:</para>
 
   <para><itemizedlist>
       <listitem>
-        <para>Object-Oriented Programming (OOP): describes how to encapsulate
-        associated real world aspects to abstract objects in a software</para>
+        <para>Объектно ориентированное программирование (ООП): описывает связи
+        инкапсулированных ассоциативных объектов реального мира в
+        программе.</para>
       </listitem>
 
       <listitem>
-        <para>Domain-Driven Design (DDD): Goal of this Approach of developing
-        is to transcribe terms, rules and actions of the problem at hand in an
-        adequate way.</para>
+        <para>Предметно ориентированная разработка (Domain-Driven Design -
+        DDD): целью подхода к разработке является расшифровка терминов, правил
+        и действий насущной проблемы наиболее адекватным способом.</para>
       </listitem>
 
       <listitem>
-        <para>Model-View-Controller (MVC): This programming paradigm leads to
-        a clear isolation of data, control of actions and logic of
-        interaction.</para>
+        <para>Модель-Представление-Диспетчер (Model-View-Controller – MVC):
+        эта парадигма программирования ведёт к понятному разделению данных,
+        контроля действий и логики взаимодействия.</para>
       </listitem>
 
       <listitem>
-        <para>Test-Driven Development (TDD): This approach is a basic
-        technique for generating code being stable, resilient to errors and
-        legible - and therefore maintainable.</para>
+        <para>Разработка через тестирование (Test-Driven Development – TDD):
+        подход является базовой техникой формирования стабильного, устойчивого
+        к ошибкам, понятного, а значит хорошо сопровождаемого, кода.</para>
       </listitem>
-    </itemizedlist>Each of these four paradigms are well known in professional
-  software development and more or less widespread. This results in a big
-  advantage when using Extbase. Until now an expert in developing TYPO3
-  extensions was mainly an expert in usage (and by-passing) of the application
-  programming interface (API) of TYPO3. Extbase in contrast will demand
-  additional knowledge and skills in domains that are useful and effective far
-  beyond the TYPO3 Community. Thus you can access an extensive accumulation of
-  experience in form of books, forums or personal contacts – an important
-  aspect of the future of TYPO3.</para>
+    </itemizedlist>Каждая из четырёх парадигм хорошо известна в
+  профессиональной среде разработки программного обеспечения, и имеют
+  более-менее широкое распространение. И это даёт большое преимущество при
+  использовании Extbase. До сих пор эксперт в разработке расширений для TYPO3
+  был в основном экспертом в использовании (и обходным образом) прикладного
+  интерфейса программирования (API) TYPO3. Extbase в противоположность этому
+  потребует дополнительных знаний и навыков в областях, лежащих далеко вне
+  области сообщества TYPO3. Таким образом можно получить доступ и накапливать
+  опыт из книг, форумов или из личных контактов – это важная сторона будущего
+  TYPO3.</para>
 
-  <para>Knowledge in Object-Oriented Programming, Domain-Driven Design and the
-  MVC-paradigm is essential for working with extbase. Knowledge of Test-Driven
-  Development is not absolutely necessary for understanding nor using extbase.
-  Nevertheless we like to warmly recommend this technique of
-  developing.</para>
+  <para>Знания в областях объектно ориентированного программирования,
+  предметно ориентированной разработки и парадигмы MVC необходимы для работы с
+  extbase. Знание разработки через тестирование не столь необходимо ни для
+  понимания, ни для использования extbase. Тем не менее мы всячески
+  рекомендуем такую технику разработки.</para>
 
   <xi:include href="1-Object-oriented%20Programming%20in%20PHP.xml" />
 

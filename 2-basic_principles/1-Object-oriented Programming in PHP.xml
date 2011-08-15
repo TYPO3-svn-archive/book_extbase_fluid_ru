@@ -6,7 +6,7 @@
          xmlns:svg="http://www.w3.org/2000/svg"
          xmlns:ns="http://docbook.org/ns/docbook"
          xmlns:mathml="http://www.w3.org/1998/Math/MathML">
-  <title>Object-oriented programming in PHP</title>
+  <title>Объектно ориентированное программирование в PHP</title>
 
   <para>Object-oriented programming is a Programming Paradigm, versatilely
   applied in extbase and the extensions built on it. In this section we will
