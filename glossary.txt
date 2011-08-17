@@ -41,6 +41,7 @@ Entwurfsmuster = Design Pattern
 Exception = Exception
 	Eine Ausnahmesituation, technisch umgesetzt durch PHPs Exception Handler
 Exception werfen = ... throw Exception ...
+extend = дополнить
 Fehler = Error
 Fehlerbehandlung = Error Handling
 Fabrik = Factory
@@ -49,6 +50,7 @@ framework = framework = технология, платформа
 web application framework = платформа (технология) веб разработки
 Frontend = внешний интерфейс
 IDE = среда разработки
+Instantiation = реализация
 Interface = Interface
 	Im Sinne von PHP "interface"
 Schnittstelle = Interface

@@ -64,8 +64,8 @@ xdebug.remote_port=9000</programlisting>
   контекстном меню выбрать <emphasis>Свойства</emphasis>. Здесь предстоит
   изменить <emphasis>Настройки выполнения</emphasis>: в строке <emphasis>URL
   адрес проекта</emphasis> введите URL внешнего интерфейса TYPO3 под которым
-  работает локальная система, например: <link
-  linkend="???">http://localhost/typo3v4/</link>. Затем щёлкните по кнопке
+  работает локальная система, например:
+  <emphasis>http://localhost/typo3v4/</emphasis>. Затем щёлкните по кнопке
   <emphasis>Дополнительно</emphasis>..., и в параметрах <emphasis>URL адрес
   отладки</emphasis> установите <emphasis>Спрашивать каждый раз</emphasis>.
   NetBeans готов к отладке.</para>
@@ -97,8 +97,8 @@ xdebug.remote_port=9000</programlisting>
 
   <para>Теперь перейдём к настройке отладки в Eclipse. Перейдите к параметрам
   Eclipse и откройте раздел <emphasis>PHP ➝ PHP Servers</emphasis> и создайте
-  запись <link linkend="???">http://localhost</link>. В разделе <emphasis>PHP
-  ➝ Debug</emphasis> параметр <emphasis>PHP Debugger</emphasis> должен быть
+  запись <emphasis>http://localhost</emphasis>. В разделе <emphasis>PHP ➝
+  Debug</emphasis> параметр <emphasis>PHP Debugger</emphasis> должен быть
   установлен на <emphasis>XDebug</emphasis>, а <emphasis>Server</emphasis>
   должен быть указан только что созданный сервер localhost. Опять же, мы
   рекомендуем снять настройку <emphasis>Break at First Line</emphasis>, чтобы

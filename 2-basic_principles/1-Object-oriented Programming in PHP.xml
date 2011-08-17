@@ -8,630 +8,727 @@
          xmlns:mathml="http://www.w3.org/1998/Math/MathML">
   <title>Объектно ориентированное программирование в PHP</title>
 
-  <para>Object-oriented programming is a Programming Paradigm, versatilely
-  applied in extbase and the extensions built on it. In this section we will
-  give an overview of the basic concepts of Object Orientation.</para>
+  <para>Объектно ориентированное программирование – это парадигма
+  программирования, широко используемая в extbase и построенных на нем
+  расширениях. В текущем разделе мы даём обзор основных концепций ориентации
+  на объекты.</para>
 
-  <para>Programs have a certain purpose, which is - generally speaking - to
-  solve a problem. "Problem" does not necessarily mean error or defect but
-  rather an actual task. This Problem usually has a concrete counterpart in
-  real life.</para>
+  <para>Программы всегда имеют определённое назначение, то есть, вообще
+  говоря, решение определённого рода проблем. "Проблемы" - это не обязательно
+  ошибки или дефекты, а текущие задачи. Такие проблемы обычно имеют отражения
+  в реальной жизни.</para>
 
-  <para>A Program could for example take care of the task of booking a cruise
-  in the Indian Ocean. If so we obviously have a problem (a programmer that
-  has been working to much and finally decided to go on vacation) and a
-  program, promising recuperation by booking a coach on one of the luxury
-  liners for him and his wife.</para>
+  <para>Программа, например, может позаботиться о задаче бронирования билетов
+  на круиз по Индийскому океану. При этом очевидно, возникает проблема
+  (программист, который работает на износ, наконец решил пойти в отпуск), а
+  программа будет закончена лишь после отпуска, а ведь с ее помощью
+  программист мог бы забронировать билеты на один из роскошных лайнеров для
+  себя и жены.</para>
 
-  <para>Object Orientation assumes that a concrete problem is to be solved by
-  a program, and a concrete problem is caused by real Objects. Therefore focus
-  is on the Object. This can be abstract of course: it will not be something
-  as concrete as a car or a ship all the time, but can also be a reservation,
-  an accout or a graphical symbol.</para>
+  <para>При объектно ориентированном подходе предполагается, что программа
+  решает конкретные проблемы, а проблемы эти вызваны реальными объектами.
+  Поэтому фокус смещается на объект. Может быть и абстракция, ведь не все
+  можно отобразить реально существующими в мире объектами, такими как, скажем,
+  машина или корабль, но существует и резервирование, учётные записи или даже
+  какие-то графические символы.</para>
 
-  <para>Objects are "containers" for data and corresponding functionality. The
-  data of an object is stored in its <emphasis>Properties</emphasis>. The
-  functionality is provided by <emphasis>Methods</emphasis>, which can for
-  example alter the Properties of the Object. In regard to the cruise liner we
-  can say, that it has a certain ammount of coaches, a length and width and a
-  maximum speed. Further it has Methods to start the motor (and hopefully to
-  stop it again also), change the direction as well as to increase thrust, for
-  you can reach your holiday destination a bit faster.</para>
+  <para>Объекты — это "контейнеры" для данных и соответствующих функций.
+  Данные об объекте хранятся в их качествах (<emphasis>Свойствах</emphasis>).
+  Функции отражаются в <emphasis>Методах</emphasis>, которые могут, например,
+  менять и <emphasis>качества (Свойства) объекта</emphasis>. Для круизного
+  лайнера можно говорить о количестве кают, его длине и ширине, максимальной
+  скорости. Помимо этого он имеет присущие ему <emphasis>методы</emphasis> для
+  запуска двигателя (и, разумеется, его остановки), изменения направления и
+  увеличения тяги, чтобы отдыхающие смогли немного быстрее добраться до места
+  назначения.</para>
 
   <section>
-    <title>Why Object Orientation after all?</title>
+    <title>Почему, в конце-концов, объектно ориентированное
+    программирование?</title>
 
-    <para>Surely some users will ask themselves why they should develop object
-    orientated in the first place. Why not (just like until now) keep on
-    developing procedural, thus stringing together functions. If we look at
-    the roughly 4.300 extensions available for TYPO3 at the moment, we'll see
-    that they are built with a class by default - but have been completed by
-    the extension developer in a procedural way in about 95% of all cases.
-    Procedural programming has some severe disadvantages though:</para>
+    <para>Конечно же, некоторые пользователи задаются вопросом, почему они в
+    первую очередь должны быть озабочены объектно ориентированной разработкой.
+    А почему бы (как и прежде) ни заниматься процедурной разработкой, на
+    основе связанных друг с другом функций. Если мы взглянем на более чем
+    5.000 доступных для TYPO3 на данный момент расширений, то можно увидеть,
+    что они построены на классе по умолчанию, но в 95% случаев разработка
+    расширений закачивалась процедурным подходом. Процедурный подход имеет
+    серьёзные недостатки, среди которых:</para>
 
     <itemizedlist>
       <listitem>
-        <para>Properties and Methods belonging together with regard to content
-        ca not be united. This methodology, called
-        <emphasis>Encapsulation</emphasis> in Object Orientation, is
-        necessary, if only because of clear arrangement.</para>
+        <para>По смыслу подходящие друг другу Свойства и Методы нельзя
+        объединить. Эта методика, называемая в объектно ориентированном
+        программировании <emphasis>Инкапсуляция</emphasis>, крайне важна, хотя
+        бы для понятного расположения.</para>
       </listitem>
 
       <listitem>
-        <para>It is rather difficult to re-use code</para>
+        <para>Затруднено повторное использование фрагментов кода.</para>
       </listitem>
 
       <listitem>
-        <para>All Properties can be altered everywhere throughout the code.
-        This leads to hard-to-find errors.</para>
+        <para>Все Свойства разбросаны по коду, что приводит к затруднению
+        поиска ошибок.</para>
       </listitem>
 
       <listitem>
-        <para>Procedural code gets confusing easily. This is called Spaghetti
-        code.</para>
+        <para>В процедурном коде легко запутаться. Это называется
+        спагетти-код.</para>
       </listitem>
     </itemizedlist>
 
-    <para>Furthermore Object Orientation mirrors the real world: Real Objects
-    exist, and they all have properties and (most of them) methods. This fact
-    is now represented in programming.</para>
+    <para>Кроме того, ориентация на объекты отражает реальный мир: существуют
+    реальные объекты, все они имеют присущие им свойства и (большинство)
+    методы. Этот факт теперь отражён в программировании.</para>
 
-    <para>In the following we'll talk about the object ship. We'll invoke this
-    object, stock it with coaches, a motor and other useful stuff.
-    Furthermore, there will be funtions, moving the ship, thus turning the
-    motor on and off. Later we'll even create a luxury liner based on the
-    general ship and equip it with a golf simulator and sattelite TV.</para>
+    <para>Далее возьмём в качестве примера объекта корабль. Мы будем ссылаться
+    на этот объект, с его каютами, мотором и другими полезными нам частями.
+    Кроме того, имеются и функции перемещения корабля, запуска и остановки
+    двигателя. Позже мы даже создадим роскошный лайнер и снабдим его
+    симулятором гольфа и спутниковым ТВ.</para>
 
-    <para>On the following pages, we'll try to be as graphic as possible (but
-    still semantically correct) to familiarize you with object orientation.
-    There is a specific reason: The more you can identify with the Object and
-    its Methods, the more open you'll be for the Theory behind Object
-    Orientated Programming. Both is necessary for successfull programming –
-    even though you'll often not be able to imagine the objects you'll later
-    work with as clearly as in our examples.</para>
+    <para>Далее попытаемся разъяснить как можно красочнее, по возможности с
+    рисунками, (но семантически корректно) ориентацию на объекты. Для этого
+    есть причина: чем лучше себе представляешь Объекты с их Методами, тем
+    понятнее становится теория объектно ориентированного программирования. Для
+    успешного программирования необходимо все это, даже если затем попадутся
+    объекты, которые не столь отчётливо, как в нашем примере, можно
+    представить.</para>
   </section>
 
   <section>
-    <title>Classes and Objects</title>
+    <title>Классы и Объекты</title>
 
-    <para>Let's now take a step back and imagine there'd be a blueprint for
-    ships in general. We now focus not the ship but this blueprint. It is
-    called <emphasis>Class</emphasis>, in this case is is the Class
-    <classname>ship</classname>. In PHP this is written as follows;</para>
+    <para>Теперь давайте вернёмся немного назад, и представим, что же является
+    общим для всех кораблей. Мы сконцентрируемся не на конкретном корабле, а
+    на его "шаблоне" или образе. Это называется <emphasis>Класс</emphasis>, в
+    нашем случае это будет класс <classname>ship</classname>. В PHP он
+    записывается следующим образом:</para>
 
-    <para><code>&lt;?php</code></para>
-
-    <para><code>class ship {</code></para>
-
-    <para><code>...</code></para>
-
-    <para><code>}</code></para>
-
-    <para><code>?&gt;</code></para>
+    <programlisting>&lt;?php
+class Ship {
+    ...
+}
+?&gt;</programlisting>
 
     <para><tip>
-        <para>In this piece of code we kept noting the necessary PHP tags at
-        the beginning and end. We will spare them in the following examples to
-        make the listings a bit shorter.</para>
-      </tip>The key word <classname>class </classname>opens the Class and
-    inside the curly brackets Properties and Methods are wirtten. we'll now
-    add these Properties and Methods:</para>
+        <para>В этом фрагменте кода мы внесли необходимые для PHP теги в
+        начале и конце. Для сокращения листинга, далее мы не будем их
+        приводить.</para>
+      </tip>Ключевое слово <classname>class</classname> открывает Класс, а
+    внутри фигурных скобок записываются Свойства и Методы. Далее мы добавим
+    все эти Свойства и Методы:</para>
 
-    <para><code>class ship {</code></para>
+    <programlisting>class Ship {
 
-    <para><code></code></para>
+    public $name;
+    public $coaches;
+    public $engineStatus;
+    public $speed;
 
-    <para><code>public $name;</code></para>
+    function startEngine() {}
+    function stopEngine() {}
+    function moveTo($location) {}
+}</programlisting>
 
-    <para><code>public $coaches;</code></para>
-
-    <para><code>public $engineStatus;</code></para>
-
-    <para><code>public $speed;</code></para>
-
-    <para><code></code></para>
-
-    <para><code>function startEngine() {}</code></para>
-
-    <para><code>function stopEngine() {}</code></para>
-
-    <para><code>function moveTo($location) {}</code></para>
-
-    <para><code></code></para>
-
-    <para><code>}</code></para>
-
-    <para>Our ship now has a name (<classname>$name</classname>), a number of
-    coaches (<classname>$coaches</classname>) and a speed
-    (<classname>$speed</classname>). In addition we built in a variable,
-    containing the status of the engine
-    (<classname>$engineStatus</classname>). A real ship, of course, has much
-    more properties, all important somehow – for our our abstraction these few
-    will be sufficient though. We'll focus on why every Property is marked
-    with the key word <classname>public </classname>further down.</para>
+    <para>У нашего корабля теперь есть название
+    (<classname>$name</classname>), количество кают
+    (<classname>$coaches</classname>) и скорость
+    (<classname>$speed</classname>). Кроме того, мы ввели переменную, для
+    хранения состояния двигателя (<classname>$engineStatus</classname>). У
+    настоящего корабля, разумеется, свойств гораздо больше, но для наших целей
+    этих пока достаточно. Сейчас сконцентрируемся на том, почему каждое
+    свойство отмечено ключевым словом <classname>public</classname>.</para>
 
     <para><tip>
-        <para>For Methods and Properties we use a notation called
-        <emphasis>lowerCamelCase</emphasis>: The first letter is lower case
-        and all other parts are added without blank or underscore in upper
-        case. This is a convention used in extbase (as well as FLOW3).</para>
-      </tip>We can also swith on the engine
-    (<classname>startEngine()</classname>), travel with the ship to the
-    desired destination (<classname>moveTo($location)</classname>) and switch
-    off the engine again (<classname>stopEnginge()</classname>). Note that all
-    Methods are empty, i.e. we have no content at all. We'll change this in
-    the following examples, of course. The line containint Method name ad (if
-    avallabe) parameters is called Method signature or method head. Everything
-    contained by the Method ist called method body accordingly.</para>
+        <para>Методы и Свойства мы используем
+        <emphasis>нижнююГорбатуюЗапись</emphasis>: первый символ в нижнем
+        регистре, а последующие части добавляются без пробела и подчёркиваний
+        с первым символом в верхнем регистре. Это соглашение используется в
+        extbase (также, как и в FLOW3).</para>
+      </tip>Также мы можем включить наш двигатель
+    (<classname>startEngine()</classname>), путешествовать на корабле к
+    нужному местоназначению (<classname>moveTo($location)</classname>) и снова
+    глушить двигатель (<classname>stopEnginge()</classname>). Обратите
+    внимание, что все методы пустые, то есть в них нет ничего вообще. В
+    дальнейших примерах мы, разумеется, поправим это. Строка с названием
+    Метода и (если имеются) параметрами называется сигнатура или заголовок
+    Метода. А все остальное содержимое метода называется соответственно
+    телом.</para>
 
-    <para>Now we'll finally create an Object from our Class. The Class
-    <classname>ship </classname>will be the blueprint and <classname>$fidelio
-    </classname>the concrete Object.</para>
+    <para>Ну а теперь давайте создадим Объект из нашего Класса. Класс
+    <classname>ship</classname> послужит шаблоном, а
+    <classname>$fidelio</classname> станет конкретным Объектом.</para>
 
-    <para><code>$fidelio = new Ship();</code></para>
+    <programlisting>$fidelio = new Ship();
+// Просмотр объекта
+var_dump($fidelio);</programlisting>
 
-    <para><code>// Display the Object</code></para>
+    <para>Ключевое слово <code>new</code> используется для создания конкретных
+    Объектов из Класса. Такой объект также называется
+    <emphasis>Экземпляром</emphasis>, а процесс создания —
+    <emphasis>реализация</emphasis>. Можно использовать команду
+    <code>var_dump()</code> для подробного изучения объекта. Мы увидим
+    следующее:</para>
 
-    <para><code>var_dump($fidelio</code>);</para>
+    <programlisting>object(Ship)#1 (3) {
+    ["name"] =&gt; NULL
+    ["coaches"] =&gt; NULL
+    ["engineStatus"] =&gt; NULL
+    ["speed"] =&gt; NULL
+}</programlisting>
 
-    <para>The key word new is used to create a concrete Objext from the Class.
-    This Object is also called <emphasis>Instance </emphasis>and the creation
-    process consequentially <emphasis>Instantiation</emphasis>. We can use the
-    command <code>var_dump() </code>to closely examine the object. We'll see
-    the following</para>
+    <para>Ясно видно, что наш Объект имеет четыре Свойства с конкретными
+    значениями, в текущий момент все значения NULL, так как мы ещё ничего для
+    них не назначили. Можно создать столько объектов одного класса, сколько
+    будет нужно, и все они будут разными, даже если набор свойств будет таким
+    же.</para>
 
-    <para><code>object(Ship)#1 (3) {</code></para>
+    <programlisting>$fidelio1 = new Ship();
+$fidelio2 = new Ship();
+if ($fidelio1 === $fidelio2) {
+    echo "Объекты идентичны!";
+} else {
+    echo "Объекты не идентичны!";
+}</programlisting>
 
-    <para><code>["name"] =&gt; NUL </code></para>
-
-    <para><code>["coaches"] =&gt; NULL</code></para>
-
-    <para><code>["engineStatus"] =&gt; NULL</code></para>
-
-    <para><code>["speed"] =&gt; NULL</code></para>
-
-    <para><code>}</code></para>
-
-    <para>We can clearly see that our Object has 4 Properties with a concrete
-    value, at the moment still NULL, for we did not yet assign anything. We
-    can instantiate as many Objects from a class as we like, and every single
-    one will differ from the others – even if all of the Properties have the
-    same values.</para>
-
-    <para><code>$fidelio1 = new Ship();</code></para>
-
-    <para><code>$fidelio2 = new Ship();</code></para>
-
-    <para><code>if ($fidelio1 === $fidelio2) {</code></para>
-
-    <para><code>echo 'Objects are identical!'</code></para>
-
-    <para><code>} esle {</code></para>
-
-    <para><code>echo 'Objects are not identical!'</code></para>
-
-    <para><code>}</code></para>
-
-    <para>In this examle the output ist <code>Objects are not
-    identical!</code></para>
+    <para>Здесь будет выведено <code>Объекты не идентичны!</code></para>
 
     <section>
-      <title>The arrow operator</title>
+      <title>Оператор стрелка</title>
 
-      <para>We are able to create an Object now, but of course it's Properties
-      are still empty.We'll hurry to change this by assigning values to the
-      Properties. For this, we use a special operator, the so called arrow
-      operator (-&gt;). We can use it for getting access to the properties of
-      an Object or calling Methods. In the following example, we set the name
-      of the ship and call some Methods:</para>
+      <para>Теперь мы можем создавать Объекты, но конечно их Свойства все ещё
+      не заполнены. Поторопимся и исправим это, задав значения Свойствам. Для
+      этого воспользуемся специальным оператором, так называемый оператор
+      стрелка (-&gt;). Он полезен для доступа к свойствам объекта или вызова
+      его методов. В следующем примере дадим кораблю название и вызовем
+      несколько методов:</para>
 
-      <para><code>$ship = new Ship();</code></para>
-
-      <para><code>$ship-&gt;name = "FIDELIO";</code></para>
-
-      <para><code>echo "The ship's Name is ". $ship-&gt;name;</code></para>
-
-      <para><code>$ship-&gt;startEngine();</code></para>
-
-      <para><code>$ship-&gt;moveTo('Bahamas');</code></para>
-
-      <para><code>$ship-&gt;stopEngine();</code></para>
+      <programlisting>$schiff = new Ship();
+$schiff-&gt;name = "FIDELIO";
+echo "Название корабля: " . $schiff-&gt;name;
+$schiff-&gt;startEngine();
+$schiff-&gt;moveTo('Bahamas');
+$schiff-&gt;stopEngine();</programlisting>
     </section>
 
     <section>
       <title>$this</title>
 
-      <para>Using the arrow operator we can now comfortably access Properties
-      and Methods of an Object. But what to do, if we want to do this from
-      inside a Method, e.g. to set <classname>$speed </classname>inside of the
-      Method <classname>startEngine()</classname>? We don't know at this
-      point, how an object to be instantiated later will be called. So we need
-      a mechanism to do this indepentent from the name. This is done with the
-      special variable <classname>$this</classname>.</para>
+      <para>Теперь мы можем с удобством добраться до Свойств и Методов Объекта
+      при помощи оператора стрелка. Но что делать, если доступ к ним нам
+      понадобится внутри одного из Методов, например, для установки
+      <classname>$speed</classname> из Метода
+      <classname>startEngine()</classname>? При этом нам неизвестно, как будет
+      вызван объект, реализованный впоследствии. Нам нужен механизм,
+      независимый от названия. Это обеспечивает специальная переменная
+      <classname>$this</classname>.</para>
 
-      <para><code>class Ship {</code></para>
+      <programlisting>class Ship {
+    ...
+    public $speed;
+    function startEngine() {
+        $this-&gt;speed = 200;
+    }
+    ...
+}</programlisting>
 
-      <para><code>...</code></para>
-
-      <para><code>public $speed;</code></para>
-
-      <para><code>...</code></para>
-
-      <para><code>function startEngine() {</code></para>
-
-      <para><code>$this-&gt;speed = 200;</code></para>
-
-      <para><code>}</code></para>
-
-      <para><code>}</code></para>
-
-      <para>With <code>$this-&gt;speed </code>you can acces the Property
-      "speed" in the acual Object, independently of it's name.</para>
+      <para>При помощи <code>$this-&gt;speed</code> можно добраться до
+      Свойства "speed" текущего Объекта, независимо от его текущего
+      названия.</para>
     </section>
 
     <section>
-      <title>Constructor</title>
+      <title>Конструктор</title>
 
-      <para>It can be very useful to initialize an Object at the Moment of
-      instantiating it. Surely there will be a certain number of coaches built
-      in right away, when a new cruise liner is created - so that the future
-      guest will not be forced to sleep in emergency accommodation. So we can
-      define the number of coaches right when instantiating. The processing of
-      the given value is done in a Method automatically called on creation of
-      an Object, the so called <emphasis>Constructor</emphasis>. This special
-      Method always has the name <classname>__construct() </classname>(the
-      first two characters are underscores).</para>
+      <para>Было бы очень полезно определять Объект во время его реализации.
+      При создании нового лайнера подразумевается определённое количество кают
+      — чтобы будущие пассажиры не спали бы в аварийных условиях. Поэтому нам
+      нужно определить количество кают прямо во время реализации конкретного
+      экземпляра корабля. Сами значения задаются в Методе, автоматически
+      вызываемом при создании Объекта, так называемом
+      <emphasis>Конструкторе</emphasis>. Такой метод всегда носит название
+      name <classname>__construct() </classname>(с двумя символами
+      подчёркивания).</para>
 
-      <para>The values received from instantiating are now passed on to the
-      constructor as Argument and then assigned to the Properties
-      <classname>§coaches </classname>respectively
+      <programlisting>class Ship {
+    public $name;
+    public $coaches;
+    public $speed;
+    ...
+    function __construct($name, $numberOfCoaches) {
+        $this-&gt;name = $name;
+        $this-&gt;coaches = $numberOfCoaches;
+        echo "Новое судно названо: ".$this-&gt;name;
+        echo "&lt;br /&gt;и имеет ". $this-&gt;coaches . " кают";
+    }
+}
+$fidelio = new Ship('Fidelio', 200);</programlisting>
+
+      <para>Значения от конкретного экземпляра при этом передаются в качестве
+      аргументов конструктору, который затем присваивает соответственно
+      значения для Свойств <classname>$coaches </classname>и
       <classname>$name</classname>.</para>
     </section>
   </section>
 
   <section>
-    <title>Inheritance of Classes</title>
+    <title>Наследование классов</title>
 
-    <para>With the class we created we can already do a lot. We can create
-    many ships and send them to the oceans of the world. But of course the
-    shipping company always works on improving the offer of cruise liners.
-    Increasingly big and beautiful ships are built. Also new offers for the
-    passengers are added. FIDELIO2, for example, even has a little golf course
-    based on deck.</para>
+    <para>При помощи созданного класса мы уже многого достигли. Можно создать
+    множество судов и наполнить ими все океаны мира. Но судостроительные
+    компании непрерывно работают над совершенствованием круизных лайнеров.
+    Строятся все большие и совершенные суда. А пассажирам предлагаются новый
+    сервис. Например, FIDELIO2 имеет даже небольшое поле для гольфа прямо на
+    палубе.</para>
 
-    <para>If we look behid the curtain of this new luxury liner though, we
-    find that the shipping company only took a ship type FIDELIO and altered
-    it a bit. The basis is the same. Therefore it makes no sense to completely
-    redefine the new ship – instead we use the old definition and just add the
-    golf course – just as the shipping company did. Technically speaking we
-    extend an "old" Class definition by using the key word
-    <code>extends</code>.</para>
+    <para>Но если мы заглянем за занавес этого нового роскошного лайнера, то
+    обнаружим, что за основу судостроительная компания взяла тип судна FIDELIO
+    и немного его доработала. Действительно, не имеет большого смысла
+    выдумывать полностью новое судно — вместо этого возьмём старое определение
+    и просто добавим поле для гольфа, также, как поступила судостроительная
+    компания. Говоря техническим языком, мы дополним (extend) определение
+    "старого" Класса, используя ключевое слово <code>extends</code>.</para>
 
-    <para><code>class LuxuryLiner extends Ship {</code></para>
+    <programlisting>class LuxuryLiner extends Ship {
+    public $luxuryCoaches;
+    function golfSimulatorStart() {
+        echo 'Симулятор гольфа на корабле ' . $this-&gt;name . ' запущен.';
+    }
+    function golfSimulatorStop() {
+        echo 'Симулятор гольфа на корабле ' . $this-&gt;name . ' остановлен.';
+    }
+}
+$luxusschiff = new LuxuryLiner('FIDELIO2','600');</programlisting>
 
-    <para><code>public $luxuryCoaches;</code></para>
+    <para>Наш новый суперлайнер так запросто вышел в свет. Мы определили, что
+    суперлайнер просто дополнил определение класса
+    <classname>Ship</classname>. Дополняемый класс (здесь
+    <classname>Ship</classname>) вызывает <emphasis>родительский
+    класс</emphasis> или <emphasis>суперкласс</emphasis>. Класс формируется
+    расширением (в нашем примере <classname>LuxuryLiner</classname>) и
+    вызывает <emphasis>дочерний класс </emphasis>или
+    <emphasis>субкласс</emphasis>.</para>
 
-    <para><code>function golfSimulatorStart() {</code></para>
-
-    <para><code>echo 'Golf simulator on ship ' . $this-&gt;name . '
-    started.';</code></para>
-
-    <para><code>}</code></para>
-
-    <para><code>function golfSimulatorStop() {</code></para>
-
-    <para><code>echo 'Golf simulator on ship ' . $this-&gt;name . '
-    stopped.';</code></para>
-
-    <para><code>}</code></para>
-
-    <para><code>}</code></para>
-
-    <para><code>$luxuryShip = new LuxuryLiner('FIDELIO2','600')</code></para>
-
-    <para>Our new luxury liner comes into existence as easy as that. We
-    define, that the luxury liner just extends the Definition of the class
-    <classname>Ship</classname>. The extended class (in or example
-    <classname>Ship</classname>) is called <emphasis>parent class
-    </emphasis>or <emphasis>superclass</emphasis>. The class formed by
-    Extension (in our example <classname>LuxuryLiner</classname>) is called
-    <emphasis>child class </emphasis>or <emphasis>sub class</emphasis>.</para>
-
-    <para>The class <classname>LuxuryLiner</classname> now contains the
-    complete configuration of the base class <classname>Ship</classname>
-    (including all Properties and Methods) and defines additional Porperties
-    (like the ammount of luxury coaches in
-    <classname>$luxuryCoaches</classname>) and additional Methods (like
-    <classname>golfSimulatorStart()</classname> and
-    <classname>golfSimulatorStop()</classname>). Inside these Methods you can
-    again access the Properties and Methods of the parent class by using
-    <classname>$this</classname>.</para>
+    <para>Класс <classname>LuxuryLiner</classname> теперь содержит полную
+    настройку базового класса <classname>Ship</classname> (включая все его
+    Свойства и Методы) и определяет дополнительные свойства (вроде количества
+    кают класса люкс в <classname>$luxuryCoaches</classname>) и дополнительные
+    Методы (вроде <classname>golfSimulatorStart()</classname> и
+    <classname>golfSimulatorStop()</classname>). Внутри этих методов по
+    прежнему можно получить доступ к Свойствам и Методам родительского класса
+    посредством <classname>$this</classname>.</para>
 
     <section>
-      <title>Overriding Properties and Methods</title>
+      <title>Переназначение Свойств и Методов</title>
 
-      <para>Inside an inherited class you can not only access Properties and
-      Methods of the parent class or define new ones. It's even possible to
-      override the original Properties and Methods. This can be very useful,
-      e.g. for giving a Method of a child class a new functionality. Let's
-      have a look at the Method <classname>startEngine()</classname> for
-      example:</para>
+      <para>Внутри класса наследника можно не только получить доступ к
+      Свойствам и Методам родительского класса или определить новые, но и
+      переопределить оригинальные Свойства и Методы. Это крайне полезно,
+      например для расширения функциональности в классе потомке. В качестве
+      примера обратимся к Методу <classname>startEngine()</classname>:</para>
 
-      <para><remark>TODO: Enter Code</remark></para>
+      <programlisting>class Ship {
+    ...
+    $engineStatus = 'OFF';
+    ...
+    function startEngine() {
+        $this-&gt;engineStatus = 'ON';
+    }
+    ...
+}
+class LuxuryLiner extends Ship {
+    ...
+    $additionalEngineStatus = 'OFF';
+    ...
+    function startEngine() {
+        $this-&gt;engineStatus = 'ON';
+        $this-&gt;additionalEngineStatus = 'ON';
+    }
+    ...
+}</programlisting>
 
-      <para>Our luxury liner (of course) has an additional motor, so this has
-      to be switched on also, if the Method
-      <classname>startEngine()</classname> is called. The child class now
-      overrides the Method of the parent class and so only the Method
-      <classname>startEngine()</classname> of the child class is
-      called.</para>
+      <para>Суперлайнер (конечно же) приобрёл дополнительный двигатель,
+      который также можно запустить, вызвав Метод
+      <classname>startEngine()</classname>. Класс потомок переназначает Метод
+      родительского класса, и теперь вызывается уже только Метод
+      <classname>startEngine()</classname> из класса потомка.</para>
     </section>
 
     <section>
-      <title>Access to the parent class through "parent"</title>
+      <title>Доступ к родительскому классу через "parent"</title>
 
-      <para>Overriding a Method comes in handy, but has a serious
-      disadvantage. When changing the Method
-      <classname>startEngine()</classname> in the parent class, we'd also have
-      to change the Method in the child class. This is not only a source for
-      errors but also kind of unconvenient. It would be better to just call
-      the Method of the parent class and then add additional code before or
-      after the call. That's exactly what can be done by using the key word
-      <classname>parent</classname>. With
-      <classname>parent::methodname()</classname> <remark>TODO: "methodname"
-      should be "emphasis" in addition to "classname". I did not get it,
-      sorry!</remark> the Method of the parent class can be accessed
-      comfortably - so our former example can be re-written in a smarter
-      way:</para>
+      <para>Изменение Методов удобно, но имеет серьёзный недостаток. Изменив
+      Метод <classname>startEngine()</classname> родительского класса нужно
+      будет изменить его и в классе потомке. А это служит не только источником
+      потенциальных ошибок, но и просто неудобно. Было бы лучше вызывать Метод
+      родительского класса и добавлять код до или после вызова. Именно это
+      можно сделать, используя ключевое слово <classname>parent</classname>.
+      При помощи <classname>parent::methodname()</classname> можно с удобством
+      добраться до родительского класса, и наш пример можно переписать
+      разумным способом:</para>
 
-      <para><remark>TODO: Enter Code</remark></para>
+      <para><programlisting>class Ship {
+    ...
+    $engineStatus = 'OFF';
+    ...
+    function startEngine() {
+        $this-&gt;engineStatus = 'ON';
+    }
+    ...
+}
+class LuxuryLiner extends Ship {
+    ...
+    $additionalEngineStatus = 'OFF';
+    ...
+    function startEngine() {
+        parent::startEngine();
+        $this-&gt;additionalEngineStatus = 'ON';
+    }
+    ...
+}</programlisting></para>
     </section>
 
     <section>
-      <title>Abstact classes</title>
+      <title>Абстрактные классы</title>
 
-      <para>Sometimes it is useful to define "placeholder Methods" in the
-      parent class which are filled in the child class. These "placeholders"
-      are called <emphasis>abstract Methods</emphasis>. A class containing
-      abstract Methods is called <emphasis>abstract Class</emphasis>. For our
-      ship there could be a Method <classname>setupCoaches()</classname>. Each
-      type of ship is to be handled differently for each has a proper
-      configuration. So each ship must have such a Method but the concrete
-      implementation is to be done seperately for each ship type.</para>
+      <para>Временами полезно создавать "шаблонные Методы" в родительском
+      классе, которые наполняются в классе потомке. Такие "шаблоны" называются
+      <emphasis>абстрактными Методами</emphasis>. Класс, содержащий
+      абстрактные Методы, называется <emphasis>абстрактный Класс</emphasis>.
+      Для нашего корабля на эту роль подходит Метод
+      <classname>setupCoaches()</classname>. Каждый тип судна должен
+      обрабатываться немного иначе, для каждого должна быть создана своя
+      настройка. Значит у каждого корабля должен быть такой Метод, но
+      конкретная его реализация должна быть сделана для каждого типа судна
+      отдельно.</para>
 
-      <para><remark>TODO: Enter Code</remark></para>
+      <para><programlisting>abstract class Ship {
+    ...
+    function __construct() {
+        $this-&gt;setupCoaches();
+    }
+    abstract function setupCoaches();
+    ...
+}
+class LuxuryLiner extends Ship {
+    ...
+    function setupCoaches() {
+        echo 'Каюты настроены';
+    }
+}
+$luxuryship = new LuxuryLiner();</programlisting></para>
 
-      <para>In the parent class we have defined only the body of the Method
-      <classname>setupCoaches()</classname>. The key word
-      <classname>abstract</classname> makes sure that the Method must be
-      implemented in the child class. So using abstract classes, we can define
-      which Methods have to be present later without having to implement them
-      right away.</para>
+      <para>В родительском классе определено лишь тело Метода
+      <classname>setupCoaches()</classname>. Ключевое слово
+      <classname>abstract</classname> гарантирует, что Метод будет реализован
+      в классе потомке. Так при помощи абстрактных классов возможно наметить
+      Методы, которые должны присутствовать.</para>
     </section>
 
     <section>
-      <title>Interfaces</title>
+      <title>Интерфейсы</title>
 
-      <para>Interfaces are a special case of abstract classes in which
-      <emphasis>all Methods</emphasis> are abstract. Using Interfaces,
-      specification and implementation of functionality can be kept apart. In
-      our cruise example we have some ships supporting sattelite TV and some
-      who don't. The ships who do, have the Methods
-      <classname>enableTV()</classname> and
-      <classname>disableTV()</classname>. It is useful to define an interface
-      for that:</para>
+      <para>Интерфейсы — это специфичная разновидность абстрактных классов,
+      <emphasis>все Методы</emphasis> которых абстрактны. Используя интерфейсы
+      можно отделять определение от конкретной реализации функциональности. В
+      примере наших круизных лайнеров, некоторые суда поддерживают спутниковое
+      телевидение, а некоторые – нет. Поддерживающие ТВ суда имеют Методы
+      <classname>enableTV()</classname> и <classname>disableTV()</classname>.
+      Для этого удобно использовать интерфейс:</para>
 
-      <para><remark>TODO: Enter Code</remark></para>
+      <programlisting>interface SatelliteTV {
+    public function enableTV();
+    public function disableTV();
+}
+class LuxuryLiner extends Ship implements SatelliteTV {
+    protected $tvEnabled = FALSE;
+    public function enableTV() {
+        $this-&gt;tvEnabled = TRUE;
+    }
+    public function disableTV() {
+        $this-&gt;tvEnabled = FALSE;
+    }
+}</programlisting>
 
-      <para>Using the key word <classname>implements</classname> it is made
-      sure, that the class implements the given interface. All Methods in the
-      interface definition then have to be realized. The object
-      <classname>LuxuryLiner</classname> now is of the type
-      <classname>Ship</classname> but also of the type
-      <classname>SatteliteTV</classname>. It is also possible to implement not
-      only one interface class but multiple, seperated by comma. Of course
-      interfaces can also be inherited by other interfaces.</para>
+      <para>Ключевое слово <classname>implements</classname> даёт уверенность,
+      что класс реализует данные интерфейс. Все Методы в определении
+      интерфейса должны быть реализованы. Объект
+      <classname>LuxuryLiner</classname> теперь имеет тип
+      <classname>Ship</classname>, а кроме того – тип
+      <classname>SatteliteTV</classname>. Кроме того, можно реализовать не
+      один, а сразу несколько классов интерфейсов, указав их через запятую.
+      Разумеется интерфейсы могут наследоваться другими интерфейсами.</para>
     </section>
   </section>
 
   <section>
-    <title>Visibilities: public, private and protected</title>
+    <title>Видимость: public, private и protected</title>
 
-    <para>Access to Properties and Methods can be restricted by different
-    visibilities to hide implementation details of a class. The meaning of a
-    class can be communicated better like this, for implementation details in
-    internal Methods can not be accessed from outside. The following
-    visibilities exist:</para>
+    <para>Доступ к Свойствам и Методам может быть ограничен различными
+    областями видимости для сокрытия деталей класса. Смысл класса может быть
+    передан лучше, для реализации деталей, если некоторые внутренние его
+    Методы не будут доступны извне. Существуют следующие области
+    видимости:</para>
 
     <para><itemizedlist>
         <listitem>
-          <para><emphasis>public</emphasis>: Properties and Methods with this
-          visibility can be accessed from outside the Object. If no Visibility
-          is defined, the behaviour of <classname>public</classname> is
-          used.</para>
+          <para><emphasis>public</emphasis>: Свойства и Методы из этой области
+          видимости доступны извне Объекта. Если область видимости не
+          определена, используется область
+          <classname>public</classname>.</para>
         </listitem>
 
         <listitem>
-          <para><emphasis>protected</emphasis>: Properties and Methods with
-          visibility <classname>protected</classname> can only be accessed
-          from inside the class and it's child classes.</para>
+          <para><emphasis>protected</emphasis>: Свойства и Методы из области
+          видимости <classname>protected</classname> доступны только изнутри
+          класса и его потомственных классов.</para>
         </listitem>
 
         <listitem>
-          <para><emphasis>private</emphasis>: Properties and Methods set to
-          <classname>private</classname> can only be accessed from inside the
-          class itself, not from child classes.</para>
+          <para><emphasis>private</emphasis>: Свойства и Методы из области
+          <classname>private</classname> доступны только изнутри самого
+          класса, но не из классов потомков.</para>
         </listitem>
       </itemizedlist></para>
 
     <section>
-      <title>Access to Properties</title>
+      <title>Доступ к свойствам</title>
 
-      <para>This small example demonstrates how to work with protected
-      properties:</para>
+      <para>Этот небольшой пример демонстрирует приёмы работы с защищёнными
+      (protected) свойствами:</para>
 
-      <para><remark>TODO: Enter Code</remark></para>
+      <para><programlisting>abstract class Ship {
+    protected $coaches;
+    ...
+    abstract protected function setupCoaches();
+}
+class LuxuryLiner extends Ship {
+    protected function setupCoaches() {
+        $this-&gt;coaches = 300;
+    }
+}
+$LuxuryLiner = new LuxuryLiner('Fidelio', 100);
+echo 'Каюты: ' . $LuxuryLiner-&gt;coaches; // НЕ работает!</programlisting></para>
 
-      <para>The <classname>LuxuryLiner</classname> may alter the property
-      <classname>coaches</classname>, for this is
-      <classname>protected</classname>. If it was
-      <classname>private</classname> no access from inside of the child class
-      would be possible. Access from outside of the hierarchy of inheritance
-      (like in the last line of the example) is not possible. It would only be
-      possible if the Property was <classname>public</classname>.</para>
+      <para><classname>LuxuryLiner</classname> может изменять свойство
+      <classname>coaches</classname>, так как оно находится в области
+      видимости <classname>protected</classname>. Если изменить область
+      видимости на <classname>private</classname>, то доступа из классов
+      потомков не будет. Доступ извне иерархии наследования (как в последней
+      строке кода) не возможен. Это можно было бы сделать, если бы область
+      видимости Свойства была бы типа <classname>public</classname>.</para>
 
-      <para>We recommend to denfine all Properties as
-      <classname>protected</classname>. Like that, they can not be altered any
-      more from outside and you should use special Methods (called getter ans
-      setter) to alter or read them. We'll explain the use of these Methods in
-      the following section.</para>
+      <para>Мы рекомендуем устанавливать область видимости
+      <classname>protected</classname> для всех Свойств. Как в приведённом
+      примере, их невозможно будет изменять извне, для изменения и чтения
+      нужно будет использовать специальные Методы (называемые получением и
+      установкой) для изменения и чтения. Использование таких методов будет
+      объяснено в следующем разделе.</para>
     </section>
 
     <section>
-      <title>Access to Methods</title>
+      <title>Доступ к методам</title>
 
-      <para>All Methods the Object makes available to the outside have to be
-      defined as <classname>public</classname>. All Methods containing
-      implementation details, e.g. <classname>setupCoaches()</classname> in
-      the above example, should be defined as
-      <classname>protected</classname>. The visibility
-      <classname>private</classname> should be used most rarely, for it
-      prevents Methods from being overwritten or extended.</para>
+      <para>Все Методы и Объекты, доступные извне должны находиться в области
+      видимости <classname>public</classname>. Все Методы, содержащие детали
+      реализации, например <classname>setupCoaches()</classname> из
+      приведённого выше примера, должны лежать в области
+      <classname>protected</classname>. Меньше всего должна использоваться
+      область <classname>private</classname> во избежание переназначения или
+      дополнения (extended) Методов.</para>
 
-      <para>Often you'll have to read or set Properties of an Object from
-      outside. So you'll need special Methods that are able to set or get a
-      property. These Methods are called <emphasis>setter</emphasis>
-      respectively <emphasis>getter</emphasis>. See the example.</para>
+      <para>Зачастую необходимо читать или назначать Свойства Объектов извне.
+      Здесь пригодятся специальные Методы, способные назначать или получать
+      свойства. Такие Методы называются, соответственно, <emphasis>установщик
+      (setter)</emphasis> и <emphasis>получатель (getter)</emphasis>. Смотрите
+      пример.</para>
 
-      <para><remark>TODO: Enter Code</remark></para>
+      <para><programlisting>class Ship {
+    protected $coaches;
+    protected $classification = 'ОБЫЧНЫЙ';
+    public function getCoaches() {
+        return $this-&gt;coaches;
+    }
+    public function setCoaches($numberOfCoaches) {
+    if ($numberOfCoaches &gt; 500) {
+            $this-&gt;classification = 'БОЛЬШОЙ';
+        } else {
+            $this-&gt;classification = 'ОБЫЧНЫЙ';
+        }
+        $this-&gt;coaches = $numberOfCoaches;
+    }
+    public function getClassification() {
+        return $this-&gt;classification;
+    }
+    ...
+}</programlisting></para>
 
-      <para>We now have a Method <classname>setCoaches()</classname> which
-      sets the number of coaches. Furthermore it changes - depending on the
-      number of coaches - the ship category. You now see the advantage: When
-      using Methods to get and set the Properties, you can perform more
-      complex operations, as e.g. setting of dependent Properties. This
-      preserves consistency of the object. If you set
-      <classname>$coaches</classname> and
-      <classname>$classification</classname> to <classname>public</classname>,
-      we could set the number of cabins to 1000 and classification to
-      <classname>NORMAL</classname> - and our ship would end up being
-      inconsistent.</para>
+      <para>Здесь имеется Метод <classname>setCoaches()</classname>,
+      устанавливающий количество кают. Кроме того, в зависимости от количества
+      установленных кают, судну назначается категория. Здесь видно
+      преимущество такого подхода – используя Методы для получения и установки
+      Свойств, можно проводить более сложные операции, например, установку
+      значения одного Свойства в зависимости от значений других Свойств. Тем
+      самым сохраняется согласованность объектов. Если перенести
+      <classname>$coaches</classname> (каюты) и
+      <classname>$classification</classname> (категорию) в область
+      <classname>public</classname>, то можно будет назначить количество кают
+      на 1000, категорию на <classname>ОБЫЧНЫЙ</classname> – что создаст
+      ненужную путаницу.</para>
 
       <para><tip>
-          <para>In extbase you'll find getter and setter Methods all over. No
-          Property in extbase is set to <classname>public</classname>.</para>
+          <para>В extbase повсюду встречаются методы установщики и получатели.
+          Ни одно свойство extbase не входит в область
+          <classname>public</classname>.</para>
         </tip></para>
     </section>
   </section>
 
   <section>
-    <title>Static Methods and Properties</title>
+    <title>Статические Методы и Свойства</title>
 
-    <para>Until now we worked with Objects, instantiated from classes.
-    Sometimes though, it does not make sense to generate a complete object,
-    just to be able to use a function of a class. For this php offers the
-    possibility to directly access Properties and Methods. These are then
-    referred to as <classname>static Properties</classname> respectively
-    <classname>static Methods</classname>. Take as a rule of thumb: static
-    Properties are necessary, every time two instances of a class are to have
-    a common Property. Static Methods are often used for function
-    libraries.</para>
+    <para>До этого момента мы работали с Объектами, созданными из классов.
+    Иногда не имеет смысла создавать целый объект для возможности
+    использования одной из его функций. Для этого в php существует возможность
+    прямого доступа к Свойствам и Методам. Это так называемые
+    <classname>статические (static) Свойства</classname> и, соответственно,
+    <classname>статические (static) Методы</classname>. Возьмите на заметку,
+    что статические Свойства нужны всегда, когда два экземпляра класса имеют
+    одно общее Свойство. Статические Методы зачастую используются в виде
+    библиотек.</para>
 
-    <para>Transferred to our example this means, that all ships are
-    constructed by the same shipyard. in case of technical emergency, all
-    ships need to know the actual emergency phone number of this shipyard. So
-    we save this number in a static Property
+    <para>Переходя к нашему примеру, это значит, что судна создаются на одной
+    верфи. А значит, что в случае технической неполадки все эти суда должны
+    знать телефон аварийной службы этой верфи. Поэтому мы сохраним этот номер
+    в статическом Свойстве
     <classname>$shipyardSupportTelephoneNumber</classname>:</para>
 
-    <para><remark>TODO: Enter Code</remark></para>
+    <para><programlisting>class LuxuryLiner extends Ship {
+    protected static $shipyardSupportTelephoneNumber = '+7 485 123456';
+    public function reportTechnicalProblem() {
+        echo 'На корабле ' . $this-&gt;name . ' была обнаружена проблема. 
+            Сообщите о ней по телефону' . self::$shipyardSupportTelephoneNumber;
+    }
+    public static function setShipyardSupportTelephoneNumber($newNumber) {
+        self::$shipyardSupportTelephoneNumber = $newNumber;
+    }
+}
+$fidelio = new LuxuryLiner('Fidelio', 100);
+$figaro = new LuxuryLiner('Figaro', 200);
+$fidelio-&gt;reportTechnicalProblem();
+$figaro-&gt;reportTechnicalProblem();
+LuxuryLiner::setShipyardSupportTelephoneNumber('+01 1000');
+$fidelio-&gt;reportTechnicalProblem();
+$figaro-&gt;reportTechnicalProblem();</programlisting></para>
 
-    <para>What happens here? We instantiate two different ships, which both
-    have a problem and do contact the shipyard. Inside the method
-    <classname>reportTechnicalProblem()</classname> you see that if you want
-    to use static properties, you have to trigger them with the key word
-    <classname>self::</classname>. If the emergency phone number now changes,
-    the shipyard has to tell all the ships about the new number. For this ist
-    uses the <emphasis>static method</emphasis>
-    <classname>setShipyardSupportTelephoneNumber($newNumber)</classname>. For
-    the Method is static, it is called through the scheme
-    <classname>classname::methodname() <remark>TODO: "methodname" should be
-    "emphasis" in addition to "classname". I did not get it,
-    sorry!</remark><remark></remark></classname>, in our case
+    <para>Будет показан следующий текст:</para>
+
+    <programlisting>На корабле Fidelio была обнаружена проблема. Сообщите о ней по телефону +7 485 123456
+На корабле Figaro была обнаружена проблема. Сообщите о ней по телефону +7 485 123456
+На корабле Fidelio была обнаружена проблема. Сообщите о ней по телефону +01 1000
+На корабле была обнаружена проблема. Сообщите о ней по телефону +01 1000</programlisting>
+
+    <para>Что здесь происходит? Мы создаёт два разных судна, оба имеют
+    проблемы и связываются с верфью. Внутри метода
+    <classname>reportTechnicalProblem()</classname> можно заметить, что если
+    нужно использовать статические свойства, то необходимо обозначить его
+    ключевым словом <classname>self::</classname>. Теперь, в случае изменения
+    телефона аварийной службы, верфь может сообщить об этом сразу всем судам.
+    Для этого используется <emphasis>статический метод</emphasis>
+    <classname>setShipyardSupportTelephoneNumber($newNumber)</classname>.
+    Статический метод вызывается по схеме
+    <classname>classname::methodname()</classname>, здесь
     <classname>LuxuryLiner::setShipyardSupportTelephoneNumber(...)</classname>.
-    If you check the latter two problem reports, you see that all instances of
-    the class use the new phone number. So both ship objects have acess to the
-    same static variable
+    Если посмотреть на два последних сообщения о проблемах, то видно, что все
+    экземпляры одного класса используют новый номер телефона. То есть оба
+    объекта судна имеют доступ к одной и той же статической переменной
     <classname>$shipyardSupportTelephoneNumber</classname>.</para>
   </section>
 
   <section>
-    <title>Important design- and architectural patterns</title>
+    <title>Важные шаблоны проектирования и архитектуры</title>
 
-    <para>In software engineering you'll sooner or later stumble upon design
-    problems that are connatural and solved in a similar way. Clever people
-    thought about <emphasis>design patterns</emphasis> aiming to be a general
-    solution to a problem. Each design pattern is so to speak a solution
-    template for a specific problem. We by now have multiple design patterns
-    that are successfully approved in practice and therefore have found there
-    way in modern programming and especially extbase. In the following we
-    don't want to focus on concrete implementation of the design patterns, for
-    this knowledge is not necessary for the usage of extbase. Nevertheless
-    deeper knowledge in design patterns in general is indispensable for modern
-    programming style, so it might be fruitful for you to learn about
-    them</para>
+    <para>Рано или поздно при разработке программного обеспечения
+    обнаруживаются проблемы, разрешаемые схожим образом. Умные люди
+    позаботились о <emphasis>шаблонах</emphasis> для общего разрешения
+    проблемы. Каждый шаблон призван разрешать определённую проблему. Сейчас у
+    нас имеется несколько шаблонов для разработки, успешно апробированных на
+    практике, а значит нашедших своё место в современном программировании, и
+    особенно в extbase. Далее мы не хотим концентрироваться на конкретной
+    реализации шаблонов разработки, такого рода знания не являются
+    необходимыми для использования extbase. Тем не менее, углубленные знания
+    шаблонов проектирования в целом являются необходимым условием для
+    использования современных стилей программирования, так что их изучение
+    может сослужить неплохую службу.</para>
 
     <para><tip>
-        <para>Further information about design patterns can e.g. be found on
-        <link linkend="???">http://sourcemaking.com/</link> or in the book
-        <emphasis>PHP Design Patterns</emphasis> by Stephan Schmidt, published
-        by O'Reilly.</para>
-      </tip>From the big number of design patterns, we will have a closer look
-    on two that are essential when programming with extbase:
-    <emphasis>Singleton</emphasis> &amp;
-    <emphasis>Prototype</emphasis>.</para>
+        <para>Дополнительную информацию о шаблонах проектирования можно найти
+        на <link linkend="???"><link
+        xl:href="???">http://sourcemaking.com/</link></link> или в книге
+        <emphasis>PHP Design Patterns</emphasis>, написанной Stephan Schmidt и
+        опубликованную O'Reilly.</para>
+      </tip>Среди большого числа шаблонов проектирования мы остановимся на
+    двух, особенно полезных при программировании с использованием extbase:
+    <emphasis>Синглтоны</emphasis> и <emphasis>Прототипы</emphasis>.</para>
 
     <section>
-      <title>Singleton</title>
+      <title>Синглтон</title>
 
-      <para>This design pattern makes sure, that only one insatance of a class
-      can exist <emphasis>at a time</emphasis>. In TYPO3 you can mark a class
-      as singleton by letting it implement the interface
-      <classname>t3lib_Singleton</classname>. An example: our luxury liners
-      are all constructed in the same shipyard. So there is no sense in having
-      more than one instance of the shipyard object:</para>
+      <para>Такой шаблон проектирования гарантирует, что
+      <emphasis>одновременно</emphasis> может существовать лишь один экземпляр
+      класса. В TYPO3 можно указать, что класс является синглтоном, позволяя
+      ему реализовать интерфейс <classname>t3lib_Singleton</classname>.
+      Пример: все наши суперлайнеры построены на одной верфи. Поэтому нет
+      смысла создавать несколько объектов верфи:</para>
 
-      <para><remark>TODO: Enter Code</remark></para>
+      <programlisting>class LuxuryLinerShipyard implements t3lib_Singleton {
+    protected $numberOfShipsBuilt = 0;
+    public function getNumberOfShipsBuilt() {
+        return $this-&gt;numberOfShipsBuilt;
+    }
+    public function buildShip() {
+        $this-&gt;numberOfShipsBuilt++;
+        // Строительство судна и возвращение
+    }
+}
+$LuxuryLinerShipyard = t3lib_div::makeInstance('LuxuryLinerShipyard');
+$LuxuryLinerShipyard-&gt;buildShip();
+$theSameLuxuryLinerShipyard = t3lib_div::makeInstance('LuxuryLinerShipyard');
+$theSameLuxuryLinerShipyard-&gt;buildShip();
+echo $LuxuryLinerShipyard-&gt;getNumberOfShipsBuilt(); // 2
+echo $theSameLuxuryLinerShipyard-&gt;getNumberOfShipsBuilt(); // 2</programlisting>
 
-      <para>In order to have the singletons correctly created you have to use
-      the static TYPO3 Method
-      <classname>t3lib_div::makeInstance()</classname>. This method gives back
-      - as seen in the example above - always the same object, if you request
-      a singleton.</para>
+      <para>Для правильного создания синглтонов, необходимо воспользоваться
+      статическим Методом TYPO3
+      <classname>t3lib_div::makeInstance()</classname>. Этот метод всегда
+      возвращает, как видно в примере, один и тот же объект при запросе
+      синглтона.</para>
     </section>
 
     <section>
-      <title>Prototype</title>
+      <title>Прототип</title>
 
-      <para>Prototype is sort of the antagonist to Singleton. While for each
-      class only one object is instantiated when using Singleton, it is
-      explicitly allowed to have multiple instances when using Prototype. Each
-      class not implementing the Interface
-      <classname>t3lib_Singleton</classname> automatically is of the type
-      <emphasis>Prototype</emphasis>.</para>
+      <para>Прототип это своего рода антагонист Синглтона. При использовании
+      Синглтона каждый класс может иметь лишь один экземпляр объекта, а при
+      использовании Прототипа можно создавать несколько экземпляров. Каждый
+      класс, не реализующий интерфейс <classname>t3lib_Singleton</classname>,
+      автоматически является типом <emphasis>Прототип</emphasis>.</para>
 
       <para><tip>
-          <para>Originally for the design pattern
-          <emphasis>Prototype</emphasis> is specified, that a new Object is to
-          be created by cloning an Object prototype. We use Prototype as
-          counterpart to Singleton, without a concrete pattern implementation
-          in the background, though. For the functionality we experience, this
-          does not make any difference: We invariably get back a new instance
-          of a class.</para>
-        </tip>Now that we refresehd your knowledge of object oriented
-      programming, we can take a look at the deeper concepts of extbase:
-      Domain Driven Design, Model View Controller and Test Driven Development.
-      You'll spot the basics we just talked about in the following
-      frequently.</para>
+          <para>Изначально для шаблона проектирования
+          <emphasis>Прототип</emphasis> определено, что новый Объект должен
+          создаваться путём клонирования прототипа Объекта. Мы используем
+          Прототип, как противоположность Синглтону, не сосредотачивая
+          внимания на конкретной реализации шаблона проектирования на заднем
+          плане. Для нужной нам функциональности это не имеет никакого
+          значения — в любом случае мы получаем новый экземпляр класса.</para>
+        </tip>Теперь, когда мы освежили наши знания в объектно ориентированном
+      программировании, можно идти дальше в дебри extbase: Предметно
+      ориентированное проектирование, Модель-Представление-Диспетчер и
+      Разработка через тестирование. В дальнейшем мы часто будем касаться этих
+      фундаментальных принципов.</para>
     </section>
   </section>
 </section>
