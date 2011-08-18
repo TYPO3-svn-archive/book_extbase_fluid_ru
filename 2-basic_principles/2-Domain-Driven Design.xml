@@ -6,7 +6,609 @@
          xmlns:svg="http://www.w3.org/2000/svg"
          xmlns:ns="http://docbook.org/ns/docbook"
          xmlns:mathml="http://www.w3.org/1998/Math/MathML">
-  <title>Domain-Driven Design</title>
+  <title>Предметно ориентированное проектирование</title>
 
-  <para>Blah Blah Blah Blah</para>
+  <para>Написание программ процесс творческий. Это не конвейер, здесь всегда
+  нужно искать что-то новое. Всякая программа отлична от предшественника,
+  всегда нужно начинать «с чистого листа». Обязательно нужно выяснить цели
+  клиента, и только затем приступать к разработке. Благодаря чему всегда есть
+  свобода, идущая бок о бок с недоразумением. Недомолвки на начальной стадии
+  разработки недопустимы, важна каждая "мелочь". Все это позволяет расти Вам,
+  как разработчику. Кто не испытывал проекта, что документы, требования и
+  спецификации были написаны, и до сих пор программное обеспечение на стороне
+  клиента не устраивает или не в самом худшем случае, его проблемы решены.
+  Даже если требования задокументированы, при тестировании проекта может
+  возникнуть ситуация, что заказчика не удовлетворяет уже выполненная
+  работа.</para>
+
+  <para>При разработке программ, сначала нужно понять проблему, которую ставит
+  заказчик, и только затем предлагать решения. Это и является
+  <emphasis>Предметной областью</emphasis> при Предметно ориентированном
+  проектировании. Узнав предметную область заказчика, Вы будете в состоянии
+  предложить ему адекватное решение в виде программы. Extbase в значительной
+  мере обеспечивает разработчика нужными инструментами для решения проблем
+  подобным образом.</para>
+
+  <para>Предметно ориентированное проектирование — это парадигма не только
+  технического плана, здесь лучше комбинировать различные, знакомые из других
+  областей методы для эффективного решения возникших проблем.</para>
+
+  <para>В предметно ориентированном проектировании на первый план выступает
+  понятная для Вас, как разработчика, постановка проблемы и контекст, в
+  котором она решается для клиента при помощи разрабатываемой программы. При
+  этом Вы постепенно (т. е. в <emphasis>несколько этапов</emphasis>) строите
+  вместе с клиентом модель, адекватно отображающую проблему. Сама модель
+  послужит основой для создаваемой программы. При создании модели нельзя
+  отвлекаться от реальной проблемы клиента, здесь важно сосредоточиться на
+  предметной области.</para>
+
+  <tip>
+    <para>На этой фазе участие клиента обязательно, так как только он
+    достаточно хорошо разбирается в поставленной им же проблеме.</para>
+  </tip>
+
+  <para>Предметно ориентированное проектирование довольно приземленно. Даже в
+  начале создания проекта программы нужно стараться ближе ознакомиться с
+  проблемой. Зачастую понадобиться несколько прототипов и попыток разрешить
+  поставленную проблему. Обязательно зарезервируйте на это время!</para>
+
+  <sidebar>
+    <title>История Предметно ориентированного проектирования</title>
+
+    <para>Идеи, стоящие в основе предметно ориентированного программирования
+    не новы — многие разработчики для себя уже давно уяснили, что реальный мир
+    должен отражаться в создаваемых ими программах. Зачастую процесс
+    развивался интуитивно, просто не хватало теоритических знаний, которые
+    упростили бы воплощение поставленной проблемы в программе.</para>
+
+    <para>Эрик Эванс в своей книге <emphasis>Domain-Driven Design – Tackling
+    Complexity in the Heart of Software</emphasis> (Addison-Wesley) описал,
+    как воплотить модель реального мира в программе для решения конкретных
+    задач. Он ввел термин <emphasis>Domain-Driven Design - предметно
+    ориентированное проектирование</emphasis>. Он обощил сведения многих
+    разработчиков, что позволило систематизировать проблемы создания моделей и
+    сделало их поддающимися изучения.</para>
+  </sidebar>
+
+  <para>Extbase со своей стороны всячески поддерживает предметно
+  ориентированную разработку. Например, здесь не нужно заботиться о хранении
+  данных в базе данных. Если предметная область имеет сложные правила (т. е.
+  правила, которые нельзя нарушать ни в коем случае), то это всегда возможно
+  воссоздать при помощи элегантных проверок. Кроме того, в Вашем распоряжении
+  всегда имеется Fluid с мощным механизмом шаблонов для упрощения вывода
+  любого рода данных. Это позволяет сосредоточиться на предметной области, не
+  растрачиваясь на обеспечение вывода данных и проблемы взаимодействия с
+  пользователем.</para>
+
+  <para>Ну теперь Ваш аппетит по настоящему разгулялся! Далее разъясняются
+  основные принципы предметно ориентированного проектирования. Это разработка
+  лексикона (понятного для всех языка) или работа над ассоциациями. Кроме
+  того, будут показаны технические стороны, такие как объекты или сущности
+  (Entities), объекты-значения (Value Objects) и репозитории.</para>
+
+  <section>
+    <title>Разработка стандартного языка</title>
+
+    <para>In Softwareprojekten haben die beteiligten Personen verschiedene
+    Rollen: Der Kunde ist ein Experte in seinem Geschäftsfeld, und er hat ein
+    Problem, das er durch Software lösen möchte. Da er besonders gut mit der
+    Anwendungsdomäne der Software vertraut ist, bezeichnen wir ihn als
+    <emphasis>Domänenexperten</emphasis> (engl. <emphasis>domain
+    expert</emphasis>).</para>
+
+    <para>Sie sind in der Regel in der Rolle des
+    <emphasis>Entwicklers</emphasis>: Sie sind mit vielen technischen
+    Möglichkeiten vertraut, kennen sich meist jedoch nicht in dem
+    Geschäftsfeld des Kunden aus. Daher sind Missverständnisse
+    vorprogrammiert, da der Entwickler eine ganz andere Sprache als der
+    Domänenexperte verwendet.</para>
+
+    <para>Im Domain-Driven Design sollen wichtige Kernbegriffe gefunden
+    werden, die bei der Charakterisierung und Lösung des Problems benötigt
+    werden. Diese werden in Form eines <emphasis>Glossars</emphasis>
+    zusammengestellt, so dass immer sichergestellt wird, dass der
+    Domänenexperte und der Entwickler sich auch richtig verstehen.</para>
+
+    <para>Diese gemeinsame Sprache (engl. ubiquitous language) kommt nicht nur
+    während der Kommunikation zur Anwendung: Sie sollte auch im Quellcode
+    (z.B. in Klassen- oder Methodennamen) zu finden sein. Dies ermöglicht es,
+    bei Problemen den Domänenexperten zu konsultieren und mit ihm zusammen auf
+    Basis des Quellcodes zu entscheiden, ob die Geschäftslogik korrekt
+    umgesetzt wurde.</para>
+  </section>
+
+  <section>
+    <title>Die Domäne modellieren</title>
+
+    <para>Sie fangen nun also während der Gespräche mit dem Domänenexperten
+    an, ein Modell zu erstellen und zu verfeinern. In der Regel entsteht
+    während dieser Gespräche ein UMLDiagramm, das die Eigenschaften,
+    Funktionalitäten und Beziehungen der relevanten Bestandteile des
+    Problemfeldes in Objekte verpackt und deren Relationen darstellt. Diese
+    Objekte bezeichnet man wegen der starken Ausrichtung auf die Problemdomäne
+    des Nutzers auch als <emphasis>Domänenobjekte</emphasis>.</para>
+
+    <para>Domain-Driven Design bietet einige Bausteine, die Ihnen bei der
+    Erstellung eines guten Domänenmodells helfen:
+    <emphasis>Entities</emphasis>, <emphasis>Value Objects</emphasis> und
+    <emphasis>Services</emphasis>. Widmen wir uns zuerst den ersten beiden
+    Bausteinen: Besitzt das Domänenobjekt eine eigene Identität, die über die
+    Zeit erhalten bleibt, auch wenn das Objekt verschiedene Zustände
+    durchläuft? Dann ist das Objekt eine <emphasis>Entity</emphasis>. Oder ist
+    es ein Attribut, das andere Dinge näher beschreibt? Dann ist das Objekt
+    vom Typ <emphasis>Value Object</emphasis>. Im Folgenden werden wir noch
+    näher auf die Unterscheidung dieser beiden Typen eingehen.</para>
+
+    <para>Außerdem gibt es noch Konzepte, die sich nicht direkt Entities oder
+    Value Objects zuordnen lassen – immer, wenn Sie während der
+    Modellierungsphase von <emphasis>Aktivitäten</emphasis> sprechen. Hierfür
+    wird das Konzept von <emphasis>Services</emphasis> eingeführt.</para>
+
+    <section>
+      <title>Entities</title>
+
+      <para>Entities sind Objekte, die eine eindeutige Identität besitzen.
+      Beispielsweise besitzt ein Benutzer als Identität einen Benutzernamen,
+      ein Produkt besitzt eine Produktnummer, und ein Student besitzt eine
+      Matrikelnummer. Daher sind alle genannten Beispiele Entities. Die
+      Identität des Objekts bleibt im Laufe der Zeit gleich, auch wenn sich
+      Eigenschaften des Objekts ändern sollten.</para>
+
+      <para>Die Identität eines Objekts wird durch eine unveränderliche
+      Eigenschaft oder eine Kombination aus mehreren unveränderlichen
+      Eigenschaften des Objekts festgelegt. Es muss mindestens eine
+      Eigenschaft identitätsbestimmend sein. Normalerweise kümmert sich
+      Extbase selbstständig darum und weist einer (versteckten)
+      Identitätseigenschaft einen eindeutigen Wert zu. Sie können aber auch
+      selbst eine Auswahl treffen und festlegen, welche Kombination von
+      Eigenschaften identitätsbestimmend sein soll.</para>
+
+      <tip>
+        <para>Extbase verwendet als automatisch generierte
+        Identitätseigenschaft einen Identifier, der von der zugrunde liegenden
+        Datenbank generiert wird (den sogenannten Unique Identifier, UID). Das
+        Wort <emphasis>unique</emphasis>, also »eindeutig«, bedeutet in diesem
+        Zusammenhang eigentlich »eindeutig innerhalb einer Datenbanktabelle «.
+        Dies wird sich jedoch eventuell in einer zukünftigen Version von
+        Extbase ändern, so dass hier eine globale Eindeutigkeit sichergestellt
+        werden kann.</para>
+      </tip>
+
+      <para>Je nach Anwendungsfall kann es sinnvoll sein, eigene
+      identitätsbestimmende Eigenschaften festzulegen, die <emphasis>innerhalb
+      Ihrer Domäne</emphasis> wichtig sind. Wie kann ich einen Menschen
+      eindeutig identifizieren? Die Personalausweisnummer und das Land
+      zusammen genommen sind vielleicht eine solch eindeutige Identifizierung,
+      allerdings oft eine wenig praktikable: Wer möchte schon seine
+      Personalausweisnummer angeben, wenn er sich bei einem Web-Portal
+      anmeldet? Für ein Internetforum bietet es sich beispielsweise an, die
+      Identität durch die E-Mail-Adresse des Forumsmitglieds festzulegen.
+      Falls Sie aber eine E-Government- Anwendung schreiben, käme die
+      Personalausweisnummer hierfür in Betracht.</para>
+
+      <para>Wichtig ist, dass die identitätsbestimmenden Eigenschaften eines
+      Objekts <emphasis>bei seiner Erstellung</emphasis> festgelegt werden und
+      sich dann nie mehr ändern: Wenn Sie diese Eigenschaften veränderbar
+      machen würden, so könnten verschiedene Identitäten ineinander
+      »konvertiert« werden – dies ist aber in den meisten Fällen unerwünscht.
+      Denn Sie müssten diese neue Identität dann allen Objekten bekannt
+      machen, die das Objekt unter der alten Identität kennen. Ansonsten
+      würden Sie alle Verbindungen von anderen Objekten zu diesem Objekt
+      verlieren. In der Regel sollte die Veränderung von
+      identitätsbestimmenden Eigenschaftswerten durch ausschließlichen
+      Lesezugriff auf diese Eigenschaften vermieden werden.</para>
+
+      <para>Wenn Sie bisher datenbankbasierte Anwendungen geschrieben haben,
+      haben Sie vielleicht festgestellt, dass Sie oft unterbewusst Entitys
+      verwendet haben, indem Sie die Datenbanktabellen mit Indizes und Primary
+      Keys ausgestattet haben (in TYPO3 wird beispielsweise immer die UID als
+      Identifier hinzugefügt). Daher fragen Sie sich vielleicht, wieso wir nun
+      überhaupt noch einen anderen Objekttyp benötigen. Im nächsten Abschnitt
+      klären wir diese Frage.</para>
+    </section>
+
+    <section>
+      <title>Value Objects</title>
+
+      <para>PHP bietet einige Werttypen, die es von Haus aus unterstützt, wie
+      z.B. Integer, Float oder String. Oft werden Sie allerdings feststellen,
+      dass Sie in Ihrer Domäne spezielle Typen von Werten, wie beispielsweise
+      Farben oder Tags, benötigen. Diese werden durch sogenannte
+      <emphasis>Value Objects</emphasis> repräsentiert.</para>
+
+      <para>Value Objects sind Objekte, die durch die Werte aller ihrer
+      Eigenschaften bestimmt werden. Nehmen wir ein Malprogramm als Beispiel:
+      Darin muss irgendwo definiert sein, was unter Farben zu verstehen ist.
+      Eine Farbe ist nur durch ihren Wert bestimmt, wie z.B. in der
+      RGB-Darstellung durch drei Farbanteile für Rot, Grün und Blau. Wenn zwei
+      Farbobjekte dieselben RGB-Werte besitzen, so sind sie effektiv gleich
+      und müssen nicht weiter unterschieden werden.</para>
+
+      <para>Bei Value Objects sind alle Eigenschaften identitätsbestimmend.
+      Wenn alle Eigenschaften von zwei Value Objects den gleichen Wert haben,
+      so sind diese beiden Value Objects identisch. Trotzdem sind Value
+      Objects oft mehr als einfache Datenstrukturen für primitive Datentypen.
+      Sie können potenziell sehr viel komplexe Domänenlogik enthalten. Unser
+      Farbe-Objekt könnte z.B. Methoden zur Umrechnung der Farbe in andere
+      Farbräume wie CYMK oder HSV enthalten und dafür Farbprofile
+      verwenden.</para>
+
+      <para>Da alle Eigenschaften identitätsbestimmend sind und diese
+      Eigenschaften nach der Erstellung des Objekts nicht mehr verändert
+      werden dürfen, sind Value Objects unveränderlich (engl.
+      <emphasis>immutable</emphasis>). Sie werden vollständig initialisiert
+      erzeugt und können danach ihren Wert nicht mehr ändern. Man kann nur ein
+      neues Value Object erzeugen und das alte eliminieren.</para>
+
+      <warning>
+        <para>Obwohl Sie ein Value Object mit Methoden zum Verändern des
+        internen Zustands ausstatten könnten, darf der interne Zustand niemals
+        geändert werden. Nehmen wir das Beispiel des Farbe-Objekts, das z.B.
+        eine neue Methode makeBrighter() enthält. Diese Methode muss,
+        ausgehend von der Farbe des aktuellen Value Objects, die Farbwerte
+        verändern und ein neues Value Object mit den veränderten Werten
+        zurückgeben. Es darf niemals das bestehende Objekt verändern.</para>
+      </warning>
+
+      <para>Durch diese einfache Semantik können Value Objects ohne Probleme
+      erzeugt, geklont, an andere Computer übertragen oder an andere Objekte
+      übergeben werden. Dadurch ist nicht nur die Implementierung einfacher,
+      sondern es wird außerdem klar kommuniziert, dass es sich bei diesen
+      Objekten um einfache Werte handelt.</para>
+
+      <sidebar>
+        <title>Entity oder Value Object?</title>
+
+        <para>Nicht immer ist auf Anhieb zu erkennen, ob es sich bei einem
+        Objekt um eine Entity oder um ein Value Object handelt. Schauen wir
+        uns dazu ein Beispiel an: In vielen Anwendungen haben Sie mit Adressen
+        zu tun. Nehmen wir einen Online-Shop, in dem der Kunde eine oder
+        mehrere Lieferadressen angeben kann. Hier wäre die Adresse ein
+        typisches Value Object, da es nur als Container für Name, Straße,
+        Stadt und Postleitzahl verwendet wird.</para>
+
+        <para>In einer Anwendung, die für die Post die Briefzustellung
+        optimiert, können Adressen darüber hinaus mit anderen Eigenschaften
+        wie dem Namen des Briefträgers verbunden sein, der diese Adresse
+        beliefert. Dieser Name gehört allerdings nicht zur Identität des
+        Objekts und kann sich über die Zeit verändern (z.B. wenn ein
+        Briefträger in Rente geht) – ein deutlicher Hinweis auf die Verwendung
+        einer Entity.</para>
+
+        <para>Sie sehen also: Man kann nicht immer eindeutig sagen, ob Objekte
+        Entities oder Value Objects sind – es hängt ganz vom Anwendungsfall
+        und der Anwendungsdomäne ab.</para>
+      </sidebar>
+
+      <tip>
+        <para>Die Unterscheidung zwischen Entities und Value-Objects wird
+        Ihnen zu Beginn vielleicht schwerfallen und als unnötiger Aufwand
+        erscheinen. Extbase behandelt die beiden Objekt-Typen im Hintergrund
+        jedoch sehr unterschiedlich. Die Verwaltung von Value-Objects ist
+        effizienter als die von Entities. Der zusätzliche Aufwand für die
+        Verwaltung und Überwachung der Eindeutigkeit entfällt hier zum
+        Beispiel völlig.</para>
+      </tip>
+    </section>
+
+    <section>
+      <title>Assoziationen</title>
+
+      <para>Sie sollten während der Modellierung nie die Implementierung aus
+      den Augen lassen. Daher lassen Sie uns noch kurz über ein besonders
+      komplexes Feld der Implementierung sprechen: Assoziationen zwischen
+      Objekten.</para>
+
+      <para>Objekte der Domäne stehen miteinander in Beziehung. Solche
+      Beziehungen werden in der Sprache der Domäne z.B. mit folgenden
+      Wendungen bezeichnet: A »besteht aus« B, C »hat« D, E »verarbeitet« F,
+      oder G »gehört zu« I. Diese Beziehungen werden im abstrahierten
+      Domänenmodell als <emphasis>Assoziationen</emphasis> bezeichnet.</para>
+
+      <para>An einer Universität stehen beispielsweise Professoren und
+      Studenten miteinander in Beziehung: Der Professor hält Vorlesungen, und
+      Studenten sind für Vorlesungen eingeschrieben. Um diese Beziehung in
+      unserem Domänenmodell abzubilden, fügen wir eine Assoziation als
+      Abstraktion der realen Welt ein. Praktisch heißt das, dass ein
+      Professor-Objekt eine Liste von Zeigern auf die Studenten-Objekte
+      enthält, die bei ihm in der Vorlesung sitzen.</para>
+
+      <para>Besonders kompliziert zu implementieren sind hier
+      <emphasis>Many-to-many</emphasis>-Assoziationen wie im obigen Beispiel
+      (ein Professor unterrichtet viele Studenten, und ein Student wird von
+      verschiedenen Professoren unterrichtet) – noch dazu, wenn diese
+      Assoziationen beidseitig (bidirektional) sind. Dies bedeutet, dass sie
+      von einem Professor zu seinen Studenten, aber auch in die andere
+      Richtung gehen können.</para>
+
+      <para>Falls Sie also während des Designs
+      <emphasis>Many-to-many</emphasis>-Assoziationen verwenden, überlegen Sie
+      einmal, ob diese vereinfacht und umstrukturiert werden können. Es ist
+      natürlich, dass Sie besonders am Anfang der Modellierung sehr viele
+      bidirektionale <emphasis>Many-to-many</emphasis>-Assoziationen
+      verwenden. Bei der Verfeinerung der Assoziationen können Ihnen die
+      folgenden Fragestellungen helfen:</para>
+
+      <orderedlist>
+        <listitem>
+          <para>Ist die Many-to-many-Assoziation wichtig in der
+          Anwendungsdomäne?</para>
+        </listitem>
+
+        <listitem>
+          <para>Kann die Assoziation einseitig gemacht werden, da es eine
+          Hauptrichtung gibt, in der die Objekte abgefragt werden?</para>
+        </listitem>
+
+        <listitem>
+          <para>Kann die Assoziation noch näher spezifiziert werden, z.B.
+          indem die einzelnen Elemente noch näher qualifiziert werden?</para>
+        </listitem>
+
+        <listitem>
+          <para>Ist die Assoziation für die Kernfunktionalität überhaupt
+          notwendig?</para>
+        </listitem>
+      </orderedlist>
+
+      <para>Denken Sie also daran, möglichst einfache Assoziationen zu
+      verwenden, da diese einfacher zu implementieren und klarer verständlich
+      sind.</para>
+    </section>
+  </section>
+
+  <section>
+    <title>Aggregates</title>
+
+    <para>Wenn Sie ein komplexes Domänenmodell bauen, haben Sie es mit sehr
+    vielen Klassen zu tun, die auf derselben Hierarchieebene stehen. Oft ist
+    es jedoch so, dass bestimmte Objekte einen Teil eines größeren Objekts
+    ausmachen. Wenn wir eine Anwendung für eine Autowerkstatt modellieren
+    wollen, so müssen wir vielleicht nicht nur das Auto, sondern auch den
+    Motor und die Räder modellieren, da diese für die Autowerkstatt von
+    besonderer Bedeutung sind. Intuitiv betrachten wir die Räder und den Motor
+    eines Autos als Teil des Autos, daher sollte dieses Verständnis auch im
+    Modell zu erkennen sein. Wir nennen solch eine Teil-Ganzes-Beziehung von
+    eng zusammenhängenden Objekten <emphasis>Aggregate</emphasis>. Sie sehen
+    dieses Domänenmodell auch in Abbildung 2-1.</para>
+
+    <remark>Добавить рисунок 2-1 Abbildung 2-1: Das Domänenmodell einer
+    Autowerkstatt. Objekte außerhalb eines Aggregates dürfen immer nur auf die
+    Aggregate Root referenzieren.</remark>
+
+    <para>Ein Aggregate besitzt eine »Wurzel«, die sogenannte
+    <emphasis>Aggregate Root</emphasis>. Diese ist für die Integrität ihrer
+    Unterobjekte verantwortlich. Objekte außerhalb des Aggregates dürfen nur
+    auf die <emphasis>Aggregate Root</emphasis>, aber nie auf Teile davon
+    referenzieren, da sonst die Aggregate Root nicht die Integrität der
+    Objekte sicherstellen könnte. Nach außen hin hat das Aggregate nur eine
+    externe Identität: die der Aggregate Root. Da Aggregate Roots also eine
+    Identität benötigen, anhand derer sie referenziert werden können, müssen
+    sie vom Typ Entity sein.</para>
+
+    <para>Übertragen auf das Autobeispiel hieße das: Die Servicestation darf
+    keine permanente Referenz auf den Motor halten, sondern muss sich eine
+    permanente Referenz auf das Auto merken (z.B. durch die Fahrzeugnummer als
+    externe Identität). Falls sie zum Arbeiten eine Referenz auf den Motor
+    benötigt, so kann sie diesen über das Auto erreichen.</para>
+
+    <para>Durch diese Referenzierungsregeln wird effektiv die Domäne weiter
+    strukturiert, was die Komplexität der Anwendung weiter reduziert und
+    beherrschbar macht.</para>
+
+    <para>Bisher haben wir gezeigt, wie man mit Entities und Value Objects die
+    Objekte der realen Welt gut in Software abbilden kann. Es gibt jedoch auch
+    Konzepte der Welt, die nicht in dieses Schema passen. Um diese abzubilden,
+    führen wir Services ein.</para>
+  </section>
+
+  <section>
+    <title>Services</title>
+
+    <para>In der Praxis gibt es beim Modellieren einer Anwendung Aktionen,
+    welche nicht direkt bestimmten Domänenobjekten zugeordnet werden können.
+    In der objektorientierten Programmierung liegt die Versuchung nahe,
+    bestimmten Entities oder Value Objects diese Aktion aufzuzwingen, obwohl
+    sie eigentlich gar nicht dort hinein gehört. Um dieses Problem zu umgehen,
+    gibt es sogenannte <emphasis>Services</emphasis>. Dabei handelt es sich um
+    Container für Aktionen, die zwar zur Domäne der Anwendung gehören, die
+    aber keinem bestimmten Objekt zugeordnet werden können.</para>
+
+    <para>Ein Service sollte zustandslos (engl.
+    <emphasis>stateless</emphasis>) sein, d.h. keinen internen Zustand
+    manipulieren oder verwenden. Ein Service sollte verwendet werden können,
+    ohne dass sein interner Zustand bekannt sein oder berücksichtigt werden
+    muss. Ein Service bekommt oft als Eingabe Entities oder Value Objects und
+    führt auf diesen komplexere Operationen aus.</para>
+  </section>
+
+  <section>
+    <title>Lebenszyklus von Objekten</title>
+
+    <para>Objekte in der realen Welt haben einen bestimmten Lebenszyklus. Ein
+    Auto wird gebaut, dann verändert es sich während seiner Lebenszeit (der
+    Kilometerstand erhöht sich, Bremsen werden getauscht,
+    Abnutzungserscheinungen, …), und irgendwann wird das Auto
+    verschrottet.</para>
+
+    <para>Da wir beim Domain-Driven Design eine Domäne modellieren, die eine
+    Entsprechung in der realen Welt hat, ist der Lebenszyklus von Objekten in
+    unserem Programm dem der Objekte in der realen Welt sehr ähnlich. Objekte
+    werden zu einem Zeitpunkt erzeugt, dann sind sie aktiv und werden
+    verändert, und irgendwann werden sie wieder gelöscht. Dies ist in
+    Abbildung 2-2 zu sehen.</para>
+
+    <remark>Abbildung 2-2: Der Lebenszyklus eines Objekts in der realen
+    Welt</remark>
+
+    <para>Nun können wir natürlich nicht immer alle vorhandenen Objekte
+    unseres Programms instanziiert im Speicher halten – unser Programm wäre
+    unbenutzbar langsam und speicherhungrig (nicht zu sprechen von dem Fall,
+    dass der Strom ausfällt und die Objekte dann weg sind). Daher benötigen
+    wir eine Möglichkeit, nur aktuell benötigte Objekte im Speicher zu halten.
+    Der aktive Zustand besteht daher eigentlich aus einigen Unterzuständen,
+    die in Abbildung 2-3 gezeigt werden.</para>
+
+    <remark>Abbildung 2-3: Der Lebenszyklus eines Objekts in Extbase ist etwas
+    komplexer, da das Objekt auch in der Datenbank gespeichert sein
+    kann.</remark>
+
+    <para>Wenn ein Objekt neu erzeugt wird, so ist es transient, d.h. am Ende
+    des aktuellen Requests entfernt PHP das Objekt aus dem Speicher: Es wird
+    gelöscht. Wenn Sie ein Objekt dauerhaft, d.h. über mehrere Requests hinweg
+    benötigen, so muss aus dem transienten ein <emphasis>persistentes
+    Objekt</emphasis> werden. Dafür sind Repositories zuständig. Diese
+    ermöglichen das permanente Speichern und Wiederauffinden von Objekten
+    anhand von bestimmten Kriterien. Wie nutzt man Repositories nun in der
+    Praxis? Indem Sie ein Objekt zu einem Repository hinzufügen, machen Sie es
+    persistent. Nun ist das Repository für das Objekt verantwortlich. Es
+    kümmert sich automatisch um die Speicherung des Objekts in der Datenbank
+    am Ende eines Requests.</para>
+
+    <para>Außerdem können Sie vom Repository wieder eine Objektreferenz
+    bekommen, wenn Sie diese benötigen – das Repository rekonstituiert in
+    diesem Fall das Objekt automatisch aus der Datenbank.</para>
+
+    <para>Wichtig ist, dass das Objekt logisch weiter existiert, wenn es in
+    der Datenbank gespeichert ist. Es liegt nur aus Performance-Gründen nicht
+    im Hauptspeicher. Es ist sehr wichtig, zwischen dem Erzeugen (engl.
+    <emphasis>creation</emphasis>) eines Objekts und der Wiederherstellung des
+    Objekts aus der Datenbank (engl. <emphasis>reconstitution</emphasis>) zu
+    unterscheiden. Stellen Sie sich daher vor, dass die Objekte auch in der
+    Datenbank weiterexistieren, nur in einer anderen
+    Repräsentationsform.</para>
+
+    <tip>
+      <para>Der Konstruktor eines Objekts wird nur bei der Erzeugung des
+      Objekts aufgerufen. Wenn das Objekt aus der Datenbank rekonstituiert
+      wird, wird der Konstruktor nicht aufgerufen, da das Objekt ja logisch
+      weiterexistiert.</para>
+    </tip>
+
+    <para>Sie können ein persistentes Objekt auch in ein transientes Objekt
+    zurückverwandeln, indem Sie es explizit aus dem Repository entfernen. Das
+    bedeutet, dass das Repository für dieses Objekt keine Verantwortung mehr
+    hat. Am Ende eines Requests wird das Objekt dann gelöscht.</para>
+
+    <para>Extbase nimmt Ihnen bei der Persistierung der Objekte in der
+    Datenbank so viel Arbeit wie möglich ab. Sie kommen nicht mehr mit der
+    Datenbankschicht direkt in Berührung, sondern Extbase kümmert sich um den
+    gesamten Lebenszyklus Ihrer Objekte.</para>
+
+    <para>Nun haben Sie den Lebenszyklus von Objekten im Großen und Ganzen
+    kennengelernt, und wir wollen noch einmal auf zwei Teile des Lebenszyklus
+    eingehen: auf das Erzeugen von Objekten und auf das Rekonstituieren von
+    Objekten.</para>
+  </section>
+
+  <section>
+    <title>Objekte erzeugen mit Factories</title>
+
+    <para>Jetzt, wo Sie den Lebenszyklus der Objekte genauer kennen, wollen
+    wir uns zunächst einmal mit dem Erzeugen von Objekten beschäftigen. Sie
+    dürfen nur in sich konsistente Aggregates erzeugen. Bei dem Autobeispiel
+    von vorhin heißt das, dass bei der Erstellung des Autos auch sofort die
+    Räder und der Motor erzeugt werden müssen, da sonst das Auto-Objekt in
+    einem inkonsistenten Zustand ist.</para>
+
+    <para>Bei einfachen Initialisierungen empfiehlt es sich, den Konstruktor
+    der Aggregate Root für diese Zwecke zu verwenden. Falls ein komplexes
+    Objektnetz mit vielen Querverbindungen aufgebaut werden muss, so sollte
+    man diese Funktionalität in eine eigene Factory auslagern. Dies ist eine
+    Klasse, die komplexe Objekte zusammenbaut und fertig gebaut
+    zurückgibt.</para>
+
+    <para>Im Folgenden sehen Sie exemplarisch die vollständige Initialisierung
+    des Autos im Konstruktor der Aggregate Root:</para>
+
+    <programlisting>&lt;?php
+class Car {
+    protected $engine;
+    protected $wheels;
+    public function __construct() {
+        $this-&gt;engine = new Engine();
+        $this-&gt;wheels[0] = new Wheel();
+        $this-&gt;wheels[1] = new Wheel();
+        $this-&gt;wheels[2] = new Wheel();
+        $this-&gt;wheels[3] = new Wheel();
+    }
+}
+?&gt;</programlisting>
+
+    <para>Wir haben der Einfachheit halber hier die Basisklassen und die
+    ausführlichen Klassennamen weggelassen, um das Wesentliche zu zeigen: Da
+    beim Erstellen des Objekts der Konstruktor ausgeführt wird, wird
+    <emphasis>immer</emphasis> ein konsistentes Objekt gebaut.</para>
+
+    <tip>
+      <para>In TYPO3 erzeugen Sie Klassen für gewöhnlich nicht mit new wie im
+      oberen Beispiel, sondern <methodname>mit
+      t3lib_div::makeInstance(ClassName)</methodname>. Im oben stehenden
+      Beispiel wollten wir uns nur auf das Wesentliche konzentrieren, daher
+      haben wir hier new verwendet.</para>
+    </tip>
+  </section>
+
+  <section>
+    <title>Objekte mit Repositories rekonstituieren</title>
+
+    <para>Ein Repository können Sie sich wie eine Bücherei vorstellen: Sie
+    gehen zum Ausleihschalter und fragen nach einem bestimmten Buch (anhand
+    bestimmter Kriterien wie dem Titel oder dem Autor). Falls das Buch
+    vorhanden ist, so besorgt der Bibliothekar es für Sie und gibt es Ihnen.
+    Sie müssen nicht wissen, in welchem Regal das Buch steht oder ob es
+    vielleicht sogar aus einer anderen Bücherei für Sie angeliefert wird. Nun
+    können Sie das Buch lesen und finden dabei vielleicht einen Tippfehler und
+    korrigieren ihn mit Bleistift. Nach Ablauf der Ausleihfrist müssen Sie das
+    Buch wieder zurückgeben, und dann kann die nächste Person es ausleihen –
+    natürlich stehen Ihre Korrekturen noch mit im Buch.</para>
+
+    <para>Wie kommen nun neue Bücher in die Bibliothek? Sie können
+    beispielsweise Bücher, die Sie gelesen haben, der Bibliothek spenden.
+    Dabei wird ein Bibliothekar den Titel des Buchs, den Autor und einige
+    Schlagwörter in die zentrale Bibliotheksdatenbank schreiben, so dass das
+    Buch von anderen Nutzern gefunden und ausgeliehen werden kann. Umgekehrt
+    wird ein Buch, wenn es alt und kaputt ist, aus dem Bücherbestand
+    aussortiert. Dabei muss natürlich der Eintrag in der Bibliotheksdatenbank
+    gelöscht werden, damit das Buch nicht mehr auffindbar ist.</para>
+
+    <para>Mit einem Repository verhält es sich ähnlich wie mit einer Bücherei.
+    Mit einem Repository lassen sich persistente Objekte eines bestimmten Typs
+    auffinden. Wenn Sie beispielsweise an das
+    <emphasis>BookRepository</emphasis> die Abfrage
+    <emphasis>findByTitle('Domain-Driven Design')</emphasis> senden, so
+    bekommen Sie als Antwort alle Buch-Objekte, die Domain-Driven Design als
+    Titel besitzen. Wenn Sie nun ein Buch-Objekt verändern (beispielsweise
+    indem Sie einen Tippfehler im Inhaltsverzeichnis korrigieren), werden
+    diese Änderungen automatisch gespeichert, und beim nächsten Suchvorgang
+    wird das geänderte Buch-Objekt zurückgegeben.</para>
+
+    <para>Wie können Sie nun einem Repository ein neues Objekt übergeben, so
+    dass es dafür verantwortlich wird? Dafür besitzt es die Methode
+    <methodname>add($object)</methodname>. Wenn Sie beispielsweise dem
+    <emphasis>BookRepository</emphasis> ein neues Buch-Objekt übergeben
+    wollen, können Sie mittels <varname>$book = new Book('Extbase und
+    Fluid')</varname> ein neues Buch mit dem Titel Extbase und Fluid anlegen
+    und dieses dann mittels <methodname>add($book)</methodname> dem
+    <emphasis>BookRepository</emphasis> zur Aufbewahrung übergeben. Analog
+    können Sie ein Objekt aus einem Repository entfernen, indem Sie die
+    <methodname>remove($object)</methodname>- Methode aufrufen. Nun ist das
+    Objekt über das Repository nicht mehr auffindbar und wird aus der
+    Datenbank gelöscht.</para>
+
+    <para>Für jede Aggregate Root in Ihrem Modell muss es genau ein Repository
+    geben, das für diesen Objekttyp und seine Unterobjekte zuständig ist.
+    Mithilfe dieses Repository können Sie dann anhand verschiedener Kriterien
+    das gewünschte Aggregate Root-Objekt auffinden. Umgekehrt heißt dies: In
+    Extbase definieren Sie einen Objekttyp als Aggregate Root, indem Sie ein
+    Repository für diesen Objekttyp anlegen.</para>
+
+    <para>Wir haben nun erläutert, wie sich die Domäne der Anwendung effektiv
+    in ein Software- Modell packen lässt. Dafür haben wir als »Werkzeugkasten«
+    die Techniken des Domain- Driven Design erklärt, die von Extbase besonders
+    unterstützt werden. Doch eine entstehende Anwendung besteht nicht nur aus
+    dem Modell: Es ist auch Darstellungslogik notwendig. Mit einer effektiven
+    Trennung von Modell und Darstellungslogik beschäftigt sich der folgende
+    Abschnitt.</para>
+  </section>
 </section>

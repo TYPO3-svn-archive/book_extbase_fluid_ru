@@ -665,8 +665,7 @@ $figaro-&gt;reportTechnicalProblem();</programlisting></para>
 
     <para><tip>
         <para>Дополнительную информацию о шаблонах проектирования можно найти
-        на <link linkend="???"><link
-        xl:href="???">http://sourcemaking.com/</link></link> или в книге
+        на <link xl:href="???">http://sourcemaking.com/</link> или в книге
         <emphasis>PHP Design Patterns</emphasis>, написанной Stephan Schmidt и
         опубликованную O'Reilly.</para>
       </tip>Среди большого числа шаблонов проектирования мы остановимся на
