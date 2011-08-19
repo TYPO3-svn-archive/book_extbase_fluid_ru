@@ -89,140 +89,131 @@
   <section>
     <title>Разработка стандартного языка</title>
 
-    <para>In Softwareprojekten haben die beteiligten Personen verschiedene
-    Rollen: Der Kunde ist ein Experte in seinem Geschäftsfeld, und er hat ein
-    Problem, das er durch Software lösen möchte. Da er besonders gut mit der
-    Anwendungsdomäne der Software vertraut ist, bezeichnen wir ihn als
-    <emphasis>Domänenexperten</emphasis> (engl. <emphasis>domain
-    expert</emphasis>).</para>
+    <para>В разработке программ участвуют самые разные люди: клиент является
+    экспертом в своей сфере деятельности, и у него возникла проблема, которую
+    он хотел бы решить в создаваемом программном обеспечении. Так как он
+    отлично знаком с предметной областью программы, мы назовем его
+    <emphasis>экспертом в предметной области</emphasis> (английское
+    <emphasis>domain expert</emphasis>).</para>
 
-    <para>Sie sind in der Regel in der Rolle des
-    <emphasis>Entwicklers</emphasis>: Sie sind mit vielen technischen
-    Möglichkeiten vertraut, kennen sich meist jedoch nicht in dem
-    Geschäftsfeld des Kunden aus. Daher sind Missverständnisse
-    vorprogrammiert, da der Entwickler eine ganz andere Sprache als der
-    Domänenexperte verwendet.</para>
+    <para>Сами Вы обычно выполняете роль <emphasis>Разработчика</emphasis>:
+    знакомы с техническими возможностями, хорошо осведомлены в своей сфере
+    работы, но, обычно, не в области клиента. Здесь неизбежны недоразумения,
+    так как разработчик общается на своем языке, далеком от языка эксперта в
+    предметной области.</para>
 
-    <para>Im Domain-Driven Design sollen wichtige Kernbegriffe gefunden
-    werden, die bei der Charakterisierung und Lösung des Problems benötigt
-    werden. Diese werden in Form eines <emphasis>Glossars</emphasis>
-    zusammengestellt, so dass immer sichergestellt wird, dass der
-    Domänenexperte und der Entwickler sich auch richtig verstehen.</para>
+    <para>В предметно ориентированном проектировании важно определить ключевые
+    термины, необходимые для характиристики и решения проблемы. Они
+    составляются в форме <emphasis>глоссария</emphasis>, чтобы разработчик и
+    эсперт в предметной области могли общаться на одном языке и хорошо
+    понимать друг друга.</para>
 
-    <para>Diese gemeinsame Sprache (engl. ubiquitous language) kommt nicht nur
-    während der Kommunikation zur Anwendung: Sie sollte auch im Quellcode
-    (z.B. in Klassen- oder Methodennamen) zu finden sein. Dies ermöglicht es,
-    bei Problemen den Domänenexperten zu konsultieren und mit ihm zusammen auf
-    Basis des Quellcodes zu entscheiden, ob die Geschäftslogik korrekt
-    umgesetzt wurde.</para>
+    <para>Такой обобщенный язык (английское ubiquitous language) используется
+    не только при переговорах, но отражается и в исходном коде (например, в
+    названиях классов и методов). Это дает возможность получить разъяснения по
+    возникающим проблемам у эксперта используя исходный код для
+    непосредственного выверения бизнес-логики приложения.</para>
   </section>
 
   <section>
-    <title>Die Domäne modellieren</title>
+    <title>Модель предметной области</title>
 
-    <para>Sie fangen nun also während der Gespräche mit dem Domänenexperten
-    an, ein Modell zu erstellen und zu verfeinern. In der Regel entsteht
-    während dieser Gespräche ein UMLDiagramm, das die Eigenschaften,
-    Funktionalitäten und Beziehungen der relevanten Bestandteile des
-    Problemfeldes in Objekte verpackt und deren Relationen darstellt. Diese
-    Objekte bezeichnet man wegen der starken Ausrichtung auf die Problemdomäne
-    des Nutzers auch als <emphasis>Domänenobjekte</emphasis>.</para>
+    <para>Теперь переходим к переговорам с экспертом, в результате которых
+    постепенно создаем и совершенствуем модель предметной области. Как
+    правило, результатом всего этого являются UML диаграммы, которые
+    отображают свойства, функциональность и отношения соответствующих
+    компонентов предметной области в виде объектов и их отношений. Благодаря
+    фокусировке на предметной области, такие объекты называют
+    <emphasis>объектами предметной области</emphasis>.</para>
 
-    <para>Domain-Driven Design bietet einige Bausteine, die Ihnen bei der
-    Erstellung eines guten Domänenmodells helfen:
-    <emphasis>Entities</emphasis>, <emphasis>Value Objects</emphasis> und
-    <emphasis>Services</emphasis>. Widmen wir uns zuerst den ersten beiden
-    Bausteinen: Besitzt das Domänenobjekt eine eigene Identität, die über die
-    Zeit erhalten bleibt, auch wenn das Objekt verschiedene Zustände
-    durchläuft? Dann ist das Objekt eine <emphasis>Entity</emphasis>. Oder ist
-    es ein Attribut, das andere Dinge näher beschreibt? Dann ist das Objekt
-    vom Typ <emphasis>Value Object</emphasis>. Im Folgenden werden wir noch
-    näher auf die Unterscheidung dieser beiden Typen eingehen.</para>
+    <para>Предметно ориентированное проектирование дает некоторые такие
+    кирпичики для упрощения создания хорошей модели предметной области:
+    <emphasis>сущности</emphasis>, <emphasis>объекты-значения</emphasis> и
+    <emphasis>сервисы</emphasis>. Сначала разберем первые два блока: имеется
+    ли у объекта в течение долгого времени, даже в разных его состояниях,
+    что-то индивидуальное, отличающее его? Если да, то это
+    <emphasis>Сущность</emphasis> объекта. А может это атрибут, подробно
+    описывающий что-либо? Тогда это объект типа
+    <emphasis>Объект-значение</emphasis>. Далее мы еще поговорим об отличиях
+    этих двух типов.</para>
 
-    <para>Außerdem gibt es noch Konzepte, die sich nicht direkt Entities oder
-    Value Objects zuordnen lassen – immer, wenn Sie während der
-    Modellierungsphase von <emphasis>Aktivitäten</emphasis> sprechen. Hierfür
-    wird das Konzept von <emphasis>Services</emphasis> eingeführt.</para>
+    <para>Есть и нечто иное, что невозможно представить в виде сущности или
+    объекта-значения — это возникает всегда, когда при моделировании заходит
+    разговор о <emphasis>действиях</emphasis>. Для этого вводится понятие
+    <emphasis>Сервисов</emphasis>.</para>
 
     <section>
-      <title>Entities</title>
+      <title>Сущности</title>
 
-      <para>Entities sind Objekte, die eine eindeutige Identität besitzen.
-      Beispielsweise besitzt ein Benutzer als Identität einen Benutzernamen,
-      ein Produkt besitzt eine Produktnummer, und ein Student besitzt eine
-      Matrikelnummer. Daher sind alle genannten Beispiele Entities. Die
-      Identität des Objekts bleibt im Laufe der Zeit gleich, auch wenn sich
-      Eigenschaften des Objekts ändern sollten.</para>
+      <para>Сущности - это объекты, которые можно однозначно определить. К
+      примеру, пользователей можно однозначно определить по имени
+      пользователя, продукт — номером продукта, студент — порядковый номер.
+      Из-за этого все упомянутые примеры являются сущностями. Ведь сам
+      однозначно определяемый объект остается самим собой все время, даже если
+      свойства этого объекта меняются.</para>
 
-      <para>Die Identität eines Objekts wird durch eine unveränderliche
-      Eigenschaft oder eine Kombination aus mehreren unveränderlichen
-      Eigenschaften des Objekts festgelegt. Es muss mindestens eine
-      Eigenschaft identitätsbestimmend sein. Normalerweise kümmert sich
-      Extbase selbstständig darum und weist einer (versteckten)
-      Identitätseigenschaft einen eindeutigen Wert zu. Sie können aber auch
-      selbst eine Auswahl treffen und festlegen, welche Kombination von
-      Eigenschaften identitätsbestimmend sein soll.</para>
+      <para>Тождество объекта устанавливается одним неизменяемым уникальным
+      свойством или комбинацией из нескольких свойств, остающихся неизменными
+      и уникальными. Хотя бы одно свойство должно однозначно определять
+      объект. Extbase обычно сама заботится об этом и назначает определяющему
+      свойству (спрятанному) параметр уникальности. Но всегда можно и
+      самостоятельно выбрать и установить комбинацию свойств, определяющую
+      уникальность объекта.</para>
 
       <tip>
-        <para>Extbase verwendet als automatisch generierte
-        Identitätseigenschaft einen Identifier, der von der zugrunde liegenden
-        Datenbank generiert wird (den sogenannten Unique Identifier, UID). Das
-        Wort <emphasis>unique</emphasis>, also »eindeutig«, bedeutet in diesem
-        Zusammenhang eigentlich »eindeutig innerhalb einer Datenbanktabelle «.
-        Dies wird sich jedoch eventuell in einer zukünftigen Version von
-        Extbase ändern, so dass hier eine globale Eindeutigkeit sichergestellt
-        werden kann.</para>
+        <para>Extbase в качестве автоматически устанавливаемого уникального
+        свойства использует идентификатор, генерируемый в базе данных (так
+        называемый уникальный идентификатор — Unique Identifier, UID). В
+        данном контексте слово <emphasis>уникальный</emphasis>, то есть
+        «однозначный», означает на самом деле «уникальный в пределах одной
+        таблицы базы данных». В следующих версиях Extbase это возможно будет
+        изменено, так, чтобы можно было обеспечить глобальную
+        уникальность.</para>
       </tip>
 
-      <para>Je nach Anwendungsfall kann es sinnvoll sein, eigene
-      identitätsbestimmende Eigenschaften festzulegen, die <emphasis>innerhalb
-      Ihrer Domäne</emphasis> wichtig sind. Wie kann ich einen Menschen
-      eindeutig identifizieren? Die Personalausweisnummer und das Land
-      zusammen genommen sind vielleicht eine solch eindeutige Identifizierung,
-      allerdings oft eine wenig praktikable: Wer möchte schon seine
-      Personalausweisnummer angeben, wenn er sich bei einem Web-Portal
-      anmeldet? Für ein Internetforum bietet es sich beispielsweise an, die
-      Identität durch die E-Mail-Adresse des Forumsmitglieds festzulegen.
-      Falls Sie aber eine E-Government- Anwendung schreiben, käme die
-      Personalausweisnummer hierfür in Betracht.</para>
+      <para>В зависимости от приложения, может иметь смысл устанавливать свои
+      уникальные свойства, имеющие смысл в текущей <emphasis>предметной
+      области</emphasis>. Как можно однозначно идентифицировать человека?
+      Конечно, номер паспорта и страна дают такую четкую идентификацию, но
+      имеет мало практического смысла: кто даст информацию о номере своего
+      паспорта, если нужно просто авторизоваться на сайте? Для интернет форума
+      однозначно установить человека позволяет его электронная почта. Но если
+      пишется приложение для электронного правительственного документооборота,
+      то для идентификации лучше всего как раз подходил бы номер
+      паспорта.</para>
 
-      <para>Wichtig ist, dass die identitätsbestimmenden Eigenschaften eines
-      Objekts <emphasis>bei seiner Erstellung</emphasis> festgelegt werden und
-      sich dann nie mehr ändern: Wenn Sie diese Eigenschaften veränderbar
-      machen würden, so könnten verschiedene Identitäten ineinander
-      »konvertiert« werden – dies ist aber in den meisten Fällen unerwünscht.
-      Denn Sie müssten diese neue Identität dann allen Objekten bekannt
-      machen, die das Objekt unter der alten Identität kennen. Ansonsten
-      würden Sie alle Verbindungen von anderen Objekten zu diesem Objekt
-      verlieren. In der Regel sollte die Veränderung von
-      identitätsbestimmenden Eigenschaftswerten durch ausschließlichen
-      Lesezugriff auf diese Eigenschaften vermieden werden.</para>
+      <para>Важно, чтобы свойства, устанавливающие тождественность объекта,
+      назначались один раз при его создании, и впоследствие не изменялись:
+      если сделать эти свойства изменяемыми, то нужно предусмотреть, чтобы
+      такие уникальные свойства могли трансформироваться друг в друга, что в
+      большинстве случаев нежелательно. Ведь тогда об этом новом определяющем
+      объект свойстве необходимо известить все объекты, знающие текущий объект
+      по его старому идентификатору. Иначе все связи с объектом будут утеряны.
+      Как правило, избежать изменения идентифицирующих объект свойств объекта
+      можно, установив для них исключительно право на чтение.</para>
 
-      <para>Wenn Sie bisher datenbankbasierte Anwendungen geschrieben haben,
-      haben Sie vielleicht festgestellt, dass Sie oft unterbewusst Entitys
-      verwendet haben, indem Sie die Datenbanktabellen mit Indizes und Primary
-      Keys ausgestattet haben (in TYPO3 wird beispielsweise immer die UID als
-      Identifier hinzugefügt). Daher fragen Sie sich vielleicht, wieso wir nun
-      überhaupt noch einen anderen Objekttyp benötigen. Im nächsten Abschnitt
-      klären wir diese Frage.</para>
+      <para>Если до этого вы писали приложения, в основе которых лежала база
+      данных, то отметили, что при этом подсознательно использовали сущности,
+      если таблицы базы данных имели первичные ключи (в TYPO3 принято в
+      качестве идентификатора использовать поле UID). Поэтому здесь возникает
+      вопрос, зачем нам понадобилось выдумывать еще один тип объектов? В
+      следующем разделе мы разъясним этот вопрос.</para>
     </section>
 
     <section>
-      <title>Value Objects</title>
+      <title>Объекты-значения</title>
 
-      <para>PHP bietet einige Werttypen, die es von Haus aus unterstützt, wie
-      z.B. Integer, Float oder String. Oft werden Sie allerdings feststellen,
-      dass Sie in Ihrer Domäne spezielle Typen von Werten, wie beispielsweise
-      Farben oder Tags, benötigen. Diese werden durch sogenannte
-      <emphasis>Value Objects</emphasis> repräsentiert.</para>
+      <para>PHP предлагает несколько изначально поддерживаемых типов значений,
+      например, Integer, Float или String. Но иногда для определенной области
+      могут понадобиться другие объекты-значения, например, цвета или метки.
+      Это так называемые <emphasis>объекты-значения</emphasis>.</para>
 
-      <para>Value Objects sind Objekte, die durch die Werte aller ihrer
-      Eigenschaften bestimmt werden. Nehmen wir ein Malprogramm als Beispiel:
-      Darin muss irgendwo definiert sein, was unter Farben zu verstehen ist.
-      Eine Farbe ist nur durch ihren Wert bestimmt, wie z.B. in der
-      RGB-Darstellung durch drei Farbanteile für Rot, Grün und Blau. Wenn zwei
-      Farbobjekte dieselben RGB-Werte besitzen, so sind sie effektiv gleich
-      und müssen nicht weiter unterschieden werden.</para>
+      <para>Объекты-начения — это объекты, определяемые набором значений их
+      свойств. Для примера возьмем программу рисования: нам понадобиться
+      определить условные обозначения цветов. Цвет определяется только по
+      характерному набору своих свойств, например в режиме RGB это набор
+      значений трех компонент — красной, зеленой и синей. Если два объекта
+      имеют одинаковые значения компонентов RGB, то их цвет одинаков.</para>
 
       <para>Bei Value Objects sind alle Eigenschaften identitätsbestimmend.
       Wenn alle Eigenschaften von zwei Value Objects den gleichen Wert haben,
@@ -235,7 +226,7 @@
 
       <para>Da alle Eigenschaften identitätsbestimmend sind und diese
       Eigenschaften nach der Erstellung des Objekts nicht mehr verändert
-      werden dürfen, sind Value Objects unveränderlich (engl.
+      werden dürfen, sind Value Objects unveränderlich (английское
       <emphasis>immutable</emphasis>). Sie werden vollständig initialisiert
       erzeugt und können danach ihren Wert nicht mehr ändern. Man kann nur ein
       neues Value Object erzeugen und das alte eliminieren.</para>
@@ -292,7 +283,7 @@
     </section>
 
     <section>
-      <title>Assoziationen</title>
+      <title>Ассоциации</title>
 
       <para>Sie sollten während der Modellierung nie die Implementierung aus
       den Augen lassen. Daher lassen Sie uns noch kurz über ein besonders
@@ -414,7 +405,7 @@
     Container für Aktionen, die zwar zur Domäne der Anwendung gehören, die
     aber keinem bestimmten Objekt zugeordnet werden können.</para>
 
-    <para>Ein Service sollte zustandslos (engl.
+    <para>Ein Service sollte zustandslos (английское
     <emphasis>stateless</emphasis>) sein, d.h. keinen internen Zustand
     manipulieren oder verwenden. Ein Service sollte verwendet werden können,
     ohne dass sein interner Zustand bekannt sein oder berücksichtigt werden
@@ -471,10 +462,10 @@
 
     <para>Wichtig ist, dass das Objekt logisch weiter existiert, wenn es in
     der Datenbank gespeichert ist. Es liegt nur aus Performance-Gründen nicht
-    im Hauptspeicher. Es ist sehr wichtig, zwischen dem Erzeugen (engl.
+    im Hauptspeicher. Es ist sehr wichtig, zwischen dem Erzeugen (английское
     <emphasis>creation</emphasis>) eines Objekts und der Wiederherstellung des
-    Objekts aus der Datenbank (engl. <emphasis>reconstitution</emphasis>) zu
-    unterscheiden. Stellen Sie sich daher vor, dass die Objekte auch in der
+    Objekts aus der Datenbank (английское <emphasis>reconstitution</emphasis>)
+    zu unterscheiden. Stellen Sie sich daher vor, dass die Objekte auch in der
     Datenbank weiterexistieren, nur in einer anderen
     Repräsentationsform.</para>
 
