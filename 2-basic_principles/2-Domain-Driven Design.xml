@@ -208,309 +208,315 @@
       могут понадобиться другие объекты-значения, например, цвета или метки.
       Это так называемые <emphasis>объекты-значения</emphasis>.</para>
 
-      <para>Объекты-начения — это объекты, определяемые набором значений их
+      <para>Объекты-значения — это объекты, определяемые набором значений их
       свойств. Для примера возьмем программу рисования: нам понадобиться
       определить условные обозначения цветов. Цвет определяется только по
       характерному набору своих свойств, например в режиме RGB это набор
       значений трех компонент — красной, зеленой и синей. Если два объекта
       имеют одинаковые значения компонентов RGB, то их цвет одинаков.</para>
 
-      <para>Bei Value Objects sind alle Eigenschaften identitätsbestimmend.
-      Wenn alle Eigenschaften von zwei Value Objects den gleichen Wert haben,
-      so sind diese beiden Value Objects identisch. Trotzdem sind Value
-      Objects oft mehr als einfache Datenstrukturen für primitive Datentypen.
-      Sie können potenziell sehr viel komplexe Domänenlogik enthalten. Unser
-      Farbe-Objekt könnte z.B. Methoden zur Umrechnung der Farbe in andere
-      Farbräume wie CYMK oder HSV enthalten und dafür Farbprofile
-      verwenden.</para>
+      <para>Объекты-значения определяют <emphasis>все</emphasis> их свойства.
+      Если в двух объектах-значениях все свойства одинаковые, то такие два
+      объекта идентичны. Но тем не менее, объекты-значения это не только
+      простые структуры данных для описания типов данных. Потенциально они
+      могут содержать сложную логику объектной области. Например, тот же
+      объект цвета внути может содержать методы пересчета цветов для разных
+      цветовых пространств, таких как CYMK или HSV, а кроме того и вклчать
+      сюдя цветовые профили.</para>
 
-      <para>Da alle Eigenschaften identitätsbestimmend sind und diese
-      Eigenschaften nach der Erstellung des Objekts nicht mehr verändert
-      werden dürfen, sind Value Objects unveränderlich (английское
-      <emphasis>immutable</emphasis>). Sie werden vollständig initialisiert
-      erzeugt und können danach ihren Wert nicht mehr ändern. Man kann nur ein
-      neues Value Object erzeugen und das alte eliminieren.</para>
+      <para>Так как тождество объектов определяют все свойства, и эти свойства
+      не могут изменяться после создания объекта, объекты-значения являются
+      неизменными (английское <emphasis>immutable</emphasis>). Они вцелом
+      создаютя в процессе инициализации, после чего их значение не может
+      изменяться. Возможно только создание нового объекта-значения и удаление
+      старого.</para>
 
       <warning>
-        <para>Obwohl Sie ein Value Object mit Methoden zum Verändern des
-        internen Zustands ausstatten könnten, darf der interne Zustand niemals
-        geändert werden. Nehmen wir das Beispiel des Farbe-Objekts, das z.B.
-        eine neue Methode makeBrighter() enthält. Diese Methode muss,
-        ausgehend von der Farbe des aktuellen Value Objects, die Farbwerte
-        verändern und ein neues Value Object mit den veränderten Werten
-        zurückgeben. Es darf niemals das bestehende Objekt verändern.</para>
+        <para>Хотя можно было бы снабжать объекты-значения методами для
+        изменения их внутреннего состояния, но все же внутреннее состояние
+        изменяться не должно ни при каких обстоятельствах. Вернемся все к тому
+        же объекту цвета, который, например, содежит новый метод
+        <methodname>makeBrighter()</methodname>. Этот метод за основу должен
+        брать текущий объект-значение, затем меняется значение его компонент и
+        возвращается новый объект-значение с измененными значениями компонент
+        цвета. Текущий объект не изменяется никогда!</para>
       </warning>
 
-      <para>Durch diese einfache Semantik können Value Objects ohne Probleme
-      erzeugt, geklont, an andere Computer übertragen oder an andere Objekte
-      übergeben werden. Dadurch ist nicht nur die Implementierung einfacher,
-      sondern es wird außerdem klar kommuniziert, dass es sich bei diesen
-      Objekten um einfache Werte handelt.</para>
+      <para>Такая простая семантика объектов-значений позволяет без проблем
+      переносить, клонировать или передавать их другим объектам. Это не только
+      упрощает разработку, но и ясно говорит о том, что в данном случае
+      имеется ввиду просто обычное значение и ничего более.</para>
 
       <sidebar>
-        <title>Entity oder Value Object?</title>
+        <title>Сущность или Объект-значение?</title>
 
-        <para>Nicht immer ist auf Anhieb zu erkennen, ob es sich bei einem
-        Objekt um eine Entity oder um ein Value Object handelt. Schauen wir
-        uns dazu ein Beispiel an: In vielen Anwendungen haben Sie mit Adressen
-        zu tun. Nehmen wir einen Online-Shop, in dem der Kunde eine oder
-        mehrere Lieferadressen angeben kann. Hier wäre die Adresse ein
-        typisches Value Object, da es nur als Container für Name, Straße,
-        Stadt und Postleitzahl verwendet wird.</para>
+        <para>Не всегда с наскоку моно решить, идет ли речь о сущности или о
+        значении. Рассмотрим пример. Многие приложения требуют работы с
+        адресами. Возьмем сетевой магазин, где клиент может указать один или
+        несколько адресов для доставки. Здесь адрес мог бы выступать в
+        качестве типичного объекта-значения, так как используется лишь как
+        контейнер для названий улицы, города и индекса.</para>
 
-        <para>In einer Anwendung, die für die Post die Briefzustellung
-        optimiert, können Adressen darüber hinaus mit anderen Eigenschaften
-        wie dem Namen des Briefträgers verbunden sein, der diese Adresse
-        beliefert. Dieser Name gehört allerdings nicht zur Identität des
-        Objekts und kann sich über die Zeit verändern (z.B. wenn ein
-        Briefträger in Rente geht) – ein deutlicher Hinweis auf die Verwendung
-        einer Entity.</para>
+        <para>Но в приложении, оптимизирующем доставку почтовых сообщений,
+        адреса могут быть связаны с другими свойствами, например, с именем
+        почтальона, обслуживающего определенные адреса. Но это имя почтальона
+        не входит в свойства однозначно определяющие адрес, и может меняться
+        (почталон ушел в отпуск или на пенсию), — здесь отчетливо видно, что
+        нужно использовать сущность.</para>
 
-        <para>Sie sehen also: Man kann nicht immer eindeutig sagen, ob Objekte
-        Entities oder Value Objects sind – es hängt ganz vom Anwendungsfall
-        und der Anwendungsdomäne ab.</para>
+        <para>Итак, мы видим, что однозначно невозможно сказать является ли
+        объект сущностью или значением — все зависит от контекста и предметной
+        области.</para>
       </sidebar>
 
       <tip>
-        <para>Die Unterscheidung zwischen Entities und Value-Objects wird
-        Ihnen zu Beginn vielleicht schwerfallen und als unnötiger Aufwand
-        erscheinen. Extbase behandelt die beiden Objekt-Typen im Hintergrund
-        jedoch sehr unterschiedlich. Die Verwaltung von Value-Objects ist
-        effizienter als die von Entities. Der zusätzliche Aufwand für die
-        Verwaltung und Überwachung der Eindeutigkeit entfällt hier zum
-        Beispiel völlig.</para>
+        <para>В начале сложно будет разобрать, где сущность, а где
+        объект-значение, это потребует определенного труда. Extbase работает в
+        фоновом режиме с обоими типами объектов, но по-разному. Эффективнее
+        управлять объектами-значениями. Здесь исключается из управления и
+        контроля все, связанное с уникальностью объектов.</para>
       </tip>
     </section>
 
     <section>
-      <title>Ассоциации</title>
+      <title>Ассоциации (связи)</title>
 
-      <para>Sie sollten während der Modellierung nie die Implementierung aus
-      den Augen lassen. Daher lassen Sie uns noch kurz über ein besonders
-      komplexes Feld der Implementierung sprechen: Assoziationen zwischen
-      Objekten.</para>
+      <para>На стадии моделировани никогда нельзя упускать из вида реализацию.
+      Сейчас уделим внимание очень сложной области реализации — связям между
+      объектами.</para>
 
-      <para>Objekte der Domäne stehen miteinander in Beziehung. Solche
-      Beziehungen werden in der Sprache der Domäne z.B. mit folgenden
-      Wendungen bezeichnet: A »besteht aus« B, C »hat« D, E »verarbeitet« F,
-      oder G »gehört zu« I. Diese Beziehungen werden im abstrahierten
-      Domänenmodell als <emphasis>Assoziationen</emphasis> bezeichnet.</para>
+      <para>Объекты предметной области взаимосвязанны. Такие отношения на
+      языке предметной области описываются следующими фразами: А "состоит из"
+      Б, В "содержит" Д, Е "обработано" К или Т "принадлежит" Ч. Они
+      называются абстрактными <emphasis>Ассоциациями</emphasis> предметной
+      области.</para>
 
-      <para>An einer Universität stehen beispielsweise Professoren und
-      Studenten miteinander in Beziehung: Der Professor hält Vorlesungen, und
-      Studenten sind für Vorlesungen eingeschrieben. Um diese Beziehung in
-      unserem Domänenmodell abzubilden, fügen wir eine Assoziation als
-      Abstraktion der realen Welt ein. Praktisch heißt das, dass ein
-      Professor-Objekt eine Liste von Zeigern auf die Studenten-Objekte
-      enthält, die bei ihm in der Vorlesung sitzen.</para>
+      <para>Например, в университете профессора и студенты определенным
+      образом связаны: профессор читает лекции, а студенты посещают эти
+      лекции. Для отображения подобной связи в модели предметной области нужно
+      добавить ассоциацию, как абстракцию настоящего мира. В университете, к
+      примеру, профессора и студенты находятся в связи друг с другом:
+      Профессор читает лекции, и студенты записаны для лекций. Чтобы
+      отображать это отношение в нашей модели доменов, мы вставляем ассоциацию
+      как абстракция реального мира. Практически это значит, что
+      объект-профессор содержит список указателей на объекты-студенты,
+      присутствующих у него на лекции.</para>
 
-      <para>Besonders kompliziert zu implementieren sind hier
-      <emphasis>Many-to-many</emphasis>-Assoziationen wie im obigen Beispiel
-      (ein Professor unterrichtet viele Studenten, und ein Student wird von
-      verschiedenen Professoren unterrichtet) – noch dazu, wenn diese
-      Assoziationen beidseitig (bidirektional) sind. Dies bedeutet, dass sie
-      von einem Professor zu seinen Studenten, aber auch in die andere
-      Richtung gehen können.</para>
+      <para>Особенно сложна здесь реализация ассоциаций (отношений)
+      <emphasis>Многие-ко-Многим</emphasis>, как в приведенном примере
+      (профессор обучает множество студентов, но и студент обучается у многих
+      профессоров). Более того, эти ассоциации работают в обе стороны
+      (двунаправленные). То есть сязи идут и от учеников к профессору, и
+      наоборот.</para>
 
-      <para>Falls Sie also während des Designs
-      <emphasis>Many-to-many</emphasis>-Assoziationen verwenden, überlegen Sie
-      einmal, ob diese vereinfacht und umstrukturiert werden können. Es ist
-      natürlich, dass Sie besonders am Anfang der Modellierung sehr viele
-      bidirektionale <emphasis>Many-to-many</emphasis>-Assoziationen
-      verwenden. Bei der Verfeinerung der Assoziationen können Ihnen die
-      folgenden Fragestellungen helfen:</para>
+      <para>Если в разработке имеются ассоциации
+      <emphasis>Многие-ко-Многим</emphasis>, уделите время, и подумайте,
+      нельзя ли изменить и упростить такую структуру. Естественно, особенно в
+      начале моделирования, появится большое количество двунаправленных связей
+      <emphasis>Многие-ко-Многим</emphasis>. Для оптимизации связей помогут
+      ответы на следующие вопросы:</para>
 
       <orderedlist>
         <listitem>
-          <para>Ist die Many-to-many-Assoziation wichtig in der
-          Anwendungsdomäne?</para>
+          <para>Важна ли связть Многие-ко-Многим для модели предметной
+          области?</para>
         </listitem>
 
         <listitem>
-          <para>Kann die Assoziation einseitig gemacht werden, da es eine
-          Hauptrichtung gibt, in der die Objekte abgefragt werden?</para>
+          <para>Можно ли связь преобразовать в одностороннюю, благодаря тому,
+          что объекты запрашиваются лишь в одном направлении?</para>
         </listitem>
 
         <listitem>
-          <para>Kann die Assoziation noch näher spezifiziert werden, z.B.
-          indem die einzelnen Elemente noch näher qualifiziert werden?</para>
+          <para>Можно ли описать связь подробнее, например, конкретнее по
+          отдельным объектам?</para>
         </listitem>
 
         <listitem>
-          <para>Ist die Assoziation für die Kernfunktionalität überhaupt
-          notwendig?</para>
+          <para>А нужна ли связь вообще для функционирования ядра
+          модели?</para>
         </listitem>
       </orderedlist>
 
-      <para>Denken Sie also daran, möglichst einfache Assoziationen zu
-      verwenden, da diese einfacher zu implementieren und klarer verständlich
-      sind.</para>
+      <para>Чем проще сами связи, тем проще их реализация.</para>
     </section>
   </section>
 
   <section>
-    <title>Aggregates</title>
+    <title>Совокупности</title>
 
-    <para>Wenn Sie ein komplexes Domänenmodell bauen, haben Sie es mit sehr
-    vielen Klassen zu tun, die auf derselben Hierarchieebene stehen. Oft ist
-    es jedoch so, dass bestimmte Objekte einen Teil eines größeren Objekts
-    ausmachen. Wenn wir eine Anwendung für eine Autowerkstatt modellieren
-    wollen, so müssen wir vielleicht nicht nur das Auto, sondern auch den
-    Motor und die Räder modellieren, da diese für die Autowerkstatt von
-    besonderer Bedeutung sind. Intuitiv betrachten wir die Räder und den Motor
-    eines Autos als Teil des Autos, daher sollte dieses Verständnis auch im
-    Modell zu erkennen sein. Wir nennen solch eine Teil-Ganzes-Beziehung von
-    eng zusammenhängenden Objekten <emphasis>Aggregate</emphasis>. Sie sehen
-    dieses Domänenmodell auch in Abbildung 2-1.</para>
+    <para>При построении сложной предметной области, множество классов будут
+    находиться на одном уровне иерархии. Зачастую множество объектов являются
+    составляющими более крупного объекта. Если строится модель авторемонтной
+    мастерской, то возможно придется моделировать не только сам автомобил, но
+    и его составляющие — двигатель, колеса и т.п., так как для мастерской они
+    имеют особое значение. Интуитивно двигатель и колеса мы ощущаем частью
+    автомобиля, это должно найти отражение в модели. Такие отношения части к
+    целому и связанные с ними объекты <emphasis>Совкупностями</emphasis>.
+    Модель такой предметной области приведена на рисунке 2-1.</para>
 
-    <remark>Добавить рисунок 2-1 Abbildung 2-1: Das Domänenmodell einer
-    Autowerkstatt. Objekte außerhalb eines Aggregates dürfen immer nur auf die
-    Aggregate Root referenzieren.</remark>
+    <screenshot>
+      <info>
+        <title>Рисунок 2-1: модель объектной области авторемонтной мастерской.
+        Объекты за пределами совокупности могут иметь связь только с корнем
+        совокупности</title>
+      </info>
 
-    <para>Ein Aggregate besitzt eine »Wurzel«, die sogenannte
-    <emphasis>Aggregate Root</emphasis>. Diese ist für die Integrität ihrer
-    Unterobjekte verantwortlich. Objekte außerhalb des Aggregates dürfen nur
-    auf die <emphasis>Aggregate Root</emphasis>, aber nie auf Teile davon
-    referenzieren, da sonst die Aggregate Root nicht die Integrität der
-    Objekte sicherstellen könnte. Nach außen hin hat das Aggregate nur eine
-    externe Identität: die der Aggregate Root. Da Aggregate Roots also eine
-    Identität benötigen, anhand derer sie referenziert werden können, müssen
-    sie vom Typ Entity sein.</para>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="2-1.svg"></imagedata>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
 
-    <para>Übertragen auf das Autobeispiel hieße das: Die Servicestation darf
-    keine permanente Referenz auf den Motor halten, sondern muss sich eine
-    permanente Referenz auf das Auto merken (z.B. durch die Fahrzeugnummer als
-    externe Identität). Falls sie zum Arbeiten eine Referenz auf den Motor
-    benötigt, so kann sie diesen über das Auto erreichen.</para>
+    <para>Совокупность имеет «Корень» — так называемый <emphasis>Корень
+    совокупности</emphasis>. Он отвечает за целостность составляющих ее
+    объектов. Объекты вне совокупности могут связываться только с
+    <emphasis>Корнем совокупности</emphasis>, иначе бы этот Корень не смог бы
+    обеспечить целостности совокупности. Вне совокупностей их тождество и
+    индивидуальность обеспечивают только лишь их корни. И поскольку
+    совокупности нуждаются в индивидуальных корнях, посредством которых они
+    могут быть опознаны, эти корни должны быть типа
+    <emphasis>Сущности</emphasis>.</para>
 
-    <para>Durch diese Referenzierungsregeln wird effektiv die Domäne weiter
-    strukturiert, was die Komplexität der Anwendung weiter reduziert und
-    beherrschbar macht.</para>
+    <para>Перенесем все это на пример автомастерской: здесь невозможно
+    сослаться просто на двигатель, но нужно хранить ссылку на автомобил
+    (например, в качестве этого можно использовать номер автомобиля). Если для
+    работы нужно узнать о двигателе (ссылка на двигатель), то сведения можно
+    получить посредством связи с автомобилем.</para>
 
-    <para>Bisher haben wir gezeigt, wie man mit Entities und Value Objects die
-    Objekte der realen Welt gut in Software abbilden kann. Es gibt jedoch auch
-    Konzepte der Welt, die nicht in dieses Schema passen. Um diese abzubilden,
-    führen wir Services ein.</para>
+    <para>Эффективно используя такие связи, предметная область структурируется
+    далее, что упрощает приложение и делает его еще более управляемым.</para>
+
+    <para>До сих пор мы показывали, как хорошо сущности и объекты-значения
+    справлялись с представлением реального мира. Но имются вещи, которые
+    невозможно втиснуть в предлагаемую схему. Для этого введем Сервисы.</para>
   </section>
 
   <section>
-    <title>Services</title>
+    <title>Сервисы</title>
 
-    <para>In der Praxis gibt es beim Modellieren einer Anwendung Aktionen,
-    welche nicht direkt bestimmten Domänenobjekten zugeordnet werden können.
-    In der objektorientierten Programmierung liegt die Versuchung nahe,
-    bestimmten Entities oder Value Objects diese Aktion aufzuzwingen, obwohl
-    sie eigentlich gar nicht dort hinein gehört. Um dieses Problem zu umgehen,
-    gibt es sogenannte <emphasis>Services</emphasis>. Dabei handelt es sich um
-    Container für Aktionen, die zwar zur Domäne der Anwendung gehören, die
-    aber keinem bestimmten Objekt zugeordnet werden können.</para>
+    <para>На практике, при создании модели возникают действия, которые
+    невозможно привязать ни к одному объекту предметной области. В объектно
+    ориентированном программировании существует искушение приписать действие
+    той или иной сущности или объекту-значению, хотя по разумению, оно и не
+    является их частью. Для обхода этой проблемы имеются
+    <emphasis>сервисы</emphasis>. Здесь речь идет о неком контейнере для
+    действий, относящихся к предметной области, но не связанных напрямую ни с
+    каким ее объектом.</para>
 
-    <para>Ein Service sollte zustandslos (английское
-    <emphasis>stateless</emphasis>) sein, d.h. keinen internen Zustand
-    manipulieren oder verwenden. Ein Service sollte verwendet werden können,
-    ohne dass sein interner Zustand bekannt sein oder berücksichtigt werden
-    muss. Ein Service bekommt oft als Eingabe Entities oder Value Objects und
-    führt auf diesen komplexere Operationen aus.</para>
+    <para>У сервисов не должно быть состояний (английское
+    <emphasis>stateless</emphasis>), то есть их внутренним состоянием нельзя
+    управлять и его использовать. Сервис дожен использоваться без учета его
+    состояния. На входе сервис получает Сущности или Объекты-значения, и
+    выполняет какие-либо сложные операции.</para>
   </section>
 
   <section>
-    <title>Lebenszyklus von Objekten</title>
+    <title>Цикл жизни объектов</title>
 
-    <para>Objekte in der realen Welt haben einen bestimmten Lebenszyklus. Ein
-    Auto wird gebaut, dann verändert es sich während seiner Lebenszeit (der
-    Kilometerstand erhöht sich, Bremsen werden getauscht,
-    Abnutzungserscheinungen, …), und irgendwann wird das Auto
-    verschrottet.</para>
+    <para>Объекты реального мира имеют определенный жизненный цикл. Автомобиль
+    меняется с течением времени (увеличивается пробег, меняются детали,
+    двигатель изнашивается, ...), и в определенный момент выходит из
+    строя.</para>
 
-    <para>Da wir beim Domain-Driven Design eine Domäne modellieren, die eine
-    Entsprechung in der realen Welt hat, ist der Lebenszyklus von Objekten in
-    unserem Programm dem der Objekte in der realen Welt sehr ähnlich. Objekte
-    werden zu einem Zeitpunkt erzeugt, dann sind sie aktiv und werden
-    verändert, und irgendwann werden sie wieder gelöscht. Dies ist in
-    Abbildung 2-2 zu sehen.</para>
+    <para>Так как предметно ориентированное проектирование моделирует
+    предметную область, отражающую реальный мир, то и цикл жизни объектов
+    будет схож с подобным в рельном мире. В определенный момент объект
+    создается, затем он действует и меняется, и в конце-концов — удаляется.
+    Это отражено на рисунке 2-2.</para>
 
-    <remark>Abbildung 2-2: Der Lebenszyklus eines Objekts in der realen
-    Welt</remark>
+    <screenshot>
+      <info>
+        <title>Рисунок 2-2: цикл жизни объекта в реальном мире.</title>
+      </info>
 
-    <para>Nun können wir natürlich nicht immer alle vorhandenen Objekte
-    unseres Programms instanziiert im Speicher halten – unser Programm wäre
-    unbenutzbar langsam und speicherhungrig (nicht zu sprechen von dem Fall,
-    dass der Strom ausfällt und die Objekte dann weg sind). Daher benötigen
-    wir eine Möglichkeit, nur aktuell benötigte Objekte im Speicher zu halten.
-    Der aktive Zustand besteht daher eigentlich aus einigen Unterzuständen,
-    die in Abbildung 2-3 gezeigt werden.</para>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="2-2.svg"></imagedata>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
 
-    <remark>Abbildung 2-3: Der Lebenszyklus eines Objekts in Extbase ist etwas
-    komplexer, da das Objekt auch in der Datenbank gespeichert sein
-    kann.</remark>
+    <para>Теперь, естественно, должно быть понятно, что все объекты нашей
+    программы должны постоянно храниться в памяти — программа будет
+    неповоротливой, и ей не хватит никакой памяти (неговоря о том, что она
+    просто может не запуститься, а объектов не будет совсем). Нужна
+    возможность держать в памяти только необходимые в данный момент для работы
+    объекты. Поэтому, собственно <emphasis>активное</emphasis> состояние
+    включает несколько подсостояний, которые показаны на рисунке 2-3.</para>
 
-    <para>Wenn ein Objekt neu erzeugt wird, so ist es transient, d.h. am Ende
-    des aktuellen Requests entfernt PHP das Objekt aus dem Speicher: Es wird
-    gelöscht. Wenn Sie ein Objekt dauerhaft, d.h. über mehrere Requests hinweg
-    benötigen, so muss aus dem transienten ein <emphasis>persistentes
-    Objekt</emphasis> werden. Dafür sind Repositories zuständig. Diese
-    ermöglichen das permanente Speichern und Wiederauffinden von Objekten
-    anhand von bestimmten Kriterien. Wie nutzt man Repositories nun in der
-    Praxis? Indem Sie ein Objekt zu einem Repository hinzufügen, machen Sie es
-    persistent. Nun ist das Repository für das Objekt verantwortlich. Es
-    kümmert sich automatisch um die Speicherung des Objekts in der Datenbank
-    am Ende eines Requests.</para>
+    <screenshot>
+      <info>
+        <title>Рисунок 2-3: цикл жизни объекта в Extbase несколько более
+        сложен, так как объект может также храниться в базе данных.</title>
+      </info>
 
-    <para>Außerdem können Sie vom Repository wieder eine Objektreferenz
-    bekommen, wenn Sie diese benötigen – das Repository rekonstituiert in
-    diesem Fall das Objekt automatisch aus der Datenbank.</para>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="2-3.svg"></imagedata>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
 
-    <para>Wichtig ist, dass das Objekt logisch weiter existiert, wenn es in
-    der Datenbank gespeichert ist. Es liegt nur aus Performance-Gründen nicht
-    im Hauptspeicher. Es ist sehr wichtig, zwischen dem Erzeugen (английское
-    <emphasis>creation</emphasis>) eines Objekts und der Wiederherstellung des
-    Objekts aus der Datenbank (английское <emphasis>reconstitution</emphasis>)
-    zu unterscheiden. Stellen Sie sich daher vor, dass die Objekte auch in der
-    Datenbank weiterexistieren, nur in einer anderen
-    Repräsentationsform.</para>
+    <para>При изначальном создании объект становится
+    <emphasis>временным</emphasis>, то есть в конце актуального запроса PHP
+    удаляет его из памяти: информация о нем удаляется. Если объект нужен в
+    течение длительного времени, то есть для нескольких запросов, то временный
+    объект должен перейти в <emphasis>постоянный</emphasis>. Для этого
+    используется хранилище. Оно позволяет хранить и искать объекты по
+    определенным критериям. Как же практически использовать хранилища? При
+    добавлении в хранилище, объект становится постоянным. За объект теперь
+    отвечает хранилище. По окончании запроса оно заботиться о его хранении в
+    базе данных.</para>
+
+    <para>Кроме того, при необходимости из хранилища можно получить ссылку на
+    объект, в этом случае хранилище автоматически реконструирует из базы
+    данных помещенный в него объект.</para>
+
+    <para>Важно, что при сохранении объекта в базе данных, он логически
+    продолжает существование. Только по техническим причинам он переносится из
+    основной памяти в базу данных. Важно отличать создание (английское
+    <emphasis>creation</emphasis>) объкта от его воссоздания из базы данных
+    (английское <emphasis>reconstitution</emphasis>). Поэтому нужно
+    расценивать, что объекты продолжают существовать в базе данных, но просто
+    в другой форме.</para>
 
     <tip>
-      <para>Der Konstruktor eines Objekts wird nur bei der Erzeugung des
-      Objekts aufgerufen. Wenn das Objekt aus der Datenbank rekonstituiert
-      wird, wird der Konstruktor nicht aufgerufen, da das Objekt ja logisch
-      weiterexistiert.</para>
+      <para>конструктор объекта вызывается только при изначальном создании.
+      При воссоздании объекта из базы данных конструктор не вызывается, так
+      как логически объект продолжает существовать.</para>
     </tip>
 
-    <para>Sie können ein persistentes Objekt auch in ein transientes Objekt
-    zurückverwandeln, indem Sie es explizit aus dem Repository entfernen. Das
-    bedeutet, dass das Repository für dieses Objekt keine Verantwortung mehr
-    hat. Am Ende eines Requests wird das Objekt dann gelöscht.</para>
+    <para>Объекты могут переходить во временное состояние, когда они удаляются
+    из хранилища. Это значит, что теперь хранилище не отвечает за объект. По
+    окончании запроса такой объект удаляется.</para>
 
-    <para>Extbase nimmt Ihnen bei der Persistierung der Objekte in der
-    Datenbank so viel Arbeit wie möglich ab. Sie kommen nicht mehr mit der
-    Datenbankschicht direkt in Berührung, sondern Extbase kümmert sich um den
-    gesamten Lebenszyklus Ihrer Objekte.</para>
+    <para>Extbase возьмет на себя по возможности большую часть работы по
+    сохранению объектов в базе данных. Они более не общаются напрямую с базой
+    данных, о жизненном цикле объектов заботиться Extbase.</para>
 
-    <para>Nun haben Sie den Lebenszyklus von Objekten im Großen und Ganzen
-    kennengelernt, und wir wollen noch einmal auf zwei Teile des Lebenszyklus
-    eingehen: auf das Erzeugen von Objekten und auf das Rekonstituieren von
-    Objekten.</para>
+    <para>Теперь жизненный цикл объектов должен быть в целом понятен,
+    остановимся на двух его частях: создании и восстановлении объектов.</para>
   </section>
 
   <section>
-    <title>Objekte erzeugen mit Factories</title>
+    <title>Конвеер для создания Объектов</title>
 
-    <para>Jetzt, wo Sie den Lebenszyklus der Objekte genauer kennen, wollen
-    wir uns zunächst einmal mit dem Erzeugen von Objekten beschäftigen. Sie
-    dürfen nur in sich konsistente Aggregates erzeugen. Bei dem Autobeispiel
-    von vorhin heißt das, dass bei der Erstellung des Autos auch sofort die
-    Räder und der Motor erzeugt werden müssen, da sonst das Auto-Objekt in
-    einem inkonsistenten Zustand ist.</para>
+    <para>Теперь перейдем к тонкостям жизненного цикла объектов, сначала
+    разберем первоначальное создание объектов. Они могут создаваться только в
+    определенном порядке. Например, для ранее упомянутой машины это значит,
+    что сначала дожны быть созданы двигатель и колеса, иначе машина будет
+    находиться в подвешенном состоянии.</para>
 
-    <para>Bei einfachen Initialisierungen empfiehlt es sich, den Konstruktor
-    der Aggregate Root für diese Zwecke zu verwenden. Falls ein komplexes
-    Objektnetz mit vielen Querverbindungen aufgebaut werden muss, so sollte
-    man diese Funktionalität in eine eigene Factory auslagern. Dies ist eine
-    Klasse, die komplexe Objekte zusammenbaut und fertig gebaut
-    zurückgibt.</para>
+    <para>При простой инициализации для этого рекомендуется использовать
+    конструктор корня совокупности. Если же создаются сложные сети объектов,
+    со множеством связей, то без собственного <emphasis>конвеера</emphasis> не
+    обойтись. Это класс, собирающий сложные объекты и возвращающий их в
+    готовом виде.</para>
 
-    <para>Im Folgenden sehen Sie exemplarisch die vollständige Initialisierung
-    des Autos im Konstruktor der Aggregate Root:</para>
+    <para>Ниже приведена инициализация автомобиля в виде конструктора корня
+    совокупности:</para>
 
     <programlisting>&lt;?php
 class Car {
@@ -526,53 +532,48 @@ class Car {
 }
 ?&gt;</programlisting>
 
-    <para>Wir haben der Einfachheit halber hier die Basisklassen und die
-    ausführlichen Klassennamen weggelassen, um das Wesentliche zu zeigen: Da
-    beim Erstellen des Objekts der Konstruktor ausgeführt wird, wird
-    <emphasis>immer</emphasis> ein konsistentes Objekt gebaut.</para>
+    <para>Для упрощения здесь пропущены базовый класс и полное название
+    класса, фокус лежит на действительно важном: так как при создании объекта
+    всегда вызывается конструктор, то создается
+    <emphasis>правильный</emphasis> объект.</para>
 
     <tip>
-      <para>In TYPO3 erzeugen Sie Klassen für gewöhnlich nicht mit new wie im
-      oberen Beispiel, sondern <methodname>mit
-      t3lib_div::makeInstance(ClassName)</methodname>. Im oben stehenden
-      Beispiel wollten wir uns nur auf das Wesentliche konzentrieren, daher
-      haben wir hier new verwendet.</para>
+      <para>в TYPO3 классы, по большей части, создаютя не через
+      <classname>new</classname>, как в приведенном выше примере, а
+      посредством <methodname>t3lib_div::makeInstance(ClassName)</methodname>.
+      В приведенном примере мы хотели показать суть, поэтому и было
+      использовано <emphasis>new</emphasis>.</para>
     </tip>
   </section>
 
   <section>
-    <title>Objekte mit Repositories rekonstituieren</title>
+    <title>Восстановление объектов из хранилища</title>
 
-    <para>Ein Repository können Sie sich wie eine Bücherei vorstellen: Sie
-    gehen zum Ausleihschalter und fragen nach einem bestimmten Buch (anhand
-    bestimmter Kriterien wie dem Titel oder dem Autor). Falls das Buch
-    vorhanden ist, so besorgt der Bibliothekar es für Sie und gibt es Ihnen.
-    Sie müssen nicht wissen, in welchem Regal das Buch steht oder ob es
-    vielleicht sogar aus einer anderen Bücherei für Sie angeliefert wird. Nun
-    können Sie das Buch lesen und finden dabei vielleicht einen Tippfehler und
-    korrigieren ihn mit Bleistift. Nach Ablauf der Ausleihfrist müssen Sie das
-    Buch wieder zurückgeben, und dann kann die nächste Person es ausleihen –
-    natürlich stehen Ihre Korrekturen noch mit im Buch.</para>
+    <para>Хранилище можно представить в виде библиотеки: сначала у
+    библиотекаря справляются о нужной книге (используя определенные критерии —
+    заголовок или автора). Если книга имеется в наличии, библиотекарь выдает
+    ее на руки. Вам не нужно знать, на какой полке находится книга, и каким
+    образом ее доставят (может быть и из одного из архивов библиотеки). Теперь
+    Вы читаете книгу и, найдя ошибку, исправляете ее карандашом. По окончании
+    определенного времени, Вы возвращаете книгу в библиотеку, а следующий
+    читатель находит в ней сделанные Вами исправления.</para>
 
-    <para>Wie kommen nun neue Bücher in die Bibliothek? Sie können
-    beispielsweise Bücher, die Sie gelesen haben, der Bibliothek spenden.
-    Dabei wird ein Bibliothekar den Titel des Buchs, den Autor und einige
-    Schlagwörter in die zentrale Bibliotheksdatenbank schreiben, so dass das
-    Buch von anderen Nutzern gefunden und ausgeliehen werden kann. Umgekehrt
-    wird ein Buch, wenn es alt und kaputt ist, aus dem Bücherbestand
-    aussortiert. Dabei muss natürlich der Eintrag in der Bibliotheksdatenbank
-    gelöscht werden, damit das Buch nicht mehr auffindbar ist.</para>
+    <para>Как книги попадают в библиотеку? Можно пожертвовать библиотеке уже
+    прочтенные книги. При этом библиотекарь в специальный бланк занесет
+    название книги, автора и другие необходимые данные, так чтобы книгу можно
+    было найти и выдать другим читателям. С другой стороны, старые и
+    испорченные книги исключаются из библиотечного фонда. При этом необходимо
+    удалить и сведения о них в бланках библиотеки.</para>
 
-    <para>Mit einem Repository verhält es sich ähnlich wie mit einer Bücherei.
-    Mit einem Repository lassen sich persistente Objekte eines bestimmten Typs
-    auffinden. Wenn Sie beispielsweise an das
-    <emphasis>BookRepository</emphasis> die Abfrage
-    <emphasis>findByTitle('Domain-Driven Design')</emphasis> senden, so
-    bekommen Sie als Antwort alle Buch-Objekte, die Domain-Driven Design als
-    Titel besitzen. Wenn Sie nun ein Buch-Objekt verändern (beispielsweise
-    indem Sie einen Tippfehler im Inhaltsverzeichnis korrigieren), werden
-    diese Änderungen automatisch gespeichert, und beim nächsten Suchvorgang
-    wird das geänderte Buch-Objekt zurückgegeben.</para>
+    <para>Хранилище схоже с библиотекой. В хранилище можно искать постоянные
+    объекты определенного типа. Если послать, к примеру, в
+    <emphasis>BookRepository</emphasis> запрос
+    <emphasis>findByTitle('Domain-Driven Design')</emphasis>, то в качестве
+    ответа будут получены все объекты, в заголовке которых имеется
+    Domain-Driven Design. Если теперь изменить объект-книгу (например исправят
+    опечатку в названии), то изменения будут автоматически сохранены, а при
+    следующей операции поиска будут возвращены объекты, с учетом внесенных
+    исправлений.</para>
 
     <para>Wie können Sie nun einem Repository ein neues Objekt übergeben, so
     dass es dafür verantwortlich wird? Dafür besitzt es die Methode

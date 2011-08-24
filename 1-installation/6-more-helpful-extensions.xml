@@ -42,7 +42,9 @@
     него.</para>
 
     <para>Проектировщик расширений можно найти на сайте разработки <link
-    xl:href="???">http://forge.typo3.org/projects/show/extension-extension_builder</link>.</para>
+    xl:href="???">http://forge.typo3.org/projects/show/extension-extension_builder</link>,
+    и в качестве расширения в TER (ключь extension_builder) <link
+    xl:href="???">https://typo3.org/extensions/repository/view/extension_builder/current/</link>.</para>
   </section>
 
   <section>
