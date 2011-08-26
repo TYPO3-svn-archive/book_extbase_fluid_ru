@@ -28,6 +28,7 @@ Ausnahme = Exception = Исключение
 backend = внутренний интерфейс
 Controller = Controller = Диспетчер или контроллер
 CMS = система управления информации на сайте
+Dependency Injection = Внедрение зависимостей
 Domänenmodell = Domain Model = Модель предметной области
 	Variante eines Models das dem Domain-Driven Design Prinzipien entspricht
 Domain-Driven Design (DDD) = Domain-Driven Design = Предметно ориентированное проектирование
@@ -56,6 +57,7 @@ Interface = Interface
 Schnittstelle = Interface
 Lazy Loading = Lazy Loading
 makes sure = гарантировать
+Mock-Objekte = Фиктивные объекты
 Modell = Model = Модеь
 Model-View-Controller = Model-View-Controller = Модель-Представление-Диспетчер
 	Komponente aus dem MVC Pattern

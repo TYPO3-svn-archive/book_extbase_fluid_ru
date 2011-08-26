@@ -6,7 +6,515 @@
          xmlns:svg="http://www.w3.org/2000/svg"
          xmlns:ns="http://docbook.org/ns/docbook"
          xmlns:mathml="http://www.w3.org/1998/Math/MathML">
-  <title>Test-Driven Development</title>
+  <title>Разработка через тестирование</title>
 
-  <para>Blah Blah Blah Blah</para>
+  <para>Jeder Entwickler muss seine Software testen – ein für viele Entwickler
+  leidiges, doch unvermeidbares Thema. Wie laufen Tests in der klassischen
+  Softwareentwicklung normalerweise ab? Programmierer gehen meist so vor, dass
+  sie einen Testfall konstruieren, indem sie gewisse Daten in die Datenbank
+  eintragen, kleine Testprogramme schreiben oder die URLParameter im Browser
+  manipulieren. Oft werden sogar mehrere kleinere Funktionalitäten «auf einen
+  Rutsch» eingebaut, bevor sie getestet werden (рисунок 2-7). Danach werden
+  diese Schritte in periodischen Abständen so lange wiederholt, bis die
+  gewünschte Funktion implementiert ist. Anschließend geht es dann weiter mit
+  der nächsten Funktion.</para>
+
+  <para>Es gibt bei dieser Vorgehensweise aber ein Problem: Die Tests werden
+  nicht systematisch, sondern punktuell ausgeführt. Dadurch baut man unbewusst
+  Fehler in bestehende Programmteile ein. Außerdem wird bei einem Test nicht
+  nur ein kleines Codestück getestet, sondern oft ein komplexer
+  Programmablauf.</para>
+
+  <screenshot>
+    <info>
+      <title>Рисунок 2-7: при традиционной разработке программного обеспечения
+      существует четкое разделение между фазами разработки и
+      тестирования.</title>
+    </info>
+
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="2-7.svg"></imagedata>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+
+  <para>Durch Test-Driven Development (TDD) sollen solche Probleme behoben
+  werden. Tests werden schnell ausführbar und reproduzierbar. Dies steigert
+  für den Entwickler die Motivation, die Tests regelmäßig auszuführen und
+  damit auch schneller Rückmeldung zu bekommen, ob aus Versehen Fehler in
+  bestehende Funktionalität eingebaut wurden.</para>
+
+  <sidebar>
+    <title>Erfahrungsbericht</title>
+
+    <para>Als Robert Lemke und andere Kernentwickler für FLOW3 vorgeschlagen
+    haben, die Entwicklung Test-driven zu machen, war ich etwas skeptisch.
+    Test-Driven Development klang nach einem netten Konzept, jedoch wusste ich
+    nicht, wie man eine Anwendung und ein Framework dieser Größe sinnvoll
+    testen könnte. Auch im Internet waren oft nur sehr einfache, akademische
+    Beispiele zu finden. Bis dahin hatte ich nur einen theoretischen Überblick
+    über TDD.</para>
+
+    <para>Selbst habe ich zu testen angefangen, als die Fluid-Entwicklung
+    begann. Die ersten Tests waren keine Unit- sondern Integrationstests,
+    d.h., sie haben Fluid aus Benutzersicht getestet: Es wurden kleine
+    Template-Snippets geparst und mit den Erwartungen verglichen.</para>
+
+    <para>Für den ersten Test habe ich einige Zeit gebraucht – es hat sich
+    seltsam angefühlt, Dinge zu testen, die noch nicht geschrieben waren.
+    Nachdem der erste Test jedoch geschrieben war und dieser auch erfolgreich
+    durchgelaufen ist, konnte ich dank der Tests extrem schnelle
+    Entwicklungszyklen durchführen.</para>
+
+    <para>Durch testgetriebene Entwicklung konnte ich auf einer Zugfahrt
+    innerhalb von einer Stunde den Kern von Fluid komplett umstrukturieren –
+    dafür hätte ich ohne Tests sicher mehrere Tage gebraucht (bis am Ende
+    wieder alles funktioniert). Besonders das sofortige Feedback habe ich sehr
+    zu schätzen gelernt: Man klickt auf einen Button und bekommt nach wenigen
+    Sekunden ein Feedback.</para>
+
+    <para>Seitdem bin ich von TDD »infiziert«, lernte Mock- und Stub-Objekte
+    kennen, und heute will ich es nicht mehr missen. (In diesem Kapitel werden
+    Sie eine Einführung in diese Konzepte erhalten.) Wenn Sie TDD lernen
+    wollen, springen Sie ins kalte Wasser, und versuchen Sie es bei Ihrem
+    nächsten Projekt. Bis der erste Unit-Test fertig ist, dauert es eine
+    Weile, doch danach wird es spürbar schneller gehen.</para>
+
+    <para>Sebastian Kurfürst</para>
+  </sidebar>
+
+  <section>
+    <title>Семь раз отмерь, один — отрежь</title>
+
+    <para>Das Ziel des Test-Driven Development ist es, Tests explizit und
+    automatisch wiederholbar zu machen. Der Arbeitsablauf ist, anders als beim
+    herkömmlichen Programmieren, in sehr kleine Iterationen unterteilt.</para>
+
+    <para>Beim Test-Driven Development schreiben Sie die Unit-Tests für Ihre
+    Features, <emphasis>bevor</emphasis> Sie die Features selbst schreiben.
+    Unit-Tests sind automatisch wiederholbare Tests von Methoden, Klassen und
+    kleinen Programmeinheiten. Schon während Sie die Tests schreiben, sollten
+    Sie sich ausführlich über die gewünschte Funktionalität Gedanken
+    machen.</para>
+
+    <para>Wenn Sie dann Ihre Tests ausführen, schlagen diese natürlich fehl,
+    denn die getestete Funktionalität ist ja noch gar nicht implementiert. Im
+    nächsten Schritt schreiben Sie den minimal notwendigen Code, der notwendig
+    ist, um den Test erfolgreich durchlaufen zu lassen (siehe Abbildung 2-8).
+    Ein erneuter Test läuft nun problemlos durch. Als Nächstes sollten Sie
+    beginnen, darüber nachzudenken, welche Funktionalität noch fehlt, denn Sie
+    haben bisher nur den minimal notwendigen Code geschrieben. Wenn Sie
+    wissen, was Sie nun implementieren möchten, schreiben Sie einen neuen
+    Unit-Test, mit dem Sie diese Funktionalität testen können. Auf diese Weise
+    beginnt der Prozess des Testens und Programmierens immer wieder von
+    Neuem.</para>
+
+    <screenshot>
+      <info>
+        <title>Рисунок 2-8: в процессе разработки через тестирование, фазы
+        тестирования и разработки зачастую чередуются.</title>
+      </info>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="2-8.svg"></imagedata>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
+
+    <para>Der Vorteil dieser Methode liegt auf der Hand: Da Sie durch das
+    Schreiben von Unit- Tests gezwungen sind, große Features in kleine
+    Häppchen zu zerlegen, können Sie sich während der Umsetzungsphase voll auf
+    die aktuell zu erstellende Funktionalität konzentrieren. Außerdem sorgt
+    der klare Perspektivenwechsel zwischen Entwickler und Nutzer einer Klasse
+    für besseren Code, der eher den Anforderungen genügt.</para>
+
+    <para>TDD ist besonders beim Design von APIs sinnvoll: Durch das Testen
+    nehmen Sie als Programmierer die Perspektive des Nutzers der API ein und
+    können so Unsauberkeiten, Inkonsistenzen oder fehlende Funktionalität viel
+    schneller identifizieren.</para>
+
+    <para>Des Weiteren sind die Unit-Tests auch eine Art Sicherheitsnetz gegen
+    unerwünschtes Verhalten. Falls Sie aus Versehen beim Programmieren eine
+    Funktionalität zerstören, bekommen Sie durch die Unit-Tests direktes
+    Feedback und können den Fehler sofort korrigieren. Somit wird auch die
+    Chance von Regressionen (d.h. die Produktion neuer Fehler beim Korrigieren
+    eines bekannten Fehlers) weiter vermindert.</para>
+
+    <para>Laut einigen Studien sind Programmierer, die TDD praktizieren,
+    gleich schnell oder sogar schneller als Programmierer, die im
+    konventionellen Stil coden, obwohl Erstere nicht nur die Implementierung,
+    sondern auch die dazugehörigen Tests schreiben müssen. Darüber hinaus ist
+    die Codequalität beim Test-Driven Development deutlich höher als bei
+    konventioneller Programmierung.</para>
+  </section>
+
+  <section>
+    <title>Пример</title>
+
+    <para>Nehmen wir einmal an, wir wollen für einen Online-Shop einen
+    <classname>Customer</classname> (Kunden) modellieren. Dieser besitzt einen
+    Namen, der im Konstruktor übergeben wird. Durch die Tests wollen wir
+    sicherstellen, dass der Name korrekt im Objekt gespeichert wird.</para>
+
+    <para>Als Erstes müssen wir die phpunit-Extension aus dem TYPO3 Extension
+    Repository (TER) installieren, da wir die Tests damit ausführen werden.
+    Dann gehen wir in unsere eigene Extension und erstellen, falls der Ordner
+    noch nicht existiert, im Hauptordner der Extension einen Ordner
+    <filename>Tests/Unit/</filename>. Dieser wird später all unsere Unit-Tests
+    enthalten.</para>
+
+    <para>Unser zu erstellendes Customer-Objekt wird sich, da es zum
+    Domänenmodell unserer Extension gehört, unter
+    <filename>Classes/Domain/Model/Customer.php</filename> finden. Analog dazu
+    erzeugen wir die Testklasse in der Datei
+    <filename>Tests/Unit/Domain/Model/CustomerTest.php</filename>. Erstellen
+    wir nun einen minimalen Testfall, anhand dessen wir uns mit PHPUnit
+    vertraut machen:</para>
+
+    <programlisting>&lt;?php
+class Tx_Shop_Domain_Model_CustomerTest extends Tx_Extbase_BaseTestCase {
+    /**
+    * @test
+    */
+    public function nameCanBeSetInsideTheConstructor() {
+        $this-&gt;fail('Not yet implemented.');
+    }
+}
+?&gt;</programlisting>
+
+    <para>Alle unsere Testklassen sind nach demselben Namensschema wie normale
+    Klassen benannt, und sie müssen von
+    <classname>Tx_Extbase_BaseTestCase</classname> erben. Eine Testklasse kann
+    viele Testmethoden enthalten. Diese müssen public sein und die Annotation
+    <varname>@test</varname> in ihrem <classname>PHPDOC</classname>-Block
+    enthalten, damit sie ausgeführt werden können. Beachten Sie, dass bereits
+    der Name der Testmethode deutlich machen sollte, welche Erwartungen der
+    Test erfüllen soll. Nun können wir den Test das erste Mal ausführen: Gehen
+    Sie dazu im TYPO3- Backend auf das Modul <emphasis>PHPUnit</emphasis>
+    (unterhalb von <emphasis>Инструменты администрирования</emphasis>). Dann
+    können Sie Ihre Extension auswählen und auf <emphasis>Run all
+    tests</emphasis> klicken. Sie sollten nun, wie in Abbildung 2-9 gezeigt,
+    einen (gelben) Balken sehen und die Fehlermeldung Not yet implemented
+    dazu. Da Sie sehr viel mit der PHPUnit-Umgebung arbeiten werden, sollten
+    Sie sich mit dieser ein wenig vertraut machen – probieren Sie einmal, die
+    Tests für <emphasis>extbase</emphasis> oder <emphasis>fluid</emphasis>
+    auszuführen, und probieren Sie die verschiedenen Darstellungsmöglichkeiten
+    aus. So können Sie sich z.B. alle Tests oder nur fehlgeschlagene Tests
+    anzeigen lassen.</para>
+
+    <para>Nun, da wir gesehen haben, dass unser Testfall ausgeführt wird,
+    können wir unseren ersten sinnvollen Testfall schreiben. Er soll testen,
+    ob ein im Konstruktor angegebener Name auch wieder ausgelesen werden
+    kann:</para>
+
+    <programlisting>&lt;?php
+class Tx_Shop_Domain_Model_CustomerTest extends Tx_Extbase_BaseTestCase {
+    /**
+    * @test
+    */
+    public function nameCanBeSetInsideTheConstructor() {
+        $name = 'Sebastian Kurfürst';
+        $customer = new Tx_Shop_Domain_Model_Customer($name);
+        $this-&gt;assertEquals($name, $customer-&gt;getName());
+    }
+}
+?&gt;</programlisting>
+
+    <screenshot>
+      <info>
+        <title>Рисунок 2-9: запуск тестов, из внутреннего интерфейса TYPO3
+        можно с легкостью запустить модульные тесты.</title>
+      </info>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="2-9.svg"></imagedata>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
+
+    <para>Wenn wir diesen Testfall nun ausführen, wird uns ein <emphasis>fatal
+    error</emphasis> von PHP angezeigt, da die Klasse, die wir testen wollen,
+    noch nicht existiert. Nun wechseln wir unsere Rolle: Wir sind nun nicht
+    mehr der Nutzer der Klasse, sondern wir sind der Entwickler, der die
+    Klasse implementieren soll. Als Erstes erstellen wir in der Datei
+    <filename>Classes/Domain/Model/Customer.php</filename> eine leere Klasse
+    mit den benötigten Methoden, um den <emphasis>fatal error</emphasis>
+    loszuwerden:</para>
+
+    <programlisting>&lt;?php
+class Tx_Shop_Domain_Model_Customer extends Tx_Extbase_DomainObject_AbstractEntity {
+    public function __construct($name) {
+    }
+    
+    public function getName() {
+    }
+}
+?&gt;</programlisting>
+
+    <para>Wenn wir nun die Testsuite erneut ausführen, sollte zwar kein
+    <emphasis>fatal error</emphasis> mehr vorliegen, aber stattdessen schlagen
+    unsere Unit-Tests fehl (da <classname>getName()</classname> den falschen
+    Rückgabewert liefert).</para>
+
+    <para>Nun können wir uns also, motiviert davon, den roten Balken möglichst
+    schnell grün werden zu lassen, an die Implementierung wagen:</para>
+
+    <programlisting>&lt;?php
+class Tx_Shop_Domain_Model_Customer extends Tx_Extbase_DomainObject_AbstractEntity {
+    public function __construct($name) {
+    }
+
+    public function getName() {
+        return 'Sebastian Kurfürst';
+    }
+}
+?&gt;</programlisting>
+
+    <para>Nun sollte der Unit-Test problemlos durchlaufen, da der erwartete
+    Wert ausgegeben wird. Wir sind natürlich noch nicht zufrieden –
+    schließlich wird jetzt immer «Sebastian Kurfürst» als Name zurückgegeben.
+    Nun schließt sich eine Refactoring-Phase an: Wir räumen den Code auf und
+    achten allerdings immer darauf, dass die Unit-Tests weiterhin erfolgreich
+    durchlaufen. Nach einigen Iterationen kommen wir bei folgendem Code
+    an:</para>
+
+    <programlisting>&lt;?php
+class Tx_Shop_Domain_Model_Customer extends Tx_Extbase_DomainObject_AbstractEntity {
+    /**
+    * @var string
+    */
+    protected $name;
+    /**
+    * Constructor. Sets the name of the customer.
+    *
+    * @param string $name Name of the customer
+    */
+    public function __construct($name) {
+        $this-&gt;name = $name;
+    }
+    
+    /**
+    * Get the name of the customer
+    *
+    * @return string name of the customer
+    */
+    public function getName() {
+        return $this-&gt;name;
+    }
+}
+?&gt;</programlisting>
+
+    <para>Die Unit-Tests laufen immer noch durch, und wir haben die gewünschte
+    Funktionalität erreicht. Nun können wir erneut von der Rolle des
+    Entwicklers in die Rolle des Nutzers der Klasse schlüpfen und über weitere
+    Testfälle zusätzliche Funktionalitäten spezifizieren.</para>
+  </section>
+
+  <section>
+    <title>Тестирование отдельных элементов</title>
+
+    <para>Unser erstes Beispiel für Unit-Tests war sehr einfach. In diesem
+    Abschnitt zeigen wir Ihnen, wie Sie Klassen testen können, die von anderen
+    Klassen abhängen. Nehmen wir einmal an, wir haben ein Programm, das
+    Log-Meldungen schreibt, die anschließend per E-Mail versendet werden
+    sollen. Dafür existiert eine Klasse EmailLogger, die die Log-Daten per
+    E-Mail versendet. Diese Klasse implementiert das potenziell komplexe Ziel
+    der E-Mail- Versendung nicht selbst, sondern nutzt dafür eine andere
+    Klasse, EmailService, die je nach Konfiguration z.B. SMTP-Server oder die
+    mail()-Funktion von PHP nutzt. Dies ist im UML-Diagramm in Abbildung 2-10
+    dargestellt: Die Klasse <classname>EmailLogger</classname> besitzt eine
+    Referenz auf den EmailService.</para>
+
+    <screenshot>
+      <info>
+        <title>Рисунок 2-10: EmailLogger используется для отправки электронной
+        почты через EmailService.</title>
+      </info>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="2-10.svg"></imagedata>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
+
+    <para>Wir wollen nun die Klasse EmailLogger testen, ohne dafür den
+    EmailService zu verwenden – wir wollen ja nicht immer bei jeder
+    Testausführung echte E-Mails schicken. Um dieses Ziel zu erreichen,
+    benötigen wir zwei Teilbausteine: <emphasis>Внедрение
+    зависимостей</emphasis> und die Verwendung von <emphasis>Фиктивные
+    объекты</emphasis>. Beide Konzepte werden wir im Folgenden
+    vorstellen.</para>
+
+    <section>
+      <title>Внедрение зависимостей</title>
+
+      <para>Oft sieht man Klassen, die nach der folgenden Struktur aufgebaut
+      sind:</para>
+
+      <programlisting>class EmailLogger {
+    protected $emailService;
+    public function __construct() {
+        $this-&gt;emailService = new EmailService();
+    }
+}</programlisting>
+
+      <para>Der <classname>EmailLogger</classname> benötigt den
+      <classname>EmailService</classname>, um vollständig zu funktionieren,
+      und instanziiert diesen daher im Konstruktor. Dies allerdings koppelt
+      diese beiden Klassen stark aneinander: Wenn Sie zum Testen eine neue
+      Instanz der Klasse <classname>EmailLogger</classname> erstellen,
+      bekommen Sie automatisch auch eine Instanz des EmailService und würden
+      diesen implizit testen. Außerdem ist es nicht möglich, den EmailService
+      zur Laufzeit auszutauschen, ohne den Quellcode zu verändern.</para>
+
+      <para>Eine Lösung aus diesem Dilemma bietet die Verwendung von
+      <emphasis>Внедрение зависимостей</emphasis>: Hier instanziiert eine
+      Klasse ihre Abhängigkeiten nicht selbst, sondern bekommt sie von außen
+      übergeben. Der <classname>EmailLogger</classname> bekommt eine neue
+      Methode injectEmailService, die den <classname>EmailService</classname>
+      in der Klasse setzt. Dies sieht dann z.B. so aus:</para>
+
+      <programlisting>class EmailLogger {
+    protected $emailService;
+    public function injectEmailService(EmailService $emailService) {
+        $this-&gt;emailService = $emailService;
+    }
+}</programlisting>
+
+      <para>Extbase bietet momentan noch keinen Framework-Support für
+      Dependency Injection, daher empfehlen wir, die Instanziierung von
+      Klassen und deren Dependency Injection in entsprechende Factories
+      auszulagern. Eine mögliche Factory sieht dann folgendermaßen aus:</para>
+
+      <programlisting>class EmailLoggerFactory {
+    public static function getEmailLogger() {
+        $emailLogger = new EmailLogger();
+        $emailService = new EmailService();
+        $emailLogger-&gt;injectEmailService($emailService);
+        return $emailLogger;
+    }
+}</programlisting>
+
+      <note>
+        <para>FLOW3 bietet erstklassigen Dependency Injection-Support. Wenn
+        Sie später Ihre Extensions auf FLOW3 migrieren, wird dieser Teil
+        bedeutend einfacher.</para>
+      </note>
+
+      <para>Wir können nun in einem Testfall von außen steuern, welchen
+      <classname>EmailService</classname> der
+      <classname>EmailLogger</classname> bekommt. Wir könnten beispielsweise
+      einen <classname>TestEmailService</classname> schreiben, der einfach
+      nichts tut (um einen <emphasis>fatal error</emphasis> zu vermeiden),
+      oder wir nutzen die im folgenden Abschnitt gezeigten Фиктивный
+      объект.</para>
+    </section>
+
+    <section>
+      <title>Фиктивные объекты</title>
+
+      <para>Durch die Verwendung von Dependency Injection können wir den
+      <classname>EmailLogger</classname> ohne seine Abhängigkeiten
+      instanziieren. Da der <classname>EmailLogger</classname> zum Arbeiten
+      jedoch einen EmailService benötigt, müssen wir diesen in den Tests
+      bereitstellen.</para>
+
+      <para>Aber mehr noch: Wir wollen auch sicherstellen, dass der
+      <classname>EmailLogger</classname> <emphasis>wirklich</emphasis> die
+      Methode zum Senden der E-Mail aufruft! Hierfür können wir Mocks
+      verwenden. Mocks sind gewissermaßen Attrappen» für reale Objekte, die
+      das Verhalten der Objekte emulieren. Sie eignen sich auch dazu,
+      bestimmte Aufrufe oder Parameter sicherzustellen.</para>
+
+      <para>Ein Test, der den EmailLogger testet, könnte folgendermaßen
+      aussehen:</para>
+
+      <programlisting>1 class EmailLoggerTest extends Tx_Extbase_BaseTestCase {
+2   /**
+3   * @test
+4   */
+5   public function loggerSendsEmail() {
+6       $message = 'This is a log message';
+7       $emailLogger = new EmailLogger();
+8       $emailService = $this-&gt;getMock('EmailService');
+9       $emailLogger-&gt;injectEmailService($emailService);
+a       $emailService-&gt;expects($this-&gt;once())-&gt;method('send')-&gt;
+        with('logging@domain.local', 'Log Message', $message);
+b       $emailLogger-&gt;log($message);
+c   }
+d }</programlisting>
+
+      <para>Der Ablauf im Detail: In Zeile 6 wird die Variable
+      <constant>$message</constant> mit unserer Dummy-Nachricht gefüllt, die
+      wir loggen wollen. Diese Nachricht benötigen wir noch mehrfach, daher
+      ist es sinnvoll, sie in einer Variable zu speichern.</para>
+
+      <para>In den Zeilen 7 bis 9 instanziieren wir den
+      <classname>EmailLogger</classname> und injizieren ihm ein Mock-Objekt
+      des <classname>EmailService</classname>.</para>
+
+      <para>In Zeile 10 passiert das eigentlich Spannende: Wir erwarten, dass
+      es im <classname>EmailService</classname> zu einem einmaligen Aufruf der
+      Methode <methodname>send</methodname> kommt, und zwar mit den Parametern
+      <constant>'logging@domain.local'</constant>, <constant>'Log
+      Message'</constant>, <constant>$message</constant>.</para>
+
+      <para>Nachdem wir unsere Erwartungen spezifiziert haben, lassen wir in
+      Zeile 11 die Nachicht vom <classname>EmailLogger</classname>
+      loggen.</para>
+
+      <para>Am Ende des Testcases werden automatisch unsere Erwartungen
+      überprüft. Falls nun die Methode send nicht genau einmal oder mit
+      falschen Parameterwerten aufgerufen wurde, wird der Test mit einer
+      detaillierten Meldung fehlschlagen.</para>
+
+      <para>Was haben wir nun erreicht? Wir haben den
+      <classname>EmailLogger</classname> ohne die Verwendung des
+      <classname>EmailService</classname> getestet und trotzdem
+      sichergestellt, dass der <classname>EmailService</classname> mit den
+      korrekten Parametern aufgerufen wird. Außerdem mussten wir keine eigene
+      «Platzhalter»-Klasse für den <classname>EmailService</classname>
+      schreiben, da wie die Mock-Funktionalität von PHPUnit verwendet
+      haben.</para>
+
+      <note>
+        <para>Man muss sich an die Schreibweise für Mock-Objekte gewöhnen; sie
+        wird Ihnen aber mit der Zeit in Fleisch und Blut übergehen.</para>
+      </note>
+    </section>
+  </section>
+
+  <section>
+    <title>Резюме</title>
+
+    <para>In diesem Kapitel haben Sie die wichtigsten Basiskonzepte von
+    Extbase kennengelernt. Zu Beginn wurden Ihre Kenntnisse in
+    objektorientierter Programmierung aufgefrischt, so dass Sie nun eine gute
+    Wissensbasis haben, um den Programmierstil von Extbase zu
+    verstehen.</para>
+
+    <para>Dann haben Sie Domain-Driven Design kennengelernt, das die
+    normalerweise eher unsystematisch ablaufende Modellerstellung strukturiert
+    und die für die Domäne wichtigen Konzepte in den Mittelpunkt stellt. Da
+    Sie zusammen mit dem Endkunden über die Domänenlogik diskutieren, werden
+    Missverständnisse zwischen dem Kunden und Ihnen als Entwickler schneller
+    ausgeräumt.</para>
+
+    <para>Danach haben wir uns das Model-View-Controller-Entwurfsmuster
+    angeschaut, das Anwendungen in das Datenmodell und die Nutzerinteraktion
+    unterteilt.</para>
+
+    <para>Domain-Driven Design und die MVC-Architektur bilden das konzeptuelle
+    Rückgrat von Extbase. Nun haben wir uns dem Test-Driven Development als
+    Entwicklungsparadigma zugewandt, das die Wahrscheinlichkeit von Fehlern in
+    Code dramatisch reduziert und das tägliche Arbeiten des Entwicklers weiter
+    strukturiert.</para>
+
+    <para>Mit diesen Grundkonzepten sind Sie für die weiteren Kapitel gut
+    gerüstet. Tauchen Sie mit uns nun in die Tiefen von Extbase ein!</para>
+  </section>
 </section>

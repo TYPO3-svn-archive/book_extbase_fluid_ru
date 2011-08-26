@@ -6,181 +6,252 @@
          xmlns:svg="http://www.w3.org/2000/svg"
          xmlns:ns="http://docbook.org/ns/docbook"
          xmlns:mathml="http://www.w3.org/1998/Math/MathML">
-  <title>Model-View-Controller in Extbase</title>
+  <title>Модель-Отображение-Диспетчер в Extbase</title>
 
-	<para>Object-oriented programming and Domain-Driven Design specify a structure 
-	for our Extension on different levels. Object-oriented programming provides us with 
-	the basic building blocks of software development: Objects as combination of data 
-	and associated methods. Domain Driven Design provides us tools for creating a Model 
-	that represents the real world rules in Software. However, we still lack a component 
-	that specifies how to react on user requests and what functionality the application 
-	will ultimately have. The Model View Controller Paradigm provides us exactly that. 
-	It ensures a clean separation of the Domain Model from the View. This clean Separation 
-	is the foundation of the smooth interaction between Extbase and Fluid</para>
-	
-	<para>The Model-View-Controller design pattern is the infrastructure that we build our 
-	application on. It provides us a rough <emphasis>roadmap</emphasis> and the separation 
-	of the presentation logic from the Model.</para>
-	
-	<para>The MVC pattern divides our application into three rough layers: the 
-	<emphasis>Model</emphasis>, which implements the Domain Model including the domain logic, 
-	the <emphasis>controller</emphasis>, which controls the flow of the application, 
-	and the <emphasis>view</emphasis>, which prepares and outputs the data to the user 
-	(see Figure 2-4).</para>
-	
-	<para>The lowest layer, the <emphasis>Model</emphasis> encapsulates the application 
-	logic and data as well as the according access and storage logic. Domain Driven Design 
-	divides this layer even further. In a Extbase extension you can find the classes for this 
-	layer in the folder <emphasis>Classes/Domain</emphasis>.</para>
-	
-	<para>The Controller presents externally ( that is: directly callable by the user ) 
-	functionality. It coordinates the interaction of Model and View to dispatch the 
-	actual request. It fetches Data from the Model and hands it to the View for presentation.
-	Important: The Controller only <emphasis>coordinates</emphasis>, the actual functionality 
-	is usually implemented in the <emphasis>Model</emphasis>. Because the Controller is 
-	difficult to test, it should stay as slim as possible.</para>
-	
-	<para>The top layer, the <emphasis>View</emphasis> encapsulates the whole 
-	Presentation Logic and everything related with the presentation of data.</para>
-	
-	<remark>is this the right markup for that box?</remark>
-	<sidebar>
-		<title>Firsthand Report</title>
-		<para>About 2 years ago i started to deal with the MVC-Paradigm. 
-		I consulted various sources and tried to get an idea how i could fit my extensions 
-		to this structure. At this point i failed due to the enormous variations of MVC. 
-		No source was able to help me structure my usual, plugin oriented code. It was clear
-		to me that Database Queries belong to the Model and the template is part of the View. 
-		But where should subject-oriented Source be held? And how can you prevent that 
-		Objects of the Model mix SQL-Code, Domain specific Parts and persistence methods again?
-		All in all, getting started with MVC demanded a high frustration tolerance. Finally, 
-		Domain Driven Design ( DDD ) showed me a way to the MVC Paradigm, because DDD enables 
-		a clean separation of concerns inside the Model that finally slims the View and 
-		Controller</para>
-		<para>With the further separation of the Model Layer into the Domain Model 
-		( the heart of the application ), the Repositories ( as database layer ) and the 
-		Validators ( which contain the invariants of the Model ) the MVC Scheme is easier 
-		to implement and understand.
-		- Jochen Rau</para>
-	</sidebar>
-	
-	<section>
-		<title>The Interaction of Model, View and Controller</title>
-		<para>The Functionality of many Applications can be split into modules. This modules can 
-		be further differentiated. The Functionality of a Blog e.g. can be split as follows:
-		</para>
-		<para>
-			Functionality related to Blog Posts:
-			<itemizedlist>
-				<listitem><para>List View of all Blog-Posts</para></listitem>
-				<listitem><para>Create a Blog-Post</para></listitem>
-				<listitem><para>Show a Blog-Post</para></listitem>
-				<listitem><para>Edit a Blog-Post</para></listitem>
-				<listitem><para>Delete a Blog-Post</para></listitem>
-			</itemizedlist>
-			Functionality related to Comments:
-			<itemizedlist>
-				<listitem><para>Create Comments</para></listitem>
-				<listitem><para>Delete Comments</para></listitem>
-			</itemizedlist>
-		</para>
-		<para>These Modules are implemented in a Controller. Inside of this Controller there is a 
-		<emphasis>Action</emphasis> for every single function. In the above example we have a 
-		<emphasis>PostController</emphasis>, which implements the Actions to create, show, edit 
-		and delete Posts. In Addition there is a <emphasis>CommentController</emphasis>, which 
-		implements the Actions to create and delete Comments.</para>
-		
-		<para>The Listing of Comments is not implemented as separate Action here, as the Comments 
-		usually should be display directly with the Blog-Post and there is no View showing all 
-		Comments.</para>
-		
-		<para>Both Examples show that a Controller is mainly a Container for associated Actions.</para>
-		
-		<para>Now we show by example how Model, View and Controller work together. The first request 
-		we look at should display a list of blog posts (see Figure 2-5):</para>
-		
-		<para>The User sends a request (1). The request Object contains information about the controller 
-		and action that should be called and optionally additional parameters. In this example the 
-		Controller is <code>Post</code> and the action <code>list</code></para>
-		
-		<para>To respond to the request the action has to query certain data from the Model.(2) 
-		In return it receives on or several domain Objects. In our example the action queries 
-		all blog posts and receives a array with all Blog-Post Objects as response.(3)</para>
-		
-		<para>Thereafter the action calls the according view and hands over the data for 
-		presentation (4) - the array with Blog-Posts in our case.</para>
-		
-		<para>The View displays the data and returns the Response to the user.(5)</para>
-		
-		<remark>TODO: insert figure 2-5
-		Figure 2-5: In this request a list of Blog-Post is displayed.
-		</remark>
-		<para>Now as the first request is completely dispatched the user has a list of all 
-		Blog-Posts displayed in the browser. Now the user clicks on a single Blog-Post and gets 
-		the complete blog post. In addition the user can add a comment to this post. 
-		With the help of Figure 2-6 we wan't to understand how the comment is stored.</para>
-		
-		<para>When submitting the comment form the user creates a new request (1) 
-		containing the according controller and action. In our example the controller is 
-		<code>Comment</code> and the action is <code>new</code>. Furthermore the request 
-		contains the comment text and a reference to the commented Blog-Post.</para>
-		
-		<para>The called action now has to modify the Model and add the new comment to the 
-		according Blog-Post. (2)</para>
-		
-		<para>
-		After that the action forwards to another action (3). In our case we forward 
-		to the <code>show-Action</code> in the <code>PostController</code>, 
-		which displays the Blog-Post and the freshly added comment.
-		</para>
-		
-		<para>Now the <code>show</code>-Action calls the according view and hands 
-		over the Blog-Post that should be displayed. (4)</para>
-		
-		<para>The view now displays the data and returns the result to the user. (5)</para>
-		
-		<remark>TODO: insert Figure 2-6
-			Figure: 2-6: In this request a comment is stored.
-		</remark>
-		
-		<para>You will often see that actions can be sorted into two categories:
-		Some actions control the display of a Model, while other actions modify the 
-		Model and usually forward to displaying actions. In the above example we first 
-		saw a displaying action and then a modifying action.</para>
-		
-		<para>Now we have all the Modules we need for developing our Application. 
-		You got to know the Object-oriented basics, modelled the application domain 
-		with Domain Driven Design and introduced the clean separation between the 
-		Domain Model and the Presentation Logic</para>
-		
-		<para>At last we want to introduce you to a development Model that can drastically
-		improve the stability and quality of the source code: Test-Driven Development.
-		This approach can be used independently of the previously introduced concepts, but 
-		is another helpful Module for the extension development with Extbase and Fluid.</para>
-		
-		<sidebar>
-			<title>Differences to the classic MVC-Pattern</title>
-	
-			<para>If you previously have developed desktop applications with the MVC-Pattern you will
-			notice some differences to the mentioned MVC Variant.</para>
-			<para>Strictly speaking we have only mentioned the server-side components of the view,
-			but there is a client-side component involved too: The Webbrowser ultimately displays 
-			the data from our web application, so it has to be part of the view-layer. Furthermore 
-			the view can be modified on the client-side with JavaScript. As a consequence, the 
-			view is even more separated as in the classic MVC Pattern.</para>
-			
-			
-			<para>In the <emphasis>Desktop</emphasis>-MVC-Pattern the View listens for changes 
-			in the Model ( usually using the <emphasis>Observer</emphasis> Design Pattern ). 
-			This enables the view to react immediately to changes in the Model. As we only discuss 
-			the server side of the view and the server and the client don't share a persistent 
-			connection changes in the Model can not be visible in the browser immediately. 
-			</para>
-		</sidebar>
-		
-	</section>
-	
-	
-	
-	
+  <para>Объектно-ориентированное программирование и предметно-ориентированное
+  проектирование определяют структуру будущего расширения на разных уровнях.
+  Объектно-ориентированное программирование предоставляет нам основные
+  стандартные кирпичика для разработки программного обеспечения: объекты в
+  виде комбинация данных и связанных с ними методов. Предметно-ориентированное
+  проектирование даёт инструменты для создания модели, отражающей законы
+  реального мира в программном обеспечении. Но все ещё недостаёт компонента,
+  определяющего реакцию на пользовательские запросы и общую конечную
+  функциональность приложения. Именно это и даёт парадигма
+  Модель-Отображение-Диспетчер. Это гарантирует чёткое разделение модели
+  предметной области и ее внешнего представления. Такое чёткое разделение —
+  основа гладкого взаимодействия Extbase и Fluid.</para>
+
+  <para>Модель-Отображение-Диспетчер даёт шаблон инфраструктуры, на которой
+  строится будущее приложение. Это грубый «план маршрута» и отделение логики
+  представления от модели.</para>
+
+  <para>Шаблон MVC разделяет приложение на три слоя:
+  <emphasis>модель</emphasis>, реализующую предметную область, включая ее
+  логику, <emphasis>диспетчер</emphasis>, контролирующий ход выполнения
+  приложения, и <emphasis>отображение</emphasis>, подготавливающее и выводящее
+  данные для пользователя (рисунок 2-4).</para>
+
+  <para>Нижний слой, <emphasis>модель</emphasis> содержит логику приложения и
+  данные, помимо этого, ещё и соответствующую логику доступа и хранения.
+  Предметно-ориентированное проектирование разделяет этот слой далее. В
+  расширении на основе Extbase классы для этого слоя можно найти в папке
+  <emphasis>Classes/Domain</emphasis>.</para>
+
+  <para><emphasis>Диспетчер</emphasis> представляет внешнюю (то есть
+  вызываемую непосредственно пользователем) функциональность. Он координирует
+  взаимодействие модели и представления в соответствие с актуальным запросом.
+  Он извлекает данные из модели и передаёт их для отображения. Важно:
+  диспетчер лишь <emphasis>координирует</emphasis> действия, фактическая
+  работа обычно реализована в модели. Так как диспетчер сложно тестировать, он
+  должен быть как можно проще.</para>
+
+  <screenshot>
+    <info>
+      <title>Рисунок 2-4: шаблон MVC разделяет приложение на три больших
+      слоя.</title>
+    </info>
+
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="2-4.svg"></imagedata>
+      </imageobject>
+    </mediaobject>
+  </screenshot>
+
+  <para> Верхний слой, <emphasis>Отображение (представление)</emphasis>
+  включает всю логику представления и все, относящееся к представлению
+  (выводу, отображению) данных.</para>
+
+  <sidebar>
+    <title>Собственный опыт</title>
+
+    <para>Приблизительно 2 года назад я впервые столкнулся с парадигмой MVC.
+    Копаясь в различных источниках, я пытался понять, как эту идею
+    использовать в собственных расширениях. Я растерялся из-за огромного
+    количества вариаций MVC. Ни один источник не смог помочь мне в
+    структурировании обычного кода для расширения. Мне было ясно, что запросы
+    к базе данных относятся к Модели, а шаблона является частью Представления.
+    Но где должен храниться предметно-ориентированный код? И как избежать
+    того, что в коде Объектов модели перемешаны части для SQL, предметной
+    области и, опять же, методы присущие самому объекту? В конце концов,
+    эксперименты с MVC привели к одним лишь расстройствам. И наконец,
+    предметно ориентированное проектирование (DDD) указало мне путь к
+    парадигме MVC, так как DDD подразумевает чёткое разделение проблем
+    <emphasis>внутри</emphasis> модели, что «облегчает» Представление и
+    Диспетчер.</para>
+
+    <para>При дальнейшем разделении слоя Модели на Модель предметной области
+    (сердце приложения), хранилища (слой базы данных) и средства проверки
+    (содержащие инварианты модели), схема MVC становится простой для
+    реализации и понимания.</para>
+
+    <para><emphasis>Йохен Рау</emphasis></para>
+  </sidebar>
+
+  <section>
+    <title>Взаимодействие Модели, Представления и Диспетчера</title>
+
+    <para>Функционал многих приложений можно разделить на модули. Эти модули
+    можно разделять и далее. Функции, например, сетевого журнала можно
+    разделить следующим образом:</para>
+
+    <para>Функционал для статей журнала:<itemizedlist>
+        <listitem>
+          <para>Полнотекстовое представление для всех статей.</para>
+        </listitem>
+
+        <listitem>
+          <para>Создание статьи.</para>
+        </listitem>
+
+        <listitem>
+          <para>Отображение статьи.</para>
+        </listitem>
+
+        <listitem>
+          <para>Редактирование статьи.</para>
+        </listitem>
+
+        <listitem>
+          <para>Удаление статьи.</para>
+        </listitem>
+      </itemizedlist> Функционал для комментариев: <itemizedlist>
+        <listitem>
+          <para>Создание комментариев.</para>
+        </listitem>
+
+        <listitem>
+          <para>Удаление комментариев.</para>
+        </listitem>
+      </itemizedlist></para>
+
+    <para>Эти модули реализованы в Диспетчере. Внутри Диспетчера имеется
+    отдельное <emphasis>Действие</emphasis> для каждой отдельной функции. Для
+    приведённого примера имеется диспетчер
+    <emphasis>PostController</emphasis>, реализующий Действия для создания,
+    отображения, редактирования и удаления статей. Кроме того, существует
+    диспетчер <emphasis>CommentController</emphasis>, реализующий Действия для
+    создания и удаления комментариев.</para>
+
+    <para>Список комментариев в виде отдельного действия не реализуется, так
+    как обычно комментарии отображаются вместе со статьёй, и нет режима,
+    показывающего все комментарии.</para>
+
+    <para>Оба примера показывают, что Диспетчер — это по большей части
+    контейнер для соответствующих Действий.</para>
+
+    <para>Теперь посмотрим на примере слаженную работы Модели, Представления и
+    Диспетчера. Первый запрос, который мы рассмотрим, должен вывести на экран
+    список сообщений в журнале (рисунок 2-5):</para>
+
+    <para>Пользователь посылает запрос (1). Объект запроса содержит информацию
+    о вызываемых диспетчере и действие, а также возможны дополнительные
+    параметры. В этом примере Диспетчер — это <code>Post</code>, а действие —
+    <code>list</code>. </para>
+
+    <para>Ответом на запрос служит действие — запрос определённых данных из
+    Модели (2). В ответ получаются один или несколько Объектов предметной
+    области. В нашем примере действием выступает запрос всех сообщений
+    журнала, получается массив со всеми объектами сообщений журнала
+    (3).</para>
+
+    <para>Затем действие вызывает соответствующий режим отображения и передаёт
+    данные для представления (4) — в нашем случае массив сообщений
+    журнала.</para>
+
+    <para>Представление выводит данные и возвращает ответ пользователю
+    (5).</para>
+
+    <screenshot>
+      <info>
+        <title>Рисунок 2-5: в ответ на запрос выводится список сообщений
+        журнала.</title>
+      </info>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="2-5.svg"></imagedata>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
+
+    <para>Теперь, как только ответ на первый запрос полностью переправлен
+    пользователю, в браузере отобразится список всех статей в журнале.
+    Пользователь может щёлкнуть по одному из сообщений для вывода его
+    полностью. Кроме того, пользователь может добавить к статье комментарий.
+    Рисунок 2-6 поможет нам разобраться, как сохраняется комментарий.</para>
+
+    <para>Отправляя форму с комментарием, пользователь создаёт новый запрос
+    (1), содержащий соответствующие диспетчер и действие. В нашем примере
+    Диспетчер —это <code>Comment</code>, а действие — <code>new</code>. Помимо
+    этого запрос содержит текст комментария и ссылку на комментируемую статью
+    журнала.</para>
+
+    <para>Теперь вызываемое действие должно изменить Модель и добавить новый
+    комментарий к соответствующей статье журнала (2).</para>
+
+    <para>После этого осуществляется переход к следующему действию (3). В
+    нашем случае — переход к Действию <code>show</code> в
+    <code>PostController</code>, отображающему сообщение журнала с только что
+    добавленным комментарием.</para>
+
+    <para>После чего Действие <code>show</code> вызывает соответствующий режим
+    отображения и передаёт статью, которую нужно вывести (4).</para>
+
+    <para>Представление отображает данные и возвращает результат пользователю
+    (5).</para>
+
+    <screenshot>
+      <info>
+        <title>Рисунок 2-6: запрос на сохранение комментария.</title>
+      </info>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="2-6.svg"></imagedata>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
+
+    <para>Зачастую можно наблюдать, что действия можно разделить на две
+    категории: некоторые действия отвечают за управление отображением Модели,
+    а другие — изменяют Модель и, обычно, переходят к действиям отображения. В
+    приведённом примере сначала мы видели действие отображения, а затем —
+    изменения.</para>
+
+    <para>Теперь все необходимые для разработки приложения Модули готовы. Вы
+    познакомились с основами объектно-ориентированного программирования,
+    моделированием предметной области приложения в предметно-ориентированном
+    проектировании и чётко разделили модель предметной области от логики
+    представления.</para>
+
+    <para>И наконец, хотелось бы познакомить Вас с моделью проектирования,
+    способной значительно улучшить стабильность и качество исходного кода:
+    разработкой через тестирование. Этот подход можно использовать независимо
+    от представленных выше концепций, а как ещё один полезный модуль для
+    разработки расширений на Extbase и Fluid.</para>
+
+    <sidebar>
+      <title>Отличия от классического шаблона MVC</title>
+
+      <para>Если в прошлом Вы разрабатывали прикладные программы на шаблоне
+      MVC, то заметили некоторые отличия от приводимого здесь варианта
+      MVC.</para>
+
+      <para>Строго говоря, имеются не только упомянутые компоненты отображения
+      со стороны сервера, но и компоненты на стороне клиента: браузер
+      обязательно участвует в отображении данных нашего сетевого приложения,
+      поэтому он является частью слоя Представления. Более того, отображение
+      может быть изменено на стороне клиента при помощи JavaScript. Как
+      следствие, представление становится сложнее, чем в классическом варианте
+      MVC.</para>
+
+      <para>В шаблоне MVC для локального компьютера, Представление отслеживает
+      изменения в Модели (обычно, используя шаблон разработки
+      <emphasis>Наблюдатель (Observer)</emphasis>). Это позволяет оперативно
+      отражать изменяющуюся Модель. Как уже говорилось, сервер и клиент не
+      поддерживают постоянное соединение, поэтому изменения в Модели не могут
+      сразу отображаться в браузере.</para>
+    </sidebar>
+  </section>
 </section>
