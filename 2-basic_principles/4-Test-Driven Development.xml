@@ -8,27 +8,26 @@
          xmlns:mathml="http://www.w3.org/1998/Math/MathML">
   <title>Разработка через тестирование</title>
 
-  <para>Jeder Entwickler muss seine Software testen – ein für viele Entwickler
-  leidiges, doch unvermeidbares Thema. Wie laufen Tests in der klassischen
-  Softwareentwicklung normalerweise ab? Programmierer gehen meist so vor, dass
-  sie einen Testfall konstruieren, indem sie gewisse Daten in die Datenbank
-  eintragen, kleine Testprogramme schreiben oder die URLParameter im Browser
-  manipulieren. Oft werden sogar mehrere kleinere Funktionalitäten «auf einen
-  Rutsch» eingebaut, bevor sie getestet werden (рисунок 2-7). Danach werden
-  diese Schritte in periodischen Abständen so lange wiederholt, bis die
-  gewünschte Funktion implementiert ist. Anschließend geht es dann weiter mit
-  der nächsten Funktion.</para>
+  <para>Каждый разработчик должен тестировать свое программное обеспечение –
+  тема для многих разработчиков скучная и неприятная, но тем не менее
+  неизбежная. Как обычно происходит тестирование при обычном ходе разработки
+  программного обеспечения? Чаще используется следующих подход: создаётся
+  тестовый образец, вносятся какие-либо данные в базу данных, создаются
+  небольшие тестовые программы или манипулируют параметрами URL в браузере. А
+  небольшие функции зачастую строятся "на одном дыхании", без всякой проверки
+  (рисунок 2-7). Затем эти шаги последовательно повторяются, до тех пор пока
+  желаемая функция не заработает должным образом. После чего переходят к
+  следующей функции.</para>
 
-  <para>Es gibt bei dieser Vorgehensweise aber ein Problem: Die Tests werden
-  nicht systematisch, sondern punktuell ausgeführt. Dadurch baut man unbewusst
-  Fehler in bestehende Programmteile ein. Außerdem wird bei einem Test nicht
-  nur ein kleines Codestück getestet, sondern oft ein komplexer
-  Programmablauf.</para>
+  <para>Но при этом возникает одна проблема: тестирование проводится не
+  систематически, а выборочно. При этом в существующие разделы программы
+  неосознанно вносятся ошибки. Кроме того, во время тестирования проверяется
+  не маленький фрагмент кода, а запускается вся программа целиком.</para>
 
   <screenshot>
     <info>
       <title>Рисунок 2-7: при традиционной разработке программного обеспечения
-      существует четкое разделение между фазами разработки и
+      существует чёткое разделение между фазами разработки и
       тестирования.</title>
     </info>
 
@@ -39,76 +38,73 @@
     </mediaobject>
   </screenshot>
 
-  <para>Durch Test-Driven Development (TDD) sollen solche Probleme behoben
-  werden. Tests werden schnell ausführbar und reproduzierbar. Dies steigert
-  für den Entwickler die Motivation, die Tests regelmäßig auszuführen und
-  damit auch schneller Rückmeldung zu bekommen, ob aus Versehen Fehler in
-  bestehende Funktionalität eingebaut wurden.</para>
+  <para>При помощи разработки через тестирование (Test-Driven Development,
+  TDD) разрешаются все упомянутые выше проблемы. Тесты выполняются быстро и
+  они воспроизводимы (к ним можно вернуться, а результат их гарантированно
+  неизменен). Это мотивирует разработчика к регулярному запуску тестов, для
+  получения быстрой обратной связи, и воспрепятствует внесению ошибок в уже
+  существующий функционал.</para>
 
   <sidebar>
-    <title>Erfahrungsbericht</title>
+    <title>Собственный опыт</title>
 
-    <para>Als Robert Lemke und andere Kernentwickler für FLOW3 vorgeschlagen
-    haben, die Entwicklung Test-driven zu machen, war ich etwas skeptisch.
-    Test-Driven Development klang nach einem netten Konzept, jedoch wusste ich
-    nicht, wie man eine Anwendung und ein Framework dieser Größe sinnvoll
-    testen könnte. Auch im Internet waren oft nur sehr einfache, akademische
-    Beispiele zu finden. Bis dahin hatte ich nur einen theoretischen Überblick
-    über TDD.</para>
+    <para>Когда Роберт Лемке и другие разработчики ядра предложили делать
+    разработку FLOW3 через тестирование, я был нестроен несколько скептически.
+    Разработка через тестирование звучит довольно многообещающе, однако я не
+    представлял, как можно было бы тестировать приложение и платформу
+    разработки таким образом. Ну а в интернете попадались только лишь очень
+    простые, академические примеры. До тех пор я лишь теоретически представлял
+    себе TDD.</para>
 
-    <para>Selbst habe ich zu testen angefangen, als die Fluid-Entwicklung
-    begann. Die ersten Tests waren keine Unit- sondern Integrationstests,
-    d.h., sie haben Fluid aus Benutzersicht getestet: Es wurden kleine
-    Template-Snippets geparst und mit den Erwartungen verglichen.</para>
+    <para>Начав разработку Fluid, даже я приступил к тестированию. Первые
+    тесты не были модульными (Unit), это были сборные тесты, то есть Fluid
+    тестировалась с точки зрения пользователя: создавались фрагменты шаблонов,
+    и результат сравнивался с ожиданиями.</para>
 
-    <para>Für den ersten Test habe ich einige Zeit gebraucht – es hat sich
-    seltsam angefühlt, Dinge zu testen, die noch nicht geschrieben waren.
-    Nachdem der erste Test jedoch geschrieben war und dieser auch erfolgreich
-    durchgelaufen ist, konnte ich dank der Tests extrem schnelle
-    Entwicklungszyklen durchführen.</para>
+    <para>Первый тест потребовал времени — странно было тестировать то, что
+    ещё не было написано. Но после написания первого теста и его успешного
+    проведения, я смог быстро эволюционировать.</para>
 
-    <para>Durch testgetriebene Entwicklung konnte ich auf einer Zugfahrt
-    innerhalb von einer Stunde den Kern von Fluid komplett umstrukturieren –
-    dafür hätte ich ohne Tests sicher mehrere Tage gebraucht (bis am Ende
-    wieder alles funktioniert). Besonders das sofortige Feedback habe ich sehr
-    zu schätzen gelernt: Man klickt auf einen Button und bekommt nach wenigen
-    Sekunden ein Feedback.</para>
+    <para>Благодаря разработке через тестирования стало возможным изменить
+    полностью структуру ядра Fluid за время поездки в поезде – в течение
+    одного часа, без тестов это несомненно потребовало бы нескольких дней
+    (пока все не заработает снова). В частности, я оценил мгновенную обратную
+    связь: нажимаете на кнопку – и через несколько секунд получаете
+    результат.</para>
 
-    <para>Seitdem bin ich von TDD »infiziert«, lernte Mock- und Stub-Objekte
-    kennen, und heute will ich es nicht mehr missen. (In diesem Kapitel werden
-    Sie eine Einführung in diese Konzepte erhalten.) Wenn Sie TDD lernen
-    wollen, springen Sie ins kalte Wasser, und versuchen Sie es bei Ihrem
-    nächsten Projekt. Bis der erste Unit-Test fertig ist, dauert es eine
-    Weile, doch danach wird es spürbar schneller gehen.</para>
+    <para>Так я "заразился" TDD, познакомился с фиктивными (пробными )
+    объектами и объектами-заглушками, и сейчас я уже не могу без них
+    обходиться (в текущей главе мы познакомимся со всем этим). Если хотите
+    научиться TDD — бросьтесь в омут с головой и опробуйте все это на
+    следующем же проекте. До подготовки первого модульного теста, работа
+    замедлиться, но после его прохождения работа будет продвигаться заметно
+    быстрее.</para>
 
-    <para>Sebastian Kurfürst</para>
+    <para><emphasis>Себастьян Курфюрст</emphasis></para>
   </sidebar>
 
   <section>
     <title>Семь раз отмерь, один — отрежь</title>
 
-    <para>Das Ziel des Test-Driven Development ist es, Tests explizit und
-    automatisch wiederholbar zu machen. Der Arbeitsablauf ist, anders als beim
-    herkömmlichen Programmieren, in sehr kleine Iterationen unterteilt.</para>
+    <para>Цель проектирования через тестирование — тестирование определённых
+    вещей и автоматическая повторяемость тестов. Процесс создания программы
+    протекает несколько иначе, чем в традиционной разработке — разработка идёт
+    небольшими этапами.</para>
 
-    <para>Beim Test-Driven Development schreiben Sie die Unit-Tests für Ihre
-    Features, <emphasis>bevor</emphasis> Sie die Features selbst schreiben.
-    Unit-Tests sind automatisch wiederholbare Tests von Methoden, Klassen und
-    kleinen Programmeinheiten. Schon während Sie die Tests schreiben, sollten
-    Sie sich ausführlich über die gewünschte Funktionalität Gedanken
-    machen.</para>
+    <para>При разработке через тестирование, единичные тесты функций пишутся
+    <emphasis>перед</emphasis> созданием самих функций. Единичные тесты — это
+    автоматически повторяющиеся тесты методов, классов и небольших модулей
+    программы. Уже при написании тестов необходимо хорошо продумать желаемую
+    функциональность.</para>
 
-    <para>Wenn Sie dann Ihre Tests ausführen, schlagen diese natürlich fehl,
-    denn die getestete Funktionalität ist ja noch gar nicht implementiert. Im
-    nächsten Schritt schreiben Sie den minimal notwendigen Code, der notwendig
-    ist, um den Test erfolgreich durchlaufen zu lassen (siehe Abbildung 2-8).
-    Ein erneuter Test läuft nun problemlos durch. Als Nächstes sollten Sie
-    beginnen, darüber nachzudenken, welche Funktionalität noch fehlt, denn Sie
-    haben bisher nur den minimal notwendigen Code geschrieben. Wenn Sie
-    wissen, was Sie nun implementieren möchten, schreiben Sie einen neuen
-    Unit-Test, mit dem Sie diese Funktionalität testen können. Auf diese Weise
-    beginnt der Prozess des Testens und Programmierens immer wieder von
-    Neuem.</para>
+    <para>Если сразу же запустить созданные тесты, они, естественно, не
+    проходят, так как тестируемая функциональность ещё не написана. На
+    следующем шаге пишется минимально необходимый для прохождения теста код
+    (рисунок 2-8). Тестирование теперь проходит без проблем. Далее необходимо
+    подумать, каких же функций недостаёт — ведь был написан минимально
+    необходимый код. Теперь, если известно, что хотелось бы сделать ещё —
+    пишите следующий единичный тест для этой желаемой функциональности. Таким
+    образом и продвигается процесс тестирования и разработки.</para>
 
     <screenshot>
       <info>
@@ -123,55 +119,51 @@
       </mediaobject>
     </screenshot>
 
-    <para>Der Vorteil dieser Methode liegt auf der Hand: Da Sie durch das
-    Schreiben von Unit- Tests gezwungen sind, große Features in kleine
-    Häppchen zu zerlegen, können Sie sich während der Umsetzungsphase voll auf
-    die aktuell zu erstellende Funktionalität konzentrieren. Außerdem sorgt
-    der klare Perspektivenwechsel zwischen Entwickler und Nutzer einer Klasse
-    für besseren Code, der eher den Anforderungen genügt.</para>
+    <para>Преимущества такого подхода очевидны: необходимо писать единичные
+    тесты, вынуждает разбивать больший функционал на мелкие составляющие
+    функции, что, в свою очередь, позволяет в данный момент полностью
+    сконцентрироваться на создаваемой в текущий момент функции. Также явное
+    изменение в перспективе даёт лучший код для пользователя класса, лучше
+    подходящий под выдвигаемые требования.</para>
 
-    <para>TDD ist besonders beim Design von APIs sinnvoll: Durch das Testen
-    nehmen Sie als Programmierer die Perspektive des Nutzers der API ein und
-    können so Unsauberkeiten, Inkonsistenzen oder fehlende Funktionalität viel
-    schneller identifizieren.</para>
+    <para>TDD особенно полезно при проектировании API: после тестирования вы,
+    как программист, начинаете представлять API перспективного пользователя, и
+    можете быстрее определить необходимую, несоответствующую или отсутствующую
+    функциональность.</para>
 
-    <para>Des Weiteren sind die Unit-Tests auch eine Art Sicherheitsnetz gegen
-    unerwünschtes Verhalten. Falls Sie aus Versehen beim Programmieren eine
-    Funktionalität zerstören, bekommen Sie durch die Unit-Tests direktes
-    Feedback und können den Fehler sofort korrigieren. Somit wird auch die
-    Chance von Regressionen (d.h. die Produktion neuer Fehler beim Korrigieren
-    eines bekannten Fehlers) weiter vermindert.</para>
+    <para>Кроме того, единичные тесты — это что-то вроде защита от
+    нежелательного поведения. Если случайно уничтожается функционал программы,
+    то при быстрой обратной связи от единичного тестирования можно быстро
+    понять и исправить ошибку. Таким образом шансы регрессии (то есть
+    получения новой ошибки при исправлении старой) значительно
+    снижаются.</para>
 
-    <para>Laut einigen Studien sind Programmierer, die TDD praktizieren,
-    gleich schnell oder sogar schneller als Programmierer, die im
-    konventionellen Stil coden, obwohl Erstere nicht nur die Implementierung,
-    sondern auch die dazugehörigen Tests schreiben müssen. Darüber hinaus ist
-    die Codequalität beim Test-Driven Development deutlich höher als bei
-    konventioneller Programmierung.</para>
+    <para>Согласно некоторым исследованиям, программисты, использующие TDD,
+    пишут программы с той же скоростью, и даже быстрее, чем программисты
+    традиционного стиля, хотя приходится писать не только программу, но и
+    сопровождающие ее тесты. Кроме того, качество кода при разработке через
+    тестирование значительно выше, чем при традиционной разработке.</para>
   </section>
 
   <section>
     <title>Пример</title>
 
-    <para>Nehmen wir einmal an, wir wollen für einen Online-Shop einen
-    <classname>Customer</classname> (Kunden) modellieren. Dieser besitzt einen
-    Namen, der im Konstruktor übergeben wird. Durch die Tests wollen wir
-    sicherstellen, dass der Name korrekt im Objekt gespeichert wird.</para>
+    <para>Предположим, что для сетевого магазина нужно смоделировать
+    <classname>Customer</classname> (заказчика). У него имеется имя,
+    передаваемое конструктором. Тестами нужно убедиться, что имя в объекте
+    сохраняется правильно.</para>
 
-    <para>Als Erstes müssen wir die phpunit-Extension aus dem TYPO3 Extension
-    Repository (TER) installieren, da wir die Tests damit ausführen werden.
-    Dann gehen wir in unsere eigene Extension und erstellen, falls der Ordner
-    noch nicht existiert, im Hauptordner der Extension einen Ordner
-    <filename>Tests/Unit/</filename>. Dieser wird später all unsere Unit-Tests
-    enthalten.</para>
+    <para>Для начала из репозитория расширений TYPO3 (TER) необходимо
+    установить расширение <emphasis>phpunit</emphasis>, так как тесты будут
+    запускаться с его помощью. Затем переходим к своему расширению и создаём в
+    нем, если ещё не сделали это, папку <filename>Tests/Unit/</filename>.
+    Здесь в дальнейшем будут находится все модульные тесты.</para>
 
-    <para>Unser zu erstellendes Customer-Objekt wird sich, da es zum
-    Domänenmodell unserer Extension gehört, unter
-    <filename>Classes/Domain/Model/Customer.php</filename> finden. Analog dazu
-    erzeugen wir die Testklasse in der Datei
-    <filename>Tests/Unit/Domain/Model/CustomerTest.php</filename>. Erstellen
-    wir nun einen minimalen Testfall, anhand dessen wir uns mit PHPUnit
-    vertraut machen:</para>
+    <para>Объекты клиентов (Customer), которые необходимо будет создать, будут
+    находиться в файле <filename>Classes/Domain/Model/Customer.php</filename>.
+    По аналогии создаём тестовый класс в файле
+    <filename>Tests/Unit/Domain/Model/CustomerTest.php</filename>. Создадим
+    минимальный тест для работы с PHPUnit:</para>
 
     <programlisting>&lt;?php
 class Tx_Shop_Domain_Model_CustomerTest extends Tx_Extbase_BaseTestCase {
@@ -179,35 +171,34 @@ class Tx_Shop_Domain_Model_CustomerTest extends Tx_Extbase_BaseTestCase {
     * @test
     */
     public function nameCanBeSetInsideTheConstructor() {
-        $this-&gt;fail('Not yet implemented.');
+        $this-&gt;fail('Еще не разработано.');
     }
 }
 ?&gt;</programlisting>
 
-    <para>Alle unsere Testklassen sind nach demselben Namensschema wie normale
-    Klassen benannt, und sie müssen von
-    <classname>Tx_Extbase_BaseTestCase</classname> erben. Eine Testklasse kann
-    viele Testmethoden enthalten. Diese müssen public sein und die Annotation
-    <varname>@test</varname> in ihrem <classname>PHPDOC</classname>-Block
-    enthalten, damit sie ausgeführt werden können. Beachten Sie, dass bereits
-    der Name der Testmethode deutlich machen sollte, welche Erwartungen der
-    Test erfüllen soll. Nun können wir den Test das erste Mal ausführen: Gehen
-    Sie dazu im TYPO3- Backend auf das Modul <emphasis>PHPUnit</emphasis>
-    (unterhalb von <emphasis>Инструменты администрирования</emphasis>). Dann
-    können Sie Ihre Extension auswählen und auf <emphasis>Run all
-    tests</emphasis> klicken. Sie sollten nun, wie in Abbildung 2-9 gezeigt,
-    einen (gelben) Balken sehen und die Fehlermeldung Not yet implemented
-    dazu. Da Sie sehr viel mit der PHPUnit-Umgebung arbeiten werden, sollten
-    Sie sich mit dieser ein wenig vertraut machen – probieren Sie einmal, die
-    Tests für <emphasis>extbase</emphasis> oder <emphasis>fluid</emphasis>
-    auszuführen, und probieren Sie die verschiedenen Darstellungsmöglichkeiten
-    aus. So können Sie sich z.B. alle Tests oder nur fehlgeschlagene Tests
-    anzeigen lassen.</para>
+    <para>Все названия тестовых классов даются по той же схеме, что и для
+    обычных, и наследоваться они должны от
+    <classname>Tx_Extbase_BaseTestCase</classname>. Тестовый класс может
+    содержать множество методов для тестирования. Для того, чтобы получить
+    возможность запуска, они должны быть публичными (public) и содержать
+    примечание <varname>@test</varname> в блоке <classname>PHPDOC</classname>.
+    Обратите внимание, что даже название метода тестирования должно говорить о
+    том, <emphasis>что</emphasis> тестируется. Запустим тест первый раз:
+    перейдём в модуль внутреннего интерфейса TYPO3
+    <emphasis>PHPUnit</emphasis> (в разделе <emphasis>Сервис
+    управления</emphasis>). Здесь нужно выбрать своё расширение (расширение
+    должно быть установлено) и нажать <emphasis>Run all tests (Запуск всех
+    тестов)</emphasis>. Как показано на рисунке 2-9, должна появиться (жёлтая)
+    область и сообщение об ошибке <emphasis>ещё не разработано</emphasis>. Так
+    как придётся тесно работать в среде PHPUnit, с ней нужно познакомиться.
+    Попробуйте выполнить тесты для <emphasis>extbase</emphasis> и
+    <emphasis>fluid</emphasis>, опробуйте различные параметры отчётов.
+    Например, можно вывести отчёт для всех тестов, или только для
+    сбойных.</para>
 
-    <para>Nun, da wir gesehen haben, dass unser Testfall ausgeführt wird,
-    können wir unseren ersten sinnvollen Testfall schreiben. Er soll testen,
-    ob ein im Konstruktor angegebener Name auch wieder ausgelesen werden
-    kann:</para>
+    <para>Теперь мы знаем, как работает тестирование, и можем протестировать
+    что-то полезное. Тестируется возможность получения доступа от имени,
+    указанного в конструкторе:</para>
 
     <programlisting>&lt;?php
 class Tx_Shop_Domain_Model_CustomerTest extends Tx_Extbase_BaseTestCase {
@@ -215,7 +206,7 @@ class Tx_Shop_Domain_Model_CustomerTest extends Tx_Extbase_BaseTestCase {
     * @test
     */
     public function nameCanBeSetInsideTheConstructor() {
-        $name = 'Sebastian Kurfürst';
+        $name = 'Себастьян Курфюрст';
         $customer = new Tx_Shop_Domain_Model_Customer($name);
         $this-&gt;assertEquals($name, $customer-&gt;getName());
     }
@@ -225,24 +216,22 @@ class Tx_Shop_Domain_Model_CustomerTest extends Tx_Extbase_BaseTestCase {
     <screenshot>
       <info>
         <title>Рисунок 2-9: запуск тестов, из внутреннего интерфейса TYPO3
-        можно с легкостью запустить модульные тесты.</title>
+        можно с лёгкостью запустить модульные тесты.</title>
       </info>
 
       <mediaobject>
         <imageobject>
-          <imagedata fileref="2-9.svg"></imagedata>
+          <imagedata fileref="2-9.png"></imagedata>
         </imageobject>
       </mediaobject>
     </screenshot>
 
-    <para>Wenn wir diesen Testfall nun ausführen, wird uns ein <emphasis>fatal
-    error</emphasis> von PHP angezeigt, da die Klasse, die wir testen wollen,
-    noch nicht existiert. Nun wechseln wir unsere Rolle: Wir sind nun nicht
-    mehr der Nutzer der Klasse, sondern wir sind der Entwickler, der die
-    Klasse implementieren soll. Als Erstes erstellen wir in der Datei
-    <filename>Classes/Domain/Model/Customer.php</filename> eine leere Klasse
-    mit den benötigten Methoden, um den <emphasis>fatal error</emphasis>
-    loszuwerden:</para>
+    <para>При запуске теста будет отображена <emphasis>fatal error</emphasis>
+    в PHP, так как тестируемый класс пока ещё не существует. Поменяем роли:
+    теперь мы не пользователи, а разработчики класса. Сначала создадим файл
+    <filename>Classes/Domain/Model/Customer.php</filename> с пустым классом и
+    необходимыми для избежания <emphasis>fatal error</emphasis>
+    методами:</para>
 
     <programlisting>&lt;?php
 class Tx_Shop_Domain_Model_Customer extends Tx_Extbase_DomainObject_AbstractEntity {
@@ -254,13 +243,12 @@ class Tx_Shop_Domain_Model_Customer extends Tx_Extbase_DomainObject_AbstractEnti
 }
 ?&gt;</programlisting>
 
-    <para>Wenn wir nun die Testsuite erneut ausführen, sollte zwar kein
-    <emphasis>fatal error</emphasis> mehr vorliegen, aber stattdessen schlagen
-    unsere Unit-Tests fehl (da <classname>getName()</classname> den falschen
-    Rückgabewert liefert).</para>
+    <para>Теперь модульный тест проходит без <emphasis>fatal error</emphasis>,
+    но зато модульные тесты не проходят (<classname>getName()</classname>
+    возвращает неверное значение).</para>
 
-    <para>Nun können wir uns also, motiviert davon, den roten Balken möglichst
-    schnell grün werden zu lassen, an die Implementierung wagen:</para>
+    <para>Теперь у нас появилось желание побыстрее "перекрасить" фон сообщения
+    в зелёный, проще всего это сделать так:</para>
 
     <programlisting>&lt;?php
 class Tx_Shop_Domain_Model_Customer extends Tx_Extbase_DomainObject_AbstractEntity {
@@ -268,18 +256,16 @@ class Tx_Shop_Domain_Model_Customer extends Tx_Extbase_DomainObject_AbstractEnti
     }
 
     public function getName() {
-        return 'Sebastian Kurfürst';
+        return 'Себастьян Курфюрст';
     }
 }
 ?&gt;</programlisting>
 
-    <para>Nun sollte der Unit-Test problemlos durchlaufen, da der erwartete
-    Wert ausgegeben wird. Wir sind natürlich noch nicht zufrieden –
-    schließlich wird jetzt immer «Sebastian Kurfürst» als Name zurückgegeben.
-    Nun schließt sich eine Refactoring-Phase an: Wir räumen den Code auf und
-    achten allerdings immer darauf, dass die Unit-Tests weiterhin erfolgreich
-    durchlaufen. Nach einigen Iterationen kommen wir bei folgendem Code
-    an:</para>
+    <para>Теперь модульный тест проходит успешно — выводится ожидаемое
+    значение. Но этого мало — в качестве имени всегда будет возвращаться
+    «Себастьян Курфюрст». Наступила фаза рефакторинга: подчистим код, обращая
+    внимание на успешное завершение модульных тестов. Через несколько попыток,
+    приходим к следующему коду:</para>
 
     <programlisting>&lt;?php
 class Tx_Shop_Domain_Model_Customer extends Tx_Extbase_DomainObject_AbstractEntity {
@@ -307,31 +293,30 @@ class Tx_Shop_Domain_Model_Customer extends Tx_Extbase_DomainObject_AbstractEnti
 }
 ?&gt;</programlisting>
 
-    <para>Die Unit-Tests laufen immer noch durch, und wir haben die gewünschte
-    Funktionalität erreicht. Nun können wir erneut von der Rolle des
-    Entwicklers in die Rolle des Nutzers der Klasse schlüpfen und über weitere
-    Testfälle zusätzliche Funktionalitäten spezifizieren.</para>
+    <para>Модульные тесты проходят успешно, и получен нужный функционал.
+    Теперь можно снова перейти от роли разработчика к роли пользователя класса
+    и определить дополнительную функциональность в следующих тестах.</para>
   </section>
 
   <section>
     <title>Тестирование отдельных элементов</title>
 
-    <para>Unser erstes Beispiel für Unit-Tests war sehr einfach. In diesem
-    Abschnitt zeigen wir Ihnen, wie Sie Klassen testen können, die von anderen
-    Klassen abhängen. Nehmen wir einmal an, wir haben ein Programm, das
-    Log-Meldungen schreibt, die anschließend per E-Mail versendet werden
-    sollen. Dafür existiert eine Klasse EmailLogger, die die Log-Daten per
-    E-Mail versendet. Diese Klasse implementiert das potenziell komplexe Ziel
-    der E-Mail- Versendung nicht selbst, sondern nutzt dafür eine andere
-    Klasse, EmailService, die je nach Konfiguration z.B. SMTP-Server oder die
-    mail()-Funktion von PHP nutzt. Dies ist im UML-Diagramm in Abbildung 2-10
-    dargestellt: Die Klasse <classname>EmailLogger</classname> besitzt eine
-    Referenz auf den EmailService.</para>
+    <para>Первый пример по модульным тестам был предельно прост. В текущем
+    разделе будет показано, как тестировать классы, зависящие от других
+    классов. Предположим, что имеется программа, записывающая сообщения
+    журнал, и они должны отсылаться по электронной почте. Для этого
+    предназначен класс <classname>EmailLogger</classname>, он отсылает данные
+    журнала на E-Mail. Этот класс сам по себе реализует комплекс целей, но
+    использует для этого ещё и другой класс <emphasis>EmailService</emphasis>,
+    который, в зависимости от настроек, использует сервер SMTP или функцию
+    mail() из PHP. Как показано на рисунке 2-10, класс
+    <classname>EmailLogger</classname> связан с
+    <emphasis>EmailService</emphasis>.</para>
 
     <screenshot>
       <info>
-        <title>Рисунок 2-10: EmailLogger используется для отправки электронной
-        почты через EmailService.</title>
+        <title>Рисунок 2-10: EmailLogger использует для отправки электронной
+        почты EmailService.</title>
       </info>
 
       <mediaobject>
@@ -341,19 +326,16 @@ class Tx_Shop_Domain_Model_Customer extends Tx_Extbase_DomainObject_AbstractEnti
       </mediaobject>
     </screenshot>
 
-    <para>Wir wollen nun die Klasse EmailLogger testen, ohne dafür den
-    EmailService zu verwenden – wir wollen ja nicht immer bei jeder
-    Testausführung echte E-Mails schicken. Um dieses Ziel zu erreichen,
-    benötigen wir zwei Teilbausteine: <emphasis>Внедрение
-    зависимостей</emphasis> und die Verwendung von <emphasis>Фиктивные
-    объекты</emphasis>. Beide Konzepte werden wir im Folgenden
-    vorstellen.</para>
+    <para>Нам нужно протестировать работу EmailLogger без привлечения
+    EmailService – нам не нужно каждый раз при тестировании отсылать
+    сообщения. Для этого нужно два вторичных элемента: <emphasis>Внедрение
+    зависимостей</emphasis> и использование <emphasis>Фиктивных
+    объектов</emphasis>. Обе идеи мы рассмотрим далее.</para>
 
     <section>
       <title>Внедрение зависимостей</title>
 
-      <para>Oft sieht man Klassen, die nach der folgenden Struktur aufgebaut
-      sind:</para>
+      <para>Часто попадаются классы, построенные по следующей схеме:</para>
 
       <programlisting>class EmailLogger {
     protected $emailService;
@@ -362,21 +344,23 @@ class Tx_Shop_Domain_Model_Customer extends Tx_Extbase_DomainObject_AbstractEnti
     }
 }</programlisting>
 
-      <para>Der <classname>EmailLogger</classname> benötigt den
-      <classname>EmailService</classname>, um vollständig zu funktionieren,
-      und instanziiert diesen daher im Konstruktor. Dies allerdings koppelt
-      diese beiden Klassen stark aneinander: Wenn Sie zum Testen eine neue
-      Instanz der Klasse <classname>EmailLogger</classname> erstellen,
-      bekommen Sie automatisch auch eine Instanz des EmailService und würden
-      diesen implizit testen. Außerdem ist es nicht möglich, den EmailService
-      zur Laufzeit auszutauschen, ohne den Quellcode zu verändern.</para>
+      <para>Для корректного функционирования
+      <classname>EmailLogger</classname> требует
+      <classname>EmailService</classname>, экземпляр которого создаётся в
+      конструкторе. Но это сильно связывает оба этих класса: при создании
+      нового тестового образца класса <classname>EmailLogger</classname>,
+      автоматически создаётся экземпляр <classname>EmailService</classname>
+      который косвенно будет участвовать в проверке. Кроме того, во время
+      работы невозможна отправка через <classname>EmailService</classname> без
+      изменения его кода.</para>
 
-      <para>Eine Lösung aus diesem Dilemma bietet die Verwendung von
-      <emphasis>Внедрение зависимостей</emphasis>: Hier instanziiert eine
-      Klasse ihre Abhängigkeiten nicht selbst, sondern bekommt sie von außen
-      übergeben. Der <classname>EmailLogger</classname> bekommt eine neue
-      Methode injectEmailService, die den <classname>EmailService</classname>
-      in der Klasse setzt. Dies sieht dann z.B. so aus:</para>
+      <para>Решение проблемы состоит в использовании <emphasis>Внедрения
+      зависимостей</emphasis>: создаётся экземпляр класса, сам по себе не
+      имеющий зависимостей, они предаются извне.
+      <classname>EmailLogger</classname> получает новый метод
+      <methodname>injectEmailService</methodname>,
+      <classname>EmailService</classname> в наборе класса. Это может выглядеть
+      так:</para>
 
       <programlisting>class EmailLogger {
     protected $emailService;
@@ -385,10 +369,11 @@ class Tx_Shop_Domain_Model_Customer extends Tx_Extbase_DomainObject_AbstractEnti
     }
 }</programlisting>
 
-      <para>Extbase bietet momentan noch keinen Framework-Support für
-      Dependency Injection, daher empfehlen wir, die Instanziierung von
-      Klassen und deren Dependency Injection in entsprechende Factories
-      auszulagern. Eine mögliche Factory sieht dann folgendermaßen aus:</para>
+      <para>Extbase на данный момент не предлагает поддержку внедрения
+      зависимостей в рамках технологической платформы, поэтому мы рекомендуем
+      для создания классов и внедрения в них зависимостей было в
+      соответствующих внешних факториях. Такая фактория может выглядеть
+      следующим образом:</para>
 
       <programlisting>class EmailLoggerFactory {
     public static function getEmailLogger() {
@@ -400,38 +385,36 @@ class Tx_Shop_Domain_Model_Customer extends Tx_Extbase_DomainObject_AbstractEnti
 }</programlisting>
 
       <note>
-        <para>FLOW3 bietet erstklassigen Dependency Injection-Support. Wenn
-        Sie später Ihre Extensions auf FLOW3 migrieren, wird dieser Teil
-        bedeutend einfacher.</para>
+        <para>FLOW3 предлагает отличную поддержку Внедрения зависимостей. Если
+        переносить расширения на FLOW3, то эта часть существенно
+        упрощена.</para>
       </note>
 
-      <para>Wir können nun in einem Testfall von außen steuern, welchen
-      <classname>EmailService</classname> der
-      <classname>EmailLogger</classname> bekommt. Wir könnten beispielsweise
-      einen <classname>TestEmailService</classname> schreiben, der einfach
-      nichts tut (um einen <emphasis>fatal error</emphasis> zu vermeiden),
-      oder wir nutzen die im folgenden Abschnitt gezeigten Фиктивный
-      объект.</para>
+      <para>Теперь тестирование можно управлять снаружи, и указывать
+      <classname>EmailService</classname> для
+      <classname>EmailLogger</classname>. Например, можно написать
+      <classname>TestEmailService</classname>, который ничего не делает (для
+      избежания <emphasis>fatal error</emphasis>), либо использовать
+      показанные в следующем разделе Фиктивные объекты.</para>
     </section>
 
     <section>
       <title>Фиктивные объекты</title>
 
-      <para>Durch die Verwendung von Dependency Injection können wir den
-      <classname>EmailLogger</classname> ohne seine Abhängigkeiten
-      instanziieren. Da der <classname>EmailLogger</classname> zum Arbeiten
-      jedoch einen EmailService benötigt, müssen wir diesen in den Tests
-      bereitstellen.</para>
+      <para>Воспользовавшись Внедрением зависимостей, стало возможным создать
+      экземпляр <classname>EmailLogger</classname> без зависимостей. Так как
+      для работы <classname>EmailLogger</classname> необходим
+      <classname>EmailService</classname>, необходимо предоставить его при
+      тестировании.</para>
 
-      <para>Aber mehr noch: Wir wollen auch sicherstellen, dass der
-      <classname>EmailLogger</classname> <emphasis>wirklich</emphasis> die
-      Methode zum Senden der E-Mail aufruft! Hierfür können wir Mocks
-      verwenden. Mocks sind gewissermaßen Attrappen» für reale Objekte, die
-      das Verhalten der Objekte emulieren. Sie eignen sich auch dazu,
-      bestimmte Aufrufe oder Parameter sicherzustellen.</para>
+      <para>И более того: нам нужно убедиться, что
+      <classname>EmailLogger</classname> <emphasis>действительно</emphasis>
+      вызывает нужный метод для отправки E-Mail! Для этого можно использовать
+      Фиктивные объекты. Это что-то вроде "имитации" настоящих объектов и их
+      поведения. Они помогают убедиться в вызове определённых функций или
+      параметров.</para>
 
-      <para>Ein Test, der den EmailLogger testet, könnte folgendermaßen
-      aussehen:</para>
+      <para>Тестирование EmailLogger может быть таким:</para>
 
       <programlisting>1 class EmailLoggerTest extends Tx_Extbase_BaseTestCase {
 2   /**
@@ -442,79 +425,48 @@ class Tx_Shop_Domain_Model_Customer extends Tx_Extbase_DomainObject_AbstractEnti
 7       $emailLogger = new EmailLogger();
 8       $emailService = $this-&gt;getMock('EmailService');
 9       $emailLogger-&gt;injectEmailService($emailService);
-a       $emailService-&gt;expects($this-&gt;once())-&gt;method('send')-&gt;
+10       $emailService-&gt;expects($this-&gt;once())-&gt;method('send')-&gt;
         with('logging@domain.local', 'Log Message', $message);
-b       $emailLogger-&gt;log($message);
-c   }
-d }</programlisting>
+11       $emailLogger-&gt;log($message);
+12   }
+13 }</programlisting>
 
-      <para>Der Ablauf im Detail: In Zeile 6 wird die Variable
-      <constant>$message</constant> mit unserer Dummy-Nachricht gefüllt, die
-      wir loggen wollen. Diese Nachricht benötigen wir noch mehrfach, daher
-      ist es sinnvoll, sie in einer Variable zu speichern.</para>
+      <para>Рассмотрим поподробнее:</para>
 
-      <para>In den Zeilen 7 bis 9 instanziieren wir den
-      <classname>EmailLogger</classname> und injizieren ihm ein Mock-Objekt
-      des <classname>EmailService</classname>.</para>
+      <para>В строке 6 в переменную <constant>$message</constant> заносится
+      тестовое сообщение, которое имитирует запись в журнале. Это сообщение
+      используется в нескольких местах, поэтому имеет смысл занести его в
+      переменную.</para>
 
-      <para>In Zeile 10 passiert das eigentlich Spannende: Wir erwarten, dass
-      es im <classname>EmailService</classname> zu einem einmaligen Aufruf der
-      Methode <methodname>send</methodname> kommt, und zwar mit den Parametern
+      <para>В строках с 7 до 9 создаётся экземпляр
+      <classname>EmailLogger</classname> и инициируем для него фиктивный
+      объект <classname>EmailService</classname>.</para>
+
+      <para>В строке 10 происходит что-то действительно интересное: мы
+      ожидаем, что в <classname>EmailService</classname> происходит уникальный
+      вызов метода <methodname>send</methodname> с параметрами
       <constant>'logging@domain.local'</constant>, <constant>'Log
       Message'</constant>, <constant>$message</constant>.</para>
 
-      <para>Nachdem wir unsere Erwartungen spezifiziert haben, lassen wir in
-      Zeile 11 die Nachicht vom <classname>EmailLogger</classname>
-      loggen.</para>
+      <para>После внесения наших пожеланий, в строке 11 мы позволяем
+      <classname>EmailLogger</classname> внести сообщение в журнал.</para>
 
-      <para>Am Ende des Testcases werden automatisch unsere Erwartungen
-      überprüft. Falls nun die Methode send nicht genau einmal oder mit
-      falschen Parameterwerten aufgerufen wurde, wird der Test mit einer
-      detaillierten Meldung fehlschlagen.</para>
+      <para>В конце тестирования, наши пожелания автоматически отслеживаются.
+      Если метод <methodname>send</methodname> не будет вызван хоть раз, или
+      вызван с неверными параметрами, тестирование провалится в подробным
+      описанием ошибки.</para>
 
-      <para>Was haben wir nun erreicht? Wir haben den
-      <classname>EmailLogger</classname> ohne die Verwendung des
-      <classname>EmailService</classname> getestet und trotzdem
-      sichergestellt, dass der <classname>EmailService</classname> mit den
-      korrekten Parametern aufgerufen wird. Außerdem mussten wir keine eigene
-      «Platzhalter»-Klasse für den <classname>EmailService</classname>
-      schreiben, da wie die Mock-Funktionalität von PHPUnit verwendet
-      haben.</para>
+      <para>Чего мы добились? Мы проверили <classname>EmailLogger</classname>
+      без вовлечения в работу <classname>EmailService</classname> и получили
+      подтверждение, что <classname>EmailService</classname> используется с
+      корректными параметрами. Кроме того, нам не нужно было писать класс
+      "пустышку" для <classname>EmailService</classname>, вместо этого мы
+      воспользовались функциями для фиктивных объектов из PHPUnit.</para>
 
       <note>
-        <para>Man muss sich an die Schreibweise für Mock-Objekte gewöhnen; sie
-        wird Ihnen aber mit der Zeit in Fleisch und Blut übergehen.</para>
+        <para>Необходимо привыкнуть к стиль написания для фиктивных объектов,
+        со временем они воплотятся в плоть и кровь.</para>
       </note>
     </section>
-  </section>
-
-  <section>
-    <title>Резюме</title>
-
-    <para>In diesem Kapitel haben Sie die wichtigsten Basiskonzepte von
-    Extbase kennengelernt. Zu Beginn wurden Ihre Kenntnisse in
-    objektorientierter Programmierung aufgefrischt, so dass Sie nun eine gute
-    Wissensbasis haben, um den Programmierstil von Extbase zu
-    verstehen.</para>
-
-    <para>Dann haben Sie Domain-Driven Design kennengelernt, das die
-    normalerweise eher unsystematisch ablaufende Modellerstellung strukturiert
-    und die für die Domäne wichtigen Konzepte in den Mittelpunkt stellt. Da
-    Sie zusammen mit dem Endkunden über die Domänenlogik diskutieren, werden
-    Missverständnisse zwischen dem Kunden und Ihnen als Entwickler schneller
-    ausgeräumt.</para>
-
-    <para>Danach haben wir uns das Model-View-Controller-Entwurfsmuster
-    angeschaut, das Anwendungen in das Datenmodell und die Nutzerinteraktion
-    unterteilt.</para>
-
-    <para>Domain-Driven Design und die MVC-Architektur bilden das konzeptuelle
-    Rückgrat von Extbase. Nun haben wir uns dem Test-Driven Development als
-    Entwicklungsparadigma zugewandt, das die Wahrscheinlichkeit von Fehlern in
-    Code dramatisch reduziert und das tägliche Arbeiten des Entwicklers weiter
-    strukturiert.</para>
-
-    <para>Mit diesen Grundkonzepten sind Sie für die weiteren Kapitel gut
-    gerüstet. Tauchen Sie mit uns nun in die Tiefen von Extbase ein!</para>
   </section>
 </section>

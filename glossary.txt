@@ -79,6 +79,7 @@ Request Handler
 Service = Service
 	im Sinne von Domain-Driven Design
 Singleton	(Design Pattern)
+Stub-Objekte = объекты заглушки
 System Extensions = системные расширения
 template engine = механизм шаблонов
 Test-Driven Development = разработки через тестирование

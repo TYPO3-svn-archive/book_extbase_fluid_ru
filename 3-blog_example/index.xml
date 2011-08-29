@@ -6,38 +6,36 @@
          xmlns:svg="http://www.w3.org/2000/svg"
          xmlns:ns="http://docbook.org/ns/docbook"
          xmlns:mathml="http://www.w3.org/1998/Math/MathML">
-  <title>A journey through the Blog Example</title>
+  <title>Путешествие по примеру сетевого журнала</title>
 
-  <para>In this chapter we accompany you on a journey through a simple TYPO3
-  extension. While traveling on this round trip you get to know more about the
-  extension development with Extbase and Fluid and learn the most important
-  stations and coordinates of the extension development with the help of a
-  example extension. You first familiarize with the geography and the typical
-  characteristics of a extension and find out, which processes run in the
-  background. This knowledge will then help you in the creation of an own
-  extension</para>
+  <para>В текущей главе мы предпримем путешествие по простому расширению
+  TYPO3. В течение путешествия туда и обратно, Вы больше узнаете о разработке
+  расширений на базе Extbase и Fluid, узнаете местоположение и побываете на
+  самых важных пунктах разработки расширений по примеру приведённого образца.
+  Сначала ознакомитесь с географией и характеристикой типичного расширения,
+  выясните, какие процессы при этом задействованы в фоновом режиме. Затем эти
+  знания помогут в создании своих расширений.</para>
 
-  <para>If you search for a specific manual for the creation of an extension,
-  chapter 4 will show you the right set of tools. However we recommend you to
-  build the fundamentals for that in this chapter. The journey that lies ahead
-  of us, could also have the title "Europe in five days. If you discover nice
-  places, you should visit them later without the travel group.</para>
+  <para>Если нужно специфичное по созданию расширений руководство, то в главе
+  4 представлен нужный набор инструментов. Но все же, мы рекомендуем создать
+  хороший фундамент при помощи этой главы. Путь, лежащий перед нами, можно
+  было бы назвать «Европа за пять дней». Если найдёте хорошие места, то нужно
+  вернуться к ним, но уже без экскурсовода и группы.</para>
 
-  <para>It is a benefit, if you look into the original sourcecode while
-  reading the text so the orientation in your own extension later will be much
-  easier.</para>
+  <para>Лучше всего держать перед глазами оригинальный исходный код при чтении
+  этого руководства, чтобы значительно упростить разработку собственного
+  расширения в будущем.</para>
 
   <note>
-    <para>If you use a debugger, it can be interesting to follow a full cycle
-    in the single step modus. For that you have to set a breakpoint in the
-    file <filename>Dispatcher.php</filename>. You will find this class - like
-    every other class of Extbase also - in the folder
+    <para>Если используется отладчик (debugger), то может быть интересен
+    следующий цикл в одношаговом модусе. Для этого нужно установить точку
+    останова в файле <filename>Dispatcher.php</filename>. Этот класс, как и
+    любой другой класс в Extbase, можно найти в папке
     <filename>typo3/sysext/extbase/Classes/</filename>.</para>
   </note>
 
-  <para>At the end of this chapter you will find a short comparison of the
-  traditional way to code an extension and an approach with Extbase and
-  Fluid.</para>
+  <para>В конце этой главы находится краткое сравнение традиционного стиля
+  написания кода расширения с подходом Extbase и Fluid.</para>
 
   <xi:include href="1-first-orientation.xml" />
 
@@ -46,6 +44,8 @@
   <xi:include href="3-calling-the-extension.xml" />
 
   <xi:include href="4-and-action.xml" />
+
+  <xi:include href="12-automatic-persistence-of-the-domain-logic.xml" />
 
   <xi:include href="13-notes-for-migrating-users.xml" />
 </chapter>
